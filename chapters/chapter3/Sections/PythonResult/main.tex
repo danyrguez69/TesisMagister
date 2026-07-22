@@ -1,0 +1,85 @@
+\section{Análisis utilizando Python}
+
+Los resultados experimentales presentados en este capítulo fueron obtenidos utilizando Python y diversas bibliotecas especializadas en análisis de datos y aprendizaje automático. En particular, se emplearon las siguientes bibliotecas:
+
+\begin{itemize}
+    \item \textbf{Pandas:} Utilizada para la manipulación y análisis de datos, facilitando la carga, procesamiento y visualización de los conjuntos de datos.
+    \item \textbf{NumPy:} Empleada para operaciones matemáticas y manipulación de arreglos, complementando a Pandas en el manejo eficiente de datos numéricos.
+    \item \textbf{Scikit-learn:} Biblioteca principal utilizada para el preprocesamiento de datos, selección de características, balanceo de clases y la implementación de modelos de clasificación.
+    \item \textbf{Imbalanced-learn:} Utilizada específicamente para técnicas de balanceo de clases, incluyendo ROS (Random Over Sampling), RUS (Random Under Sampling) y SMOTE (Synthetic Minority Over-sampling Technique).
+    \item \textbf{Matplotlib y Seaborn:} Empleadas para la visualización de datos y resultados, generando gráficos y figuras que facilitan la interpretación de los resultados obtenidos.
+\end{itemize}
+
+El proceso experimental incluyó varias etapas, comenzando con la selección y preprocesamiento de datos, seguido por la aplicación de técnicas de selección de características y métodos de balanceo de clases. Posteriormente, se entrenaron y evaluaron diversos modelos de clasificación utilizando los conjuntos de datos procesados. Los resultados obtenidos se compararon con una línea base definida a partir del conjunto de datos original, BugHunter, sin ningún preprocesamiento adicional.
+
+En cada ejecución, las técnicas de balanceo se aplican al conjunto de datos completo. Esto implica que tanto los conjuntos de entrenamiento como los de prueba pueden contener datos generados artificialmente o clonados, dependiendo del algoritmo de balanceo utilizado.
+
+
+\section{Consecuencias Negativas del Balanceo de Datos}
+
+En los modelos de clasificación utilizados en los experimentos, aplicar técnicas de balanceo a todo el conjunto de datos, incluyendo tanto el conjunto de entrenamiento como el de prueba, puede acarrear varias consecuencias negativas:
+
+\begin{itemize}
+\label{item:consecneg}
+    \item \textbf{Sobreajuste (Overfitting):} La inclusión de datos artificialmente generados en el conjunto de entrenamiento puede causar que el modelo se ajuste demasiado a estos datos sintéticos, disminuyendo su capacidad para generalizar correctamente a datos nuevos y no vistos.
+    \item \textbf{Evaluación Sesgada:} Si el conjunto de prueba también contiene datos balanceados artificialmente, las métricas de evaluación pueden no reflejar el rendimiento real del modelo en un entorno no balanceado. Esto podría llevar a una sobreestimación de la capacidad predictiva del modelo.
+    \item \textbf{Redundancia de Datos:} Los métodos de sobrerrepresentación (ROS y SMOTE) pueden introducir múltiples copias o variaciones de los mismos datos, lo que puede redundar en una menor diversidad dentro del conjunto de datos y afectar negativamente la capacidad del modelo para aprender patrones generalizables.
+    \item \textbf{Pérdida de Información:} Los métodos de subrepresentación (RUS) eliminan datos de las clases mayoritarias, lo que puede llevar a la pérdida de información valiosa y afectar la capacidad del modelo para capturar la complejidad inherente de los datos originales.
+    \item \textbf{Introducción de Ruido:} Los datos sintéticos generados por SMOTE pueden introducir ruido en el conjunto de datos si las nuevas instancias no reflejan adecuadamente las características del problema real, lo que puede afectar negativamente el rendimiento del modelo.
+\end{itemize}
+
+Para mitigar estas consecuencias, es recomendable aplicar las técnicas de balanceo únicamente al conjunto de entrenamiento, manteniendo el conjunto de prueba en su estado original. Esto asegura que la evaluación del modelo refleje con mayor precisión su desempeño en condiciones reales y no sesgadas.
+
+Las tablas presentadas a continuación resumen los resultados obtenidos en estos experimentos a nivel de método, demostrando la efectividad de las técnicas aplicadas en la mejora de la predicción de fallas de software.
+
+\subsection{Resultados balanceando todo el conjunto de datos}
+
+La Tabla \ref{tab:ros_results} presenta los resultados obtenidos al aplicar la técnica de Sobremuestreo Aleatorio (ROS) a los datos de entrenamiento. El algoritmo Random Forest (RF) alcanzó una F-measure de 0.95, con una precisión de 0.9 y un recall perfecto de 1, lo que indica un rendimiento excelente bajo esta técnica. Decision Tree (DT) obtuvo un valor de F-measure idéntico, con los mismos valores de precisión y recall que RF. Por otro lado, Naive Bayes (NB) presentó una F-measure de 0.69, con una precisión de 0.56 y un recall de 0.89, siendo inferior a RF y DT pero aún así notable en términos de recall.
+
+
+\input{chapters/chapter3/Sections/PythonResult/tables/s_ros}
+
+
+En la Tabla \ref{tab:rus_results} se muestran los resultados de los algoritmos de clasificación utilizando la técnica de Submuestreo Aleatorio (RUS). DT alcanzó una F-measure de 0.85, con una precisión de 0.93 y un recall de 0.82, mostrando un equilibrio sólido entre precisión y recall. RF obtuvo una F-measure de 0.77, con una precisión de 0.82 y un recall de 0.78, mientras que NB logró una F-measure de 0.68, con una precisión de 0.55 y un recall de 0.89, destacándose más en el recall.
+
+
+\input{chapters/chapter3/Sections/PythonResult/tables/s_rus}
+
+La Tabla \ref{tab:smote_results} resume los resultados al aplicar la técnica SMOTE. El algoritmo RF obtuvo una F-measure de 0.88, con una precisión de 0.89 y un recall de 0.89, destacándose nuevamente como el mejor desempeño. DT logró una F-measure de 0.85, con una precisión de 0.87 y un recall de 0.83, siendo ligeramente inferior a RF. NB presentó una F-measure de 0.70, con una precisión de 0.56 y un recall de 0.92, mostrando una vez más un alto recall.
+
+
+\input{chapters/chapter3/Sections/PythonResult/tables/s_smote}
+
+Los resultados sin aplicar ninguna técnica de balanceo se presentan en la Tabla \ref{tab:none_results}. NB mostró una F-measure de 0.47, con una precisión de 0.37 y un recall de 0.76, mientras que RF obtuvo una F-measure de 0.40, con una precisión de 0.49 y un recall de 0.35. DT alcanzó una F-measure de 0.42, con una precisión de 0.43 y un recall de 0.41. Estos resultados reflejan el impacto negativo del desequilibrio de clases en el rendimiento de los algoritmos, con un notable descenso en la precisión.
+
+\input{chapters/chapter3/Sections/PythonResult/tables/s_none}
+
+Finalmente, la Tabla \ref{tab:best_f_measure} proporciona una visión general de los mejores valores de F-measure obtenidos por diferentes proyectos a nivel de método. El proyecto ``oryx'' alcanzó la F-measure más alta de 0.88 utilizando RF, seguido de ``antlr4'' con una F-measure de 0.87 también con RF. En términos de precisión y recall, ``oryx'' mostró una precisión de 0.89 y un recall de 0.89, mientras que ``antlr4'' tuvo una precisión de 0.87 y un recall de 0.83. En contraste, los proyectos ``mct'' y ``BroadleafCommerce'' lograron F-measures de 0.82 y 0.78 respectivamente, utilizando RF, con valores de precisión y recall consistentes. ``junit'' y ``netty'' obtuvieron F-measures de 0.77 y 0.72 respectivamente, también utilizando RF, manteniendo un equilibrio adecuado entre precisión y recall.
+
+\input{chapters/chapter3/Sections/PythonResult/tables/s_best}
+
+\subsection{Resultados balanceando solo conjunto de datos de entrenamiento}
+
+Buscando mitigar los errores mencionados en \ref{item:consecneg} se realizan nuevos experimentos balanceando solo el conjunto de datos de entrenamiento evitando la posibilidad de que existan datos generados o duplicados en el conjunto de pruebas.
+
+\subsubsection{Resultados Utilizando ROS}
+La Tabla \ref{tab:results_ros_sin} presenta los resultados de aplicar el algoritmo ROS (Random Over Sampling) únicamente al conjunto de datos de entrenamiento. Este método incrementa artificialmente el número de instancias de la clase minoritaria mediante duplicación. Los resultados muestran que el modelo Naive Bayes (NB) alcanzó una precisión de 0.37, un recall de 0.97 y una F-measure de 0.54. Este alto valor de recall indica que el modelo es efectivo en identificar la mayoría de las instancias de la clase minoritaria, aunque a costa de una baja precisión, lo que sugiere muchos falsos positivos. El Random Forest (RF) y el Decision Tree (DT) mostraron un desempeño más equilibrado en términos de precisión y recall, aunque con valores más bajos comparados con NB. RF alcanzó una precisión de 0.53, un recall de 0.48 y una F-measure de 0.50, mientras que DT mostró una precisión de 0.38, un recall de 0.60 y una F-measure de 0.46.
+
+
+\input{chapters/chapter3/Sections/PythonResult/tables/sin_ros}
+
+\subsubsection{Resultados Utilizando RUS}
+La Tabla \ref{tab:results_rus_sin} muestra los resultados de aplicar el algoritmo RUS (Random Under Sampling) solo al conjunto de entrenamiento. Este método reduce el número de instancias de la clase mayoritaria para equilibrar el dataset. Los resultados indican que NB mantiene su rendimiento con una precisión de 0.37, un recall de 0.97 y una F-measure de 0.54. Sin embargo, se observan mejoras en RF y DT comparados con los resultados obtenidos con ROS. RF mejora su precisión a 0.43 y su recall a 0.59, obteniendo una F-measure de 0.50, mientras que DT mejora en precisión a 0.43 y en recall a 0.58, logrando una F-measure de 0.49. Esto sugiere que RUS puede ser más efectivo que ROS para estos algoritmos al mejorar la representación de la clase minoritaria sin introducir demasiados falsos positivos.
+
+
+\input{chapters/chapter3/Sections/PythonResult/tables/sin_rus}
+
+
+
+\subsubsection{Resultados Utilizando SMOTE}
+
+La Tabla \ref{tab:results_smote_sin} detalla los resultados de utilizar SMOTE (Synthetic Minority Over-sampling Technique) para balancear el conjunto de entrenamiento. SMOTE genera nuevas instancias sintéticas de la clase minoritaria mediante interpolación. En este caso, DT muestra una notable mejora con una precisión de 0.50, un recall de 0.80 y una F-measure de 0.62. RF también mejora, alcanzando una precisión de 0.44, un recall de 0.80 y una F-measure de 0.57. NB, sin embargo, mantiene sus valores constantes con una precisión de 0.37, un recall de 0.97 y una F-measure de 0.54. Estos resultados indican que SMOTE es particularmente efectivo para DT y RF, mejorando significativamente su capacidad de generalización y precisión al crear instancias sintéticas más representativas de la clase minoritaria.
+
+
+\input{chapters/chapter3/Sections/PythonResult/tables/sin_smote}
+

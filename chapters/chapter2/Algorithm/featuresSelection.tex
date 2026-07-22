@@ -1,0 +1,33 @@
+\begin{algorithm}[H]
+    \hspace*{\algorithmicindent} \textbf{Input:} The original dataset $T_{le}(f_{1},f_{2},...,f_{k},l)$ where $l \in \{FP,NFP\}$ denotes the class label, and $k$ is the number of features. $le \in \{File, Class, Methods\}$ of a specific project
+
+    \hspace*{\algorithmicindent} \textbf{Output:} Saves the selected characteristics in the Database. $T_{le}(f_1,f_2,...,f_k,l)$ where $k$ is the number of features selected by relevance analysis and redundancy check.
+    \caption{Feature selection}
+    \label{alg:featureSelection}
+    \begin{algorithmic}[1]
+    \fontsize{12pt}{12pt}\selectfont
+    \REQUIRE $rankList \leftarrow [0.5, 0.7, 0.9]$
+    \STATE $bList \leftarrow [0.5, 0.7, 0.9]$
+    \STATE $levelList \leftarrow ['method', 'class', 'file']$
+    \STATE $response \leftarrow \phi$
+
+    \FOR{$\text{each}$ rank in $rankList$}
+        \FOR{$\text{each}$ b in $bList$}
+            \FOR{$\text{each}$ level in $levelList$}
+                \STATE $data \leftarrow readDataset(level, project)$
+                \STATE $data \leftarrow normalizeClass(data)$\;
+                \STATE $square \leftarrow ChiSquare(data, rank)$\;
+                \STATE $ig \leftarrow Ig(data, rank)$\;
+                \STATE $relief \leftarrow ReliefF(data, rank)$\;
+                \STATE $response \leftarrow response + NTC(b, square, 'CS-SU')$\;
+                \STATE $response \leftarrow response + NTC(b, ig, 'IG-SU')$\;
+                \STATE $response \leftarrow response + NTC(b, relief, 'RF-SU')$\;
+                \STATE $response \leftarrow response + NTC(b, square, 'CS-COS')$\;
+                \STATE $response \leftarrow response + NTC(b, ig, 'IG-COS')$\;
+                \STATE $response \leftarrow response + NTC(b, relief, 'RF-COS')$\;
+                \STATE $saveBD(response)$\;
+            \ENDFOR
+        \ENDFOR
+    \ENDFOR
+    \end{algorithmic}
+\end{algorithm}

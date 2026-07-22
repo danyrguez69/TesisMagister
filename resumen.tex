@@ -1,0 +1,12 @@
+\fontsize{12pt}{13}\selectfont %Ocupa letra 14 de TImes New Roman
+
+La predicción temprana de fallas de software es crucial para optimizar el uso de recursos y el tiempo durante las etapas de prueba y mantenimiento del software. A lo largo de los años, se han propuesto diversas técnicas de aprendizaje automático supervisado para abordar esta tarea. Estos modelos se entrenan utilizando conjuntos de datos etiquetados que incluyen múltiples variables independientes, como líneas de código, complejidad y tamaño del software, junto con una variable dependiente binaria que indica la presencia o ausencia de fallas.
+
+Sin embargo, los conjuntos de datos de fallas presentan desafíos como alta dimensionalidad, desequilibrio de clases y valores nulos. Las investigaciones recientes se han centrado en mejorar la calidad de los datos para la predicción de fallas de software. Este estudio investiga si la aplicación de técnicas de selección de características y estrategias de balanceo de clases a un conjunto de datos de métricas de software mejora la precisión de la predicción de fallas en comparación con una línea base que utiliza el conjunto de datos original.
+
+Utilizamos el conjunto de datos BugHunter, que incluye 15 proyectos en Java extraídos de GitHub, distribuidos en tres niveles (archivos, clases, métodos) y que contiene una amplia variedad de métricas de código e información sobre errores. Comenzamos aplicando la selección de características en dos etapas: análisis de relevancia y control de redundancia. Posteriormente, empleamos técnicas de balanceo como random over-sampling, random under-sampling y SMOTE para equilibrar las instancias con y sin fallas.
+
+Los resultados de los clasificadores, implementados en Python y la herramienta WEKA, se comparan con una línea base definida a partir del BugHunter sin procesar. Los resultados finales demuestran la efectividad de nuestro enfoque en la predicción de fallas de software, reduciendo la cantidad de métricas necesarias sin comprometer la precisión. Se identificaron las métricas más relevantes, evidenciando que algunas métricas calculadas en BugHunter no afectan la efectividad de la predicción de errores de software.
+
+\hfill \break
+\textbf{Palabras Clave:} bug dataset; bug prediction; code metrics; GitHub; feature selection; instance reduction; redundancy control; feature ranking; classification model

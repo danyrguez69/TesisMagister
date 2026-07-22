@@ -1,0 +1,77 @@
+En esta sección, diseñamos experimentos para demostrar la efectividad de las técnicas de selección de características propuestas. Primero, diseñamos las preguntas de investigación para el estudio empírico. Segundo, se plantean los seis esquemas utilizados para la sección de características y el clasificador utilizado. Tercero, se explica en detalle nuestro flujo de trabajo mediante un diagrama. Por último, realizamos los experimentos para definir la linea base con el conjunto de datos BugHunter y el clasificador RamdonForest.
+
+\section{Preguntas de investigación}
+
+El estudio empírico se realiza en dos pasos: uno es la etapa de selección de características para eliminar las no relevantes y redundantes. El otro es testificar si el paso anterior es valioso para mejorar el rendimiento los clasificadores en la predicción final. Por lo tanto, diseñamos experimentos para estudiar las siguientes cinco preguntas de investigación:
+
+\begin{itemize}
+    \item \textbf{RQ1.} ¿Como el análisis de relevancia y control de redundancia de características puede mejorar la identificación de bugs basado en métricas de código?
+\item \textbf{RQ2.} ¿Cuales métricas de código fuente son buenas predictoras de errores y
+en que tipo de métrica (archivo, clase, método) proporciona mejores resultados?
+\item \textbf{RQ3.} ¿Como influye la variación de los parámetros de entrada a los algoritmos de análisis de relevancia y control de redundancia en los resultados de
+los modelos de clasificación?
+
+\item \textbf{RQ4.} ¿Como los algoritmos de balanceo de clases ROS, RUS y SMOTE
+influyen en los resultados de los clasificadores?
+\item \textbf{RQ5.} ¿Que diferencias existen entre el proyecto resumen y los proyectos
+individuales en los resultados obtenidos en las preguntas anteriores?
+\end{itemize}
+
+\input{chapters/chapter3/Sections/ExperimentalDesign}
+
+
+
+\section{La Medida de Rendimiento}
+
+En el estudio presentado, se implementó el clasificador \textit{Random Forest} utilizando la herramienta de software \textbf{Weka}, reconocida por su eficacia en el análisis de datos y aprendizaje automático. Este clasificador se basa en la técnica de ensamble de múltiples árboles de decisión para optimizar la precisión en tareas de clasificación. Para la evaluación del modelo, se optó por la configuración ``Supplied Test Set'', permitiendo el uso de un conjunto de datos predefinido para las pruebas, lo cual es esencial para garantizar la consistencia y la validez de los resultados experimentales.
+
+Las métricas clave seleccionadas para evaluar el rendimiento del clasificador fueron precisión, recall y F-measure. Estas métricas son fundamentales en el dominio del aprendizaje automático y la minería de datos, proporcionando una evaluación holística del modelo:
+
+
+{
+\fontsize{14pt}{14pt}\selectfont
+\begin{itemize}
+    \item \textbf{Precisión}: Calculada como el cociente de Verdaderos Positivos (TP) sobre la suma de Verdaderos Positivos y Falsos Positivos (FP), 
+\begin{equation}
+\text{Precisión} = \frac{TP}{TP + FP}
+	\label{eq:precision}
+\end{equation}
+    
+    ,esta métrica refleja la exactitud del clasificador al identificar instancias positivas.
+    \item \textbf{Recall (Sensibilidad)}: Determinada por la fórmula
+\begin{equation}
+\text{Recall} = \frac{TP}{TP + FN}
+	\label{eq:recall}
+\end{equation}
+    
+    ,mide la capacidad del modelo para detectar todas las instancias positivas relevantes dentro del conjunto de datos.
+    \item \textbf{F-measure (F1 Score)}: Esta métrica, calculada como el promedio armónico de precisión y recall,
+    
+    \begin{equation}
+        \text{F-measure} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + \text{Recall}}
+	   \label{eq:fmeasure}
+    \end{equation}
+    
+    ,ofrece un balance entre ambas, siendo crucial para contextos donde tanto la precisión como el recall son igualmente importantes.
+\end{itemize}
+}
+
+Estas métricas proporcionan una evaluación integral y robusta del clasificador \textit{Random Forest} en la tarea de predicción y clasificación dentro del contexto de la minería de datos y el aprendizaje automático.
+
+
+El conjunto de datos tiene 3 niveles de código fuente (método, clase, archivo), 15 proyectos elegidos (además del conjunto de datos resumido 'All') y un algoritmos de aprendizaje automático, se realizaron un total de 2 592 ejecuciones variando los datos para encontrar la combinación de parámetros mas óptimas y con mejores resultados, lo que implica que las tablas completas con los resultados obtenidos serían demasiado grandes para presentar en el documento. Por lo tanto, introducimos solo los mejores resultados para el conjunto de datos general. 
+
+
+\input{chapters/chapter3/Sections/Original results Weka/main}
+
+\input{chapters/chapter3/Sections/PythonResult/main}
+
+
+\input{chapters/chapter3/Sections/Research Questions/main}
+
+
+\newpage
+
+
+
+

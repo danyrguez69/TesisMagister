@@ -1,0 +1,30 @@
+
+\section{Algoritmos utilizados en SFP}
+
+La predicción de fallas de software (SFP) es una tarea crítica en la ingeniería de software que busca identificar los módulos del software que son propensos a contener defectos. Para realizar esta predicción, se han utilizado varios algoritmos de aprendizaje automático y técnicas estadísticas. A continuación, se describen algunos de los algoritmos más comúnmente utilizados en la literatura para SFP.
+
+\subsubsection{Regresión Logística}
+La regresión logística es un método estadístico utilizado para modelar la probabilidad de que una instancia pertenezca a una de dos clases posibles. Este método ha sido ampliamente utilizado en SFP debido a su simplicidad y efectividad para manejar datos binarios. La regresión logística estima la relación entre las variables independientes (métricas del software) y la variable dependiente (presencia o ausencia de defectos) mediante una función logística \cite{kondo2019impact}.
+
+\subsubsection{Máquinas de Vectores de Soporte (SVM)}
+Las máquinas de vectores de soporte (SVM) son un conjunto de métodos de aprendizaje supervisado utilizados para clasificación y regresión. En el contexto de SFP, SVM ha demostrado ser eficaz para manejar conjuntos de datos de alta dimensionalidad y encontrar un hiperplano óptimo que separe las instancias defectuosas de las no defectuosas.
+
+\subsubsection{Árboles de Decisión}
+Los árboles de decisión son modelos de predicción que utilizan un árbol como estructura de decisión y modelan la relación entre las variables de entrada y la variable de salida. Los árboles de decisión, como el algoritmo J48, han sido utilizados en SFP debido a su capacidad para manejar datos categóricos y continuos, y su facilidad de interpretación \cite{RADJENOVIC20131397}.
+
+\subsubsection{Random Forest}
+El algoritmo Random Forest es un conjunto de árboles de decisión entrenados con diferentes subconjuntos del conjunto de datos y características. Esta técnica de conjunto mejora la precisión y la robustez del modelo al reducir el riesgo de sobreajuste. En SFP, Random Forest ha sido utilizado para combinar métricas de código y métricas de cambio, demostrando una mejora significativa en la precisión de la predicción de fallos.
+
+\subsubsection{Naive Bayes}
+Naive Bayes es un clasificador basado en la teoría de probabilidad bayesiana. Asume la independencia entre las características, lo cual es una simplificación fuerte pero efectiva en muchos casos. En SFP, Naive Bayes ha sido utilizado debido a su simplicidad y eficiencia computacional, especialmente cuando se dispone de grandes conjuntos de datos con múltiples características.
+
+\subsubsection{K-Nearest Neighbors (KNN)}
+El algoritmo K-Nearest Neighbors (KNN) es un método de clasificación que asigna una clase a una instancia basándose en las clases de sus k vecinos más cercanos en el espacio de características. KNN ha sido aplicado en SFP debido a su simplicidad y efectividad para capturar relaciones locales en los datos. Sin embargo, puede ser computacionalmente costoso cuando se trabaja con grandes conjuntos de datos.
+
+\subsubsection{Algoritmos de Sobremuestreo y Submuestreo}
+Para abordar el problema del desequilibrio de clases en los conjuntos de datos de SFP, se utilizan técnicas de sobremuestreo y submuestreo. Métodos como SMOTE (Synthetic Minority Over-sampling Technique), ROS (Random Over-Sampling), y RUS (Random Under-Sampling) se emplean para equilibrar las clases defectuosas y no defectuosas, mejorando así la precisión de los modelos de predicción de fallos \cite{9137899}.
+
+\subsubsection{Modelos de Conjunto}
+Los modelos de conjunto, como el Bagging y el Boosting, combinan múltiples clasificadores para mejorar la precisión y la robustez del modelo. Estas técnicas son útiles en SFP para combinar las predicciones de diferentes algoritmos y obtener una mejor estimación de la propensión a fallos de los módulos de software \cite{9044596}.
+
+En resumen, una variedad de algoritmos de aprendizaje automático y técnicas de preprocesamiento se utilizan en la predicción de fallas de software, cada uno con sus propias ventajas y limitaciones. La selección del algoritmo adecuado depende de las características específicas del conjunto de datos y del problema en cuestión.

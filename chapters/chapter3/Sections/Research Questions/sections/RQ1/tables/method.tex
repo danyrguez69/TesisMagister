@@ -1,0 +1,48 @@
+\begin{table}[H]
+{
+\fontsize{6pt}{6pt}\selectfont
+ \captionsetup{labelsep=period, labelfont=bf}
+ \caption{\label{table:b_u_c_m} Mejor resultado por proyecto con la clase balanceada y no balanceada a nivel de método}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllllllll}
+\toprule
+Project                        & Rank & \beta   & Model Selection & Precision & Recall & FMeasure & Balanceado & Metrics Count \\
+\midrule
+Android-Universal-Image-Loader & 0,5  & 0,7 & IG\_SU         & 0,545     & 0,543  & 0,544    & VERDADERO  & 19           \\
+ & 0,5  & 0,7 & RF\_COS        & 0,531     & 0,566  & 0,543    & FALSO      & 29           \\
+BroadleafCommerce              & 0,5  & 0,5 & CS\_COS        & 0,757     & 0,77   & 0,762    & VERDADERO  & 35           \\
+             & 0,9  & 0,5 & IG\_SU         & 0,758     & 0,777  & 0,762    & FALSO      & 28           \\
+MapDB                          & 0,7  & 0,5 & IG\_SU         & 0,529     & 0,557  & 0,538    & FALSO      & 22           \\
+                        & 0,9  & 0,7 & CS\_COS        & 0,52      & 0,531  & 0,525    & VERDADERO  & 64           \\
+all                            & 0,9  & 0,9 & RF\_COS        & 0,567     & 0,59   & 0,573    & FALSO      & 64           \\
+                            & 0,5  & 0,5 & RF\_COS        & 0,564     & 0,58   & 0,57     & VERDADERO  & 33           \\
+antlr4                         & 0,5  & 0,9 & RF\_COS        & 0,8       & 0,795  & 0,797    & VERDADERO  & 29           \\
+                       & 0,9  & 0,5 & IG\_COS        & 0,757     & 0,808  & 0,778    & FALSO      & 64           \\
+ceylon-ide-eclipse             & 0,7  & 0,7 & IG\_COS        & 0,601     & 0,657  & 0,62     & FALSO      & 50           \\
+            & 0,7  & 0,9 & IG\_COS        & 0,603     & 0,63   & 0,615    & VERDADERO  & 50           \\
+elasticsearch                  & 0,5  & 0,9 & CS\_COS        & 0,567     & 0,586  & 0,571    & FALSO      & 26           \\
+                & 0,5  & 0,5 & RF\_COS        & 0,561     & 0,57   & 0,564    & VERDADERO  & 35           \\
+hazelcast                      & 0,7  & 0,7 & CS\_COS        & 0,551     & 0,559  & 0,553    & FALSO      & 50           \\
+                     & 0,7  & 0,7 & CS\_COS        & 0,549     & 0,552  & 0,55     & VERDADERO  & 50           \\
+junit                          & 0,9  & 0,9 & IG\_COS        & 0,676     & 0,722  & 0,694    & FALSO      & 64           \\
+                         & 0,9  & 0,5 & CS\_COS        & 0,68      & 0,692  & 0,686    & VERDADERO  & 64           \\
+mcMMO                          & 0,7  & 0,9 & IG\_COS        & 0,577     & 0,604  & 0,581    & FALSO      & 50           \\
+                         & 0,7  & 0,9 & IG\_SU         & 0,575     & 0,582  & 0,578    & VERDADERO  & 10           \\
+mct                            & 0,7  & 0,7 & IG\_SU         & 0,706     & 0,694  & 0,7      & FALSO      & 18           \\
+                           & 0,9  & 0,9 & RF\_SU         & 0,716     & 0,667  & 0,684    & VERDADERO  & 33           \\
+neo4j                          & 0,9  & 0,7 & RF\_COS        & 0,538     & 0,577  & 0,552    & FALSO      & 64           \\
+                        & 0,5  & 0,9 & RF\_COS        & 0,545     & 0,555  & 0,55     & VERDADERO  & 25           \\
+netty                          & 0,9  & 0,9 & RF\_COS        & 0,638     & 0,684  & 0,653    & FALSO      & 64           \\
+                          & 0,7  & 0,5 & IG\_SU         & 0,636     & 0,676  & 0,651    & VERDADERO  & 10           \\
+orientdb                       & 0,7  & 0,5 & RF\_COS        & 0,557     & 0,598  & 0,569    & FALSO      & 43           \\
+                      & 0,5  & 0,9 & IG\_SU         & 0,561     & 0,572  & 0,566    & VERDADERO  & 6            \\
+oryx                           & 0,7  & 0,7 & CS\_SU         & 0,825     & 0,859  & 0,838    & FALSO      & 29           \\
+                           & 0,5  & 0,7 & IG\_SU         & 0,826     & 0,852  & 0,837    & VERDADERO  & 4            \\
+titan                          & 0,7  & 0,7 & CS\_SU         & 0,634     & 0,663  & 0,645    & FALSO      & 32           \\
+                        & 0,7  & 0,7 & RF\_SU         & 0,633     & 0,612  & 0,621    & VERDADERO  & 32     \\
+                        \bottomrule
+\end{tabular}%
+}}
+
+\end{table}

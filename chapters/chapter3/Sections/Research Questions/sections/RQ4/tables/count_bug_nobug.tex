@@ -1,0 +1,34 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[H]
+\captionsetup{labelsep=period, labelfont=bf}
+\caption{\label{table:count_bug_nobug} Resumen de desequilibrio por nivel}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllllll}
+\toprule
+                               & \multicolumn{2}{c}{Method} & \multicolumn{2}{c}{Class} & \multicolumn{2}{c}{File} \\
+                               \midrule
+Project                        & Bug       & Without Bug    & Bug      & Without Bug    & Bug      & Without Bug   \\
+\midrule
+oryx                           & 100       & 756            & 81       & 565            & 80       & 528           \\
+antlr4                         & 132       & 768            & 132      & 230            & 156      & 223           \\
+BroadleafCommerce              & 1337      & 3996           & 1569     & 1672           & 1733     & 1828          \\
+mct                            & 26        & 81             & 21       & 51             & 15       & 43            \\
+junit                          & 112       & 400            & 112      & 226            & 96       & 107           \\
+netty                          & 3620      & 9923           & 2618     & 3973           & 2178     & 2947          \\
+ceylon-ide-eclipse             & 660       & 1731           & 520      & 957            & 417      & 747           \\
+titan                          & 287       & 736            & 195      & 311            & 199      & 287           \\
+all                            & 58810     & 100268         & 41087    & 43475          & 35507    & 34581         \\
+elasticsearch                  & 19784     & 31746          & 15769    & 15875          & 13068    & 12052         \\
+mcMMO                          & 503       & 865            & 357      & 511            & 369      & 511           \\
+orientdb                       & 4465      & 8732           & 2153     & 2617           & 2107     & 2341          \\
+neo4j                          & 3175      & 6523           & 2068     & 2601           & 1824     & 2120          \\
+hazelcast                      & 23830     & 32617          & 14926    & 13259          & 12881    & 10472         \\
+MapDB                          & 644       & 1140           & 487      & 522            & 311      & 277           \\
+Android-Universal-Image-Loader & 135       & 254            & 79       & 105            & 73       & 98        \\
+\bottomrule
+\end{tabular}%
+}
+
+\end{table}

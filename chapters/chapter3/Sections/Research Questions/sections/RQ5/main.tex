@@ -1,0 +1,26 @@
+\section{Quinta pregunta de investigación}
+
+Nuestra ultima pregunta de investigación va enfocada a diferenciar los resultados entre el conjunto de datos resumen (unión de todos los proyectos en cada nivel) y los resultados individuales por proyecto.
+
+\noindent\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{RQ5} ¿Que diferencias existen entre el proyecto resumen y los proyectos individuales en los resultados obtenidos en las preguntas anteriores?%
+}%
+}
+\vspace{12pt}
+
+El conjunto de datos All esta diseñado a partir de la unión de todos los conjuntos de datos en el mismo nivel de los 15 proyectos seleccionados, por ende existe un conjunto All para cada nivel método, clase y archivo. Contiene una mayor cantidad de registros que todos los proyectos individuales por su origen como se puede observar en la tabla \ref{table:count_bug_nobug}.
+
+Iniciando con el análisis de los resultados base obtenidos en la sección \ref{sec:datasetoriginal}, observamos en las tablas \ref{table:original_result_weka_method_result}, \ref{table:original_result_weka_class_result} y \ref{table:original_result_weka_file_result} que en ninguno de los 3 niveles se obtienen los mejores resultados de F-measure para el proyecto All, pero tampoco siendo los peores.
+
+\input{chapters/chapter3/Sections/Research Questions/sections/RQ5/tables/min_max_all}
+
+Este escenario se observa consistentemente en respuesta a la pregunta de investigación RQ1 (véase Sección \ref{sec:RQ1}), como se ilustra en las Tablas \ref{table:b_u_c_m}, \ref{table:b_u_c_c}, y \ref{table:b_u_c_f}. A pesar de implementar la selección de características y el balanceo de clases, los resultados no alcanzan un nivel óptimo de rendimiento. Este fenómeno sugiere que la amalgama de métricas de código procedentes de diversos proyectos, los cuales pueden variar significativamente en metodologías de desarrollo, equipos de programación y objetivos, no contribuye necesariamente a la mejora de la precisión de los clasificadores. Se infiere que un análisis a nivel de proyecto individual es más fructífero, ya que los errores detectados en cada proyecto podrían estar intrínsecamente relacionados con aspectos específicos de desarrollo y estructura propios del software en cuestión. Por consiguiente, la expansión del volumen de datos mediante la combinación de métricas de diferentes proyectos no garantiza una mejora en los resultados, según se desprende de nuestro análisis.
+
+\noindent\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{Respuesta RQ5} 
+ El proyecto resumen cuenta con una mayor cantidad de registros unificando los diferentes proyectos, pero aun así esto no conlleva a la mejora de los resultados de los clasificadores en ninguna de los escenarios analizados: conjunto de datos original, selección de características y balanceo de clases. Por tanto, concluimos que se obtienen mejores resultados entrenando los clasificadores con métricas de software individuales, dado que cada software tiene sus aspectos específicos de desarrollo 
+}%
+}
+\vspace{12pt}

@@ -1,0 +1,61 @@
+\section{Segunda pregunta de investigación}
+
+\noindent\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{RQ2} ¿Cuales métricas de código fuente son buenas predictoras de errores y en que tipo de métrica (archivo, clase,
+método) proporciona mejores resultados?%
+}%
+}
+\vspace{12pt}
+
+Se implementaron 6 algoritmos de selección de características (\ref{fig:Flow}) y al terminar cada etapa, se registran todos los resultados pertinentes, incluyendo las métricas seleccionadas por cada algoritmo y los distintos valores de rank y $\beta$ utilizados.
+
+Posteriormente, se realizó un análisis de la frecuencia de aparición de cada métrica en todos los algoritmos de selección. Ordenando los resultados desencendentemente por la suma de la frecuencia de aparición de cada métrica en los seis esquemas de selección utilizados. Como resultado, se identificaron las 23 métricas con mayor frecuencia de aparición, cuyos detalles se ilustran en \ref{fig:sum_frecuency}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{chapters/chapter3/Sections/Research Questions/sections/RQ2/img/frec_all.png} %Change the figure name 
+	\setstretch{1} %Interlineado 1
+	\captionsetup{labelsep=period, labelfont=bf}
+	\caption[Suma de la frecuencia de aparición de cada métrica en todos los algoritmos de selección]{Suma de la frecuencia de aparición de cada métrica en todos los algoritmos de selección} %[Se muestra en el índice]{Se muestra en el pie de figura}
+	\label{fig:sum_frecuency}
+\end{figure}
+
+
+En la figura \ref{fig:frecuencyby}, se observa un patrón consistente: en promedio, los algoritmos de selección que incorporan el algoritmo de SU en su etapa de control de redundancia tienden a resultar en un menor número de características seleccionadas, en comparación con aquellos que utilizan la COS.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{chapters/chapter3/Sections/Research Questions/sections/RQ2/img/frec_by.png} %Change the figure name 
+	\setstretch{1} %Interlineado 1
+	\captionsetup{labelsep=period, labelfont=bf}
+	\caption[Frecuencia de cada métrica \(\beta\) y algoritmo de selección]{Frecuencia de cada métrica \(\beta\) y algoritmo de selección}
+ %[Se muestra en el índice]{Se muestra en el pie de figura}
+	\label{fig:frecuencyby}
+\end{figure}
+
+
+
+En la la tabla \ref{table:selected_metrics} se muestra las métricas de código y la tabla \ref{table:cloneMetrics} separa las métricas de clone \cite{ferenc_automatically_2020} las cuales son calculadas a nivel de método y clase.
+
+\input{chapters/chapter3/Sections/Research Questions/sections/RQ2/tables/selected_metrics}
+
+Como se evidencia en la Tabla \ref{table:selected_metrics}, las métricas seleccionadas prioritariamente corresponden al nivel de método, seguidas por las métricas a nivel de clase y, finalmente, las de archivo. Es importante destacar que la cantidad de métricas disponibles a nivel de archivo es considerablemente menor en comparación con las de nivel de método y clase. Paralelamente, según lo indicado en la Tabla \ref{metrics-table}, solo tres métricas - CLOC, LOC y LLOC - están presentes en los tres niveles mencionados. Estas métricas fueron seleccionadas entre las más contribuyentes a los modelos predictivos. Esto subraya la relevancia y eficacia de dichas métricas en la predicción de errores.
+
+\input{chapters/chapter3/Sections/Research Questions/sections/RQ2/tables/clone_metrics}
+
+
+En la tabla \ref{table:metric_cero_varia} se muestran las métricas que no tienen variación en sus datos, aquellas que contengan aproximadamente un 95\% o más de sus datos con un valor constante. 
+
+ \input{chapters/chapter3/Sections/Research Questions/sections/RQ2/tables/metrics_cero_varia}
+
+De acuerdo con los análisis presentados en las tablas \ref{description-table} y \ref{table:metric_cero_varia}, se observa que, a excepción de la métrica TNOS, todas las demás métricas relacionadas con la violación de reglas presentan poca variación en sus datos (ver tabla \ref{table:smell_metrics}). Este patrón sugiere que dichas métricas podrían no ser particularmente relevantes para el proceso de predicción de errores en el contexto estudiado.
+
+
+\noindent\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{Respuesta RQ2} 
+   Entre las métricas con mayor contribución se encuentran aquellas calculables en los tres niveles: método, clase y archivo, específicamente CLOC, LOC y LLOC. No obstante, según se detalla en la Tabla \ref{table:selected_metrics}, las métricas de código más relevantes para los modelos empleados en la selección de características son, en orden de importancia, aquellas a nivel de método, clase y archivo, respectivamente. En resumen, las métricas mas relevantes para la predicción de bug son las métricas de código fuente y seguida por las métricas de código de duplicación, quedando fuera las métricas de métricas de olores de código.
+}%
+}
+\vspace{12pt}

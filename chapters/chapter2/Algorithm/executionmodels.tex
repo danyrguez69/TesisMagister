@@ -1,0 +1,34 @@
+\begin{algorithm}[H]
+    \hspace*{\algorithmicindent} \textbf{Input:} \\ The dataset $T_{le}(f_1, f_2, ..., f_k, l)$ where $l \in \{FP, NFP\}$ denotes the class label, and $k$ is the number of features selected by the feature selection process. $le \in \{File, Class, Methods\}$ of a specific project$
+
+    \hspace*{\algorithmicindent} \textbf{Output:} 
+        Saves the precision, recall, accuracy, and f-measure in the Database 
+    \caption{Execution of models}
+    \label{alg:executionmodels}
+    \begin{algorithmic}[1]
+    \fontsize{12pt}{12pt}\selectfont
+    \REQUIRE $rankList \leftarrow [0.5, 0.7, 0.9]$
+    \STATE $rankList \leftarrow [0.5, 0.7, 0.9]$
+    \STATE $bList \leftarrow [0.5, 0.7, 0.9]$
+    \STATE $levelList \leftarrow ['method', 'class', 'file']$
+
+    \STATE $modelsSelections \leftarrow ['CS-SU', 'IG-SU', 'RF-SU', 'CS-COS', 'IG-COS', 'RF-COS', 'ALL']$\;
+    \STATE $response \leftarrow \phi$
+
+    \FOR{$\text{each}$ rank in $rankList$}
+        \FOR{$\text{each}$ b in $bList$}
+            \FOR{$\text{each}$ level in $levelList$}
+                \FOR{$\text{each}$ modelsSelection in $modelsSelections$}
+                \STATE $data \leftarrow getData(rank, b, level, modelsSelection)$\;
+                    \STATE $responseNormal \leftarrow ModelResult(data.original, model)$\;
+                    \STATE $responseBalanced \leftarrow ModelResult(data.balanced, model)$\;
+                    \STATE $saveBD(responseNormal)$\;
+                    \STATE $saveBD(responseBalanced)$\;
+                \ENDFOR
+            \ENDFOR
+        \ENDFOR
+    \ENDFOR
+
+    \end{algorithmic}
+\end{algorithm}
+

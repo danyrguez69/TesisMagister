@@ -1,0 +1,95 @@
+\section{Cuarta pregunta de investigación}
+
+\noindent\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{RQ4} ¿Como los algoritmos de balanceo de clases ROS, RUS y SMOTE influyen en los resultados de los clasificadores?%
+}%
+}
+\vspace{12pt}
+
+\subsection{Desbalance general}
+Para realizar un análisis estadístico de la tabla \ref{table:count_bug_nobug}, primero examinaremos las tendencias y patrones generales observados en los datos, enfocándonos en las diferencias entre los proyectos con errores (Bug) y sin errores (Without Bug). La tabla \ref{table:count_bug_nobug} muestra datos para diferentes entidades (Method, Class, File) en varios proyectos de software.
+
+
+\input{chapters/chapter3/Sections/Research Questions/sections/RQ4/tables/count_bug_nobug}
+
+\begin{enumerate}
+\item Análisis Descriptivo General: 
+    \begin{itemize}
+        \item Cantidad de Errores vs. Sin Errores: En general, la cantidad de instancias "Without Bug" es mayor que las instancias "Bug" en la mayoría de los proyectos, lo que sugiere una tendencia general hacia una mayor cantidad de métodos, clases y archivos sin errores en los proyectos analizados.
+    \end{itemize}
+\item Análisis por Proyecto: 
+    \begin{itemize}
+        \item Proyectos con Mayor Número de Errores: Proyectos como 'elasticsearch', 'hazelcast', y 'all' muestran un número significativamente alto de errores. Esto podría indicar problemas más profundos en la calidad del código o la complejidad del proyecto.
+        \item Proyectos con Menor Número de Errores: Proyectos como 'oryx', 'mct', y 'Android-Universal-Image-Loader' tienen menos errores, lo que puede indicar una mejor calidad del código o una menor complejidad.
+    \end{itemize}
+\item Comparación entre Entidades (Method, Class, File): 
+    \begin{itemize}
+        \item Distribución de Errores: En algunos proyectos, la distribución de errores entre métodos, clases y archivos es similar, mientras que en otros hay diferencias significativas. Por ejemplo, 'netty' tiene una alta cantidad de errores en métodos comparado con clases y archivos.
+        \item Proporción Errores/Sin Errores por Entidad: En algunos casos, la proporción de errores respecto a instancias sin errores es mayor en una entidad que en otra, lo que puede indicar áreas de mayor riesgo en el proyecto.
+    \end{itemize}
+\item Patrones y Tendencias: 
+    \begin{itemize}
+        \item Tendencia General: Una observación general es que la mayoría de los proyectos tienden a tener más instancias sin errores que con errores. Sin embargo, esta relación varía considerablemente entre proyectos.
+        \item Proyectos Específicos: Proyectos como 'hazelcast' y 'elasticsearch' tienen un alto volumen de errores y sin errores, lo que podría indicar una escala más grande o una mayor actividad de desarrollo.
+    \end{itemize}
+\item Conclusiones: 
+    \begin{itemize}
+        \item Calidad del Código: Los proyectos con una menor proporción de errores podrían estar empleando prácticas de desarrollo más robustas o tener una menor complejidad.
+        \item Puntos de Atención: Proyectos con un alto número de errores, especialmente si la proporción respecto a instancias sin errores es alta, pueden requerir una revisión más detallada del código o prácticas de desarrollo.
+    \end{itemize}
+\end{enumerate}
+
+
+
+
+\subsection{Estadísticas Descriptivas}
+
+El análisis de la relación entre las columnas \textit{InstanceReduction}, \textit{Balanceado} y \textit{FMeasure} proporciona las siguientes estadísticas descriptivas:
+{
+\fontsize{14pt}{14pt}\selectfont
+\begin{itemize}
+    \item \textbf{ROS (Random Over Sampling)}
+    \begin{itemize}
+        \item No balanceado (False): Media = 0.555, Desviación estándar = 0.108, Rango = 0.301 a 0.844.
+        \item Balanceado (True): Media = 0.548, Desviación estándar = 0.104, Rango = 0.328 a 0.837.
+    \end{itemize}
+    \item \textbf{RUS (Random Under Sampling)}
+    \begin{itemize}
+        \item No balanceado: Media = 0.555, Desviación estándar = 0.108, Rango = 0.326 a 0.844.
+        \item Balanceado: Media = 0.524, Desviación estándar = 0.082, Rango = 0.318 a 0.830.
+    \end{itemize}
+    \item \textbf{SMOTE (Synthetic Minority Over-sampling Technique)}
+    \begin{itemize}
+        \item No balanceado: Media = 0.555, Desviación estándar = 0.108, Rango = 0.318 a 0.838.
+        \item Balanceado: Media = 0.548, Desviación estándar = 0.105, Rango = 0.274 a 0.837.
+    \end{itemize}
+\end{itemize}
+}
+\subsection{Interpretación del Gráfico de Barras}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=150mm, height=120mm,]{chapters/chapter3/Sections/Research Questions/sections/RQ4/img/InstancereductionBalanceado.png}
+     \setstretch{1} %Interlineado 1
+	\captionsetup{labelsep=period, labelfont=bf}
+    \caption{Medición F según algoritmo de balanceo y si está balanceado o no}
+    \label{fig:ROSRUSSMOTE}
+\end{figure}
+
+
+El gráfico de barras muestra la media de \textit{FMeasure} para cada combinación de \textit{InstanceReduction} y \textit{Balanceado}. Se observa que para cada método de reducción de instancia (ROS, RUS, SMOTE), los valores medios de \textit{FMeasure} son ligeramente más altos cuando no están balanceados (False) en comparación con cuando están balanceados (True).
+
+\subsection{Conclusión}
+
+Este análisis sugiere que el balanceo de datos (\textit{Balanceado}) tiene un impacto en la medida \textit{FMeasure}, especialmente en el método \textit{RUS}. Los datos no balanceados tienden a tener un \textit{FMeasure} ligeramente más alto en comparación con los datos balanceados para los métodos \textit{ROS} y \textit{SMOTE}. Es importante considerar que el balanceo de datos puede ser crítico para evitar el sesgo en modelos de aprendizaje automático, especialmente en contextos con distribución de clases desigual.
+
+
+
+\noindent\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{Respuesta RQ4} 
+Se observó una tendencia general hacia un mejor desempeño de los modelos de clasificación sin la implementación de técnicas de balanceo de clases, como Random Over-Sampling (ROS), Random Under-Sampling (RUS) y Synthetic Minority Over-sampling Technique (SMOTE). Esto sugiere que, para los conjuntos de datos evaluados, dichas técnicas no contribuyen significativamente a la mejora del rendimiento de los modelos de clasificación.
+}%
+}
+\vspace{12pt}

@@ -1,0 +1,12 @@
+\fontsize{12pt}{13}\selectfont % Use 14pt Times New Roman font
+
+Early prediction of software failures is crucial for optimizing resource use and time during the testing and maintenance stages of software. Over the years, various supervised machine learning techniques have been proposed to address this task. These models are trained using labeled datasets that include multiple independent variables, such as lines of code, complexity, and software size, along with a binary dependent variable indicating the presence or absence of failures.
+
+However, failure datasets present challenges such as high dimensionality, class imbalance, and missing values. Recent research has focused on improving data quality for software failure prediction. This study investigates whether applying feature selection techniques and class balancing strategies to a dataset of software metrics improves the accuracy of failure prediction compared to a baseline using the original dataset.
+
+We use the BugHunter dataset, which includes 15 Java projects extracted from GitHub, distributed across three levels (files, classes, methods) and containing a wide variety of code metrics and error information. We begin by applying feature selection in two stages: relevance analysis and redundancy control. Subsequently, we employ balancing techniques such as random over-sampling, random under-sampling, and SMOTE to balance instances with and without failures.
+
+The results of the classifiers, implemented in Python and the WEKA tool, are compared with a baseline defined from the unprocessed BugHunter. The final results demonstrate the effectiveness of our approach in software failure prediction, reducing the number of necessary metrics without compromising accuracy. The most relevant metrics were identified, showing that some metrics calculated in BugHunter do not affect the effectiveness of software error prediction.
+
+\hfill \break
+\textbf{Keywords:} bug dataset; bug prediction; code metrics; GitHub; feature selection; instance reduction; redundancy control; feature ranking; classification model

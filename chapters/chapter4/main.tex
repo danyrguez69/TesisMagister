@@ -1,0 +1,23 @@
+
+En el ámbito de la ingeniería de software, la predicción de fallas juega un papel crucial en la mejora de la calidad y la fiabilidad del software. La capacidad de identificar potenciales errores en etapas tempranas del desarrollo puede significar ahorros significativos en términos de tiempo y recursos. Basándonos en esta premisa, nuestra investigación postula la siguiente hipótesis:
+
+\subsection*{Hipótesis}
+
+La aplicación de técnicas avanzadas de preprocesamiento de datos mejora la precisión de los modelos de predicción de fallas de software.
+
+\textbf{Hipótesis específicas:}
+\begin{itemize}
+    \item \textbf{H1:} La aplicación de técnicas de selección de características sobre conjuntos de datos de métricas de software permite reducir significativamente la cantidad de características utilizadas, sin disminuir la precisión de los modelos de predicción de fallas de software.
+    \item \textbf{H2:} El uso de algoritmos de balanceo de clases (ROS, RUS, SMOTE) mejora la precisión de los modelos de predicción de fallas de software en comparación con modelos entrenados en conjuntos de datos desequilibrados.
+    \item \textbf{H3:} La combinación de selección de características y balanceo de clases produce modelos de predicción de fallas de software con mayor precisión que aquellos entrenados con el conjunto de datos original sin preprocesamiento.
+    \item \textbf{H4:} Las métricas de código seleccionadas mediante análisis de relevancia y control de redundancia son mejores predictoras de fallas de software que el conjunto completo de métricas.
+    \item \textbf{H5:} La integración de métricas de varios proyectos en un solo conjunto de datos (proyecto resumen) no disminuye significativamente la precisión de los modelos de predicción de fallas de software en comparación con el análisis individual por proyecto.
+\end{itemize}
+
+\subsection*{Validación de la Hipótesis}
+
+Para validar esta hipótesis, adoptaremos un enfoque metodológico basado en la comparación de modelos de aprendizaje automático antes y después de aplicar técnicas de selección de características y balanceo de clases. Específicamente, utilizaremos el clasificador RandomForest, dada su eficacia demostrada en la literatura para tareas de clasificación en el dominio del software. El conjunto de datos a utilizar será el BugHunter \citep{ferenc_automatically_2020}, que comprende métricas de código de 15 proyectos en Java, se someterá a un proceso de análisis de relevancia y control de redundancia, seguido por técnicas de balanceo de clases como random over-sampling, random under-sampling y SMOTE para equilibrar las instancias de fallas y no fallas.
+
+La efectividad del enfoque se medirá mediante métricas estándar en la predicción de fallas de software, incluyendo precisión, recall y la medida F1. Se espera que la aplicación de las  técnicas de selección de características y balanceo de clases, no solo mejore la capacidad de los modelos para identificar correctamente las fallas, sino que también reduzca la dimensión del espacio de características sin sacrificar el rendimiento del modelo.
+
+

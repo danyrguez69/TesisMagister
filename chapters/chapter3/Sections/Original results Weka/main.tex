@@ -1,0 +1,33 @@
+\section{Resultados con dataset original}
+\label{sec:datasetoriginal}
+
+En la sección actual, llevamos a cabo un experimento con el objetivo de replicar los resultados reportados en \cite{ferenc_automatically_2020}, enfocándonos en las métricas de código en distintos niveles. El estudio original aplicó once algoritmos de aprendizaje automático con cross validation de 10 folds en la herramienta WEKA sobre quince proyectos (y el dataset resumen), considerando tres niveles distintos en cada uno. En nuestro enfoque para replicar estos hallazgos, empleamos los mismos proyectos pero restringimos nuestra experimentación al algoritmo RandomForest de aprendizaje automático. Esta limitación se basó en la hipótesis de si sería posible alcanzar resultados comparables a los reportados en \cite{ferenc_automatically_2020}.
+
+A continuación, presentamos en la Tabla \ref{table:original_result_average} una comparativa entre el promedio de nuestros resultados y los obtenidos en \cite{ferenc_automatically_2020}. Es importante señalar que, en nuestro experimento, se promediaron menos datos debido a la selección de una cantidad menor de algoritmos de aprendizaje automático para la prueba.
+
+\input{chapters/chapter3/Sections/Original results Weka/tables/average_results}
+
+Los resultados presentados en la Tabla \ref{table:original_result_average} revelan que, en promedio, nuestros hallazgos son comparables a pesar de haber realizado un número menor de experimentos. Esta observación nos permite afirmar, a nivel global, que hemos conseguido obtener resultados análogos a los reportados en \cite{ferenc_automatically_2020}. Tal similitud resalta la eficacia del algoritmo RandomForest en la evaluación de métricas de código en distintos niveles, y respalda la solidez del enfoque metodológico adoptado en el estudio original.
+
+\subsection{Resultados Utilizando el Conjunto de Datos Original a Nivel de Método}
+La Tabla \ref{table:original_result_weka_method_result} presenta los resultados de entrenar el modelo RandomForest con métricas a nivel de método para predecir fallos en este mismo nivel. La estructura de la tabla es la siguiente:
+
+\begin{itemize}
+  \item \textbf{Project:} Lista los proyectos de software analizados en el estudio. Cada uno representa una instancia de análisis individual y se incluye un conjunto denominado ALL, que es la unión de todos los proyectos.
+  \item \textbf{F-measure:} Indica el valor de la medida F para cada proyecto, una métrica esencial en la valoración del rendimiento de modelos de aprendizaje automático, combinando precisión y recall.
+\end{itemize}
+
+
+\input{chapters/chapter3/Sections/Original results Weka/tables/method_results}
+
+El proyecto oryx obtuvo el mejor resultado a nivel de método con una F-measure de 0,85, mientras que en el estudio original de \cite{ferenc_automatically_2020}, el proyecto antlr4 mostró el mejor resultado con un valor de 0,75 \cite{ferenc_automatically_2020}. En nuestro análisis, el proyecto antlr4 alcanzó una F-measure de 0,78, lo que demuestra una similitud notable con los resultados originales. En el estudio de \cite{ferenc_automatically_2020}, el proyecto oryx tuvo una F-measure de 0,66, lo que indica la necesidad de un análisis más exhaustivo centrado en este proyecto para determinar las causas de la diferencia significativa de 0,19. Los demás proyectos mostraron valores comparables, con una variación promedio de ±0,10 en relación con los resultados del estudio original.
+
+\input{chapters/chapter3/Sections/Original results Weka/tables/class_results}
+
+En lo que respecta a las métricas de código a nivel de clases, observamos una variación promedio de ±0,10 en todos los proyectos. Esta discrepancia podría atribuirse al uso de una mayor variedad de algoritmos de aprendizaje automático en el estudio original. No obstante, hemos conseguido resultados comparables, logrando así cumplir con nuestro objetivo inicial. Es importante resaltar que, una vez más, el proyecto oryx se posiciona a la cabeza en este nivel, mostrando una mínima diferencia de 0,08 en la F-measure en comparación con el estudio original. Este hallazgo es notable considerando que, en el análisis original a nivel de clase, el mejor desempeño lo obtuvo BroadleafCommerce con una F-measure de 0,74 utilizando el algoritmo RandomForest. Estos resultados subrayan la consistencia de oryx en nuestros experimentos y reflejan la efectividad del algoritmo RandomForest en diferentes contextos y niveles de métrica.
+
+\input{chapters/chapter3/Sections/Original results Weka/tables/file_results}
+
+Al considerar las métricas a nivel de archivo, nuevamente destacamos que el proyecto oryx obtuvo el mejor resultado con una F-measure de 0,77. Esto contrasta con los hallazgos del estudio original, donde el proyecto BroadleafCommerce lideró con una F-measure de 0,77, seguido por oryx con 0,64, lo cual representa una diferencia de 0,13 en comparación con nuestros resultados. En este nivel, también observamos una variación promedio de ±0,10 en los valores obtenidos para la F-measure.
+
+Estos experimentos han permitido alinear nuestros resultados iniciales con aquellos reportados en el estudio original, estableciendo una base sólida para futuras mejoras. Estas mejoras se centrarán en la reducción del número de métricas utilizadas en los algoritmos de aprendizaje automático, manteniendo o incluso superando los resultados obtenidos en esta fase experimental. Para todos los proyectos, a nivel de método se introducen 72 características en los algoritmos, a nivel de clase 92, y a nivel de archivo 6. Por tanto, el objetivo será minimizar el número de características introducidas, buscando optimizar la eficacia y eficiencia de los modelos de predicción empleados.
