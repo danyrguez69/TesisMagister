@@ -1,0 +1,5 @@
+class,elasticsearch,0.5,0.5,CS_SU,NONE,SGD,0.53,0.53,0.51,0.53,24,31644
+class,elasticsearch,0.5,0.5,IG_SU,RUS,SGD,0.53,0.53,0.5,0.53,11,31644
+class,elasticsearch,0.5,0.5,IG_SU,ROS,SGD,0.53,0.52,0.51,0.52,11,31644
+class,elasticsearch,0.5,0.5,IG_SU,NONE,SGD,0.53,0.52,0.48,0.52,11,31644
+class,elasticsearch,0.5,0.5,RF_SU,RUS,SGD,0.53,0.53,0.52,0.53,37,31644

@@ -1,0 +1,16 @@
+\section{Validación cruzada entre herramientas: Weka y \textit{scikit-learn}}
+\label{sec:validacion_flujos}
+
+El estudio principal combina dos herramientas: la selección de características, la partición estratificada 67/33 y el balanceo del entrenamiento se realizan en Python, mientras que la clasificación con \textit{Random Forest} se ejecuta en Weka en modalidad \textit{Supplied test set} (Sección \ref{sec:RQ1}). El análisis de sensibilidad (Sección \ref{sec:sensibilidad}), en cambio, se ejecuta completamente en \textit{scikit-learn}. Para verificar que ambos flujos son intercambiables, se compararon las 32 mejores configuraciones a nivel de método registradas en Weka ---16 conjuntos, sin balancear y con SMOTE (Tabla \ref{table:weka_method_smote_b})--- con la configuración idéntica (proyecto, esquema, \textit{Rank}, $\beta$ y balanceo) del análisis de sensibilidad ejecutado con \textit{Random Forest} en \textit{scikit-learn}. La comparación no requiere reejecutar modelos y se implementó en el \textit{script} \texttt{validar\_weka\_vs\_sklearn.py}.
+
+\input{chapters/chapter3/Tables/weka/train_test/weka_method_smote_b}
+
+Los resultados son los siguientes:
+
+\begin{itemize}
+    \item \textbf{Particiones idénticas.} El tamaño del conjunto de prueba coincide en las 32 configuraciones, lo que confirma que ambos flujos evalúan sobre la misma partición estratificada.
+    \item \textbf{\textit{F-measure} ponderado.} La diferencia absoluta mediana entre herramientas es de 0,010, y 23 de las 32 configuraciones difieren en 0,02 o menos. Las diferencias mayores (hasta 0,060) se concentran en los proyectos con conjuntos de prueba pequeños, como \textit{mct} (36 instancias) y \textit{Android-Universal-Image-Loader} (129), donde unas pocas predicciones distintas alteran la métrica. Weka obtiene un valor ligeramente superior en 24 de las 32 configuraciones (diferencia media de 0,010), lo esperable dado que estas configuraciones fueron seleccionadas como las mejores dentro del propio Weka.
+    \item \textbf{Métricas por clase.} Con la matriz de confusión de Weka se calcularon el \textit{F-measure} de la clase \textit{bug} y el MCC. Ambas herramientas reproducen el mismo patrón frente al balanceo: con SMOTE, el \textit{F-measure} ponderado apenas varía (medianas de 0,600 a 0,581 en Weka y de 0,583 a 0,578 en \textit{scikit-learn}), mientras que el \textit{F-measure} de la clase \textit{bug} aumenta (de 0,280 a 0,334 en Weka y de 0,250 a 0,293 en \textit{scikit-learn}). En MCC, en estas configuraciones elegidas por su \textit{F-measure} ponderado, la variación es pequeña y negativa en ambas herramientas.
+\end{itemize}
+
+En conjunto, la diferencia de herramienta introduce una variación del orden de 0,01 en el \textit{F-measure} ponderado, un orden de magnitud menor que las diferencias entre proyectos, y no altera el sentido de ninguna de las conclusiones. Esto permite comparar directamente los resultados del estudio principal (Weka) con los del análisis de sensibilidad (\textit{scikit-learn}).

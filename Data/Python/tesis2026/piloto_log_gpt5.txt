@@ -1,0 +1,290 @@
+[datos] oryx/method: n=150 (bug=17) feats=['Migration13 Rules', 'HPL', 'MI', 'MIMS', 'MISEI', 'MISM', 'HVOL', 'HCPL', 'HPV', 'HEFF']
+[datos] oryx/class: n=150 (bug=19) feats=['NLA', 'NOI', 'TNOS', 'NLPA', 'TLOC', 'LOC', 'TNG', 'NA', 'Import Statement Rules', 'TNPM']
+[datos] oryx/file: n=150 (bug=19) feats=['McCC', 'LOC', 'LLOC', 'CLOC', 'PUA', 'PDA']
+[datos] antlr4/method: n=150 (bug=22) feats=['JUnit Rules', 'WarningMajor', 'Type Resolution Rules', 'HVOL', 'Brace Rules', 'MISEI', 'MISM', 'MIMS', 'NL', 'MI']
+[datos] antlr4/class: n=120 (bug=44) feats=['Empty Code Rules', 'NS', 'J2EE Rules', 'Naming Rules', 'TNS', 'Strict Exception Rules', 'TNLM', 'CLLC', 'NLE', 'JUnit Rules']
+[datos] antlr4/file: n=126 (bug=52) feats=['PDA', 'CLOC', 'McCC', 'PUA', 'LLOC', 'LOC']
+[datos] netty/method: n=150 (bug=40) feats=['HEFF', 'HTRP', 'HNDB', 'MI', 'MISEI', 'MISM', 'MIMS', 'TLOC', 'HCPL', 'HDIF']
+[datos] netty/class: n=150 (bug=60) feats=['TNOS', 'WarningMinor', 'NLE', 'NLM', 'LLDC', 'NOS', 'TNG', 'NOI', 'RFC', 'LLOC']
+[datos] netty/file: n=150 (bug=64) feats=['PDA', 'LOC', 'McCC', 'CLOC', 'LLOC', 'PUA']
+openai/gpt-5 zero-shot oryx/method ids 291..: 10/10 validas | gasto acumulado 0.0135 USD
+=== Relanzado en paralelo (10 simultaneas) ===
+[datos] oryx/method: n=150 (bug=17) feats=['Migration13 Rules', 'HPL', 'MI', 'MIMS', 'MISEI', 'MISM', 'HVOL', 'HCPL', 'HPV', 'HEFF']
+[datos] oryx/class: n=150 (bug=19) feats=['NLA', 'NOI', 'TNOS', 'NLPA', 'TLOC', 'LOC', 'TNG', 'NA', 'Import Statement Rules', 'TNPM']
+[datos] oryx/file: n=150 (bug=19) feats=['McCC', 'LOC', 'LLOC', 'CLOC', 'PUA', 'PDA']
+[datos] antlr4/method: n=150 (bug=22) feats=['JUnit Rules', 'WarningMajor', 'Type Resolution Rules', 'HVOL', 'Brace Rules', 'MISEI', 'MISM', 'MIMS', 'NL', 'MI']
+[datos] antlr4/class: n=120 (bug=44) feats=['Empty Code Rules', 'NS', 'J2EE Rules', 'Naming Rules', 'TNS', 'Strict Exception Rules', 'TNLM', 'CLLC', 'NLE', 'JUnit Rules']
+[datos] antlr4/file: n=126 (bug=52) feats=['PDA', 'CLOC', 'McCC', 'PUA', 'LLOC', 'LOC']
+[datos] netty/method: n=150 (bug=40) feats=['HEFF', 'HTRP', 'HNDB', 'MI', 'MISEI', 'MISM', 'MIMS', 'TLOC', 'HCPL', 'HDIF']
+[datos] netty/class: n=150 (bug=60) feats=['TNOS', 'WarningMinor', 'NLE', 'NLM', 'LLDC', 'NOS', 'TNG', 'NOI', 'RFC', 'LLOC']
+[datos] netty/file: n=150 (bug=64) feats=['PDA', 'LOC', 'McCC', 'CLOC', 'LLOC', 'PUA']
+259 solicitudes pendientes, 10 en paralelo
+[1/259] openai/gpt-5 zero-shot oryx/method ids 689..: 10/10 validas | gasto acumulado 0.0111 USD
+[2/259] openai/gpt-5 zero-shot oryx/method ids 186..: 10/10 validas | gasto acumulado 0.0251 USD
+[3/259] openai/gpt-5 zero-shot oryx/method ids 501..: 10/10 validas | gasto acumulado 0.0451 USD
+[4/259] openai/gpt-5 zero-shot oryx/method ids 308..: 10/10 validas | gasto acumulado 0.0568 USD
+[5/259] openai/gpt-5 zero-shot oryx/method ids 234..: 10/10 validas | gasto acumulado 0.0760 USD
+[6/259] openai/gpt-5 few-shot oryx/method ids 501..: 10/10 validas | gasto acumulado 0.0944 USD
+[7/259] openai/gpt-5 zero-shot oryx/method ids 447..: 10/10 validas | gasto acumulado 0.1068 USD
+[8/259] openai/gpt-5 zero-shot oryx/method ids 482..: 10/10 validas | gasto acumulado 0.1175 USD
+[9/259] openai/gpt-5 few-shot oryx/method ids 689..: 10/10 validas | gasto acumulado 0.1345 USD
+[10/259] openai/gpt-5 few-shot oryx/method ids 234..: 10/10 validas | gasto acumulado 0.1587 USD
+[11/259] openai/gpt-5 zero-shot oryx/method ids 446..: 10/10 validas | gasto acumulado 0.1713 USD
+[12/259] openai/gpt-5 zero-shot oryx/method ids 159..: 10/10 validas | gasto acumulado 0.1819 USD
+[13/259] openai/gpt-5 few-shot oryx/method ids 308..: 10/10 validas | gasto acumulado 0.2095 USD
+[14/259] openai/gpt-5 zero-shot oryx/method ids 849..: 10/10 validas | gasto acumulado 0.2203 USD
+[15/259] openai/gpt-5 few-shot oryx/method ids 447..: 10/10 validas | gasto acumulado 0.2417 USD
+[16/259] openai/gpt-5 zero-shot oryx/method ids 392..: 10/10 validas | gasto acumulado 0.2512 USD
+[17/259] openai/gpt-5 zero-shot oryx/method ids 375..: 10/10 validas | gasto acumulado 0.2648 USD
+[18/259] openai/gpt-5 few-shot oryx/method ids 482..: 10/10 validas | gasto acumulado 0.2853 USD
+[19/259] openai/gpt-5 few-shot oryx/method ids 186..: 10/10 validas | gasto acumulado 0.3200 USD
+[20/259] openai/gpt-5 few-shot oryx/method ids 291..: 10/10 validas | gasto acumulado 0.3545 USD
+[21/259] openai/gpt-5 zero-shot oryx/method ids 357..: 10/10 validas | gasto acumulado 0.3702 USD
+[22/259] openai/gpt-5 zero-shot oryx/method ids 366..: 10/10 validas | gasto acumulado 0.3840 USD
+[23/259] openai/gpt-5 few-shot oryx/method ids 159..: 10/10 validas | gasto acumulado 0.4018 USD
+[24/259] openai/gpt-5 few-shot oryx/method ids 446..: 10/10 validas | gasto acumulado 0.4222 USD
+[25/259] openai/gpt-5 zero-shot oryx/class ids 31..: 10/10 validas | gasto acumulado 0.4322 USD
+[26/259] openai/gpt-5 few-shot oryx/method ids 357..: 10/10 validas | gasto acumulado 0.4529 USD
+[27/259] openai/gpt-5 zero-shot oryx/class ids 75..: 10/10 validas | gasto acumulado 0.4649 USD
+[28/259] openai/gpt-5 zero-shot oryx/class ids 347..: 10/10 validas | gasto acumulado 0.4811 USD
+[29/259] openai/gpt-5 few-shot oryx/method ids 392..: 10/10 validas | gasto acumulado 0.5066 USD
+[30/259] openai/gpt-5 few-shot oryx/method ids 849..: 10/10 validas | gasto acumulado 0.5353 USD
+[31/259] openai/gpt-5 zero-shot oryx/class ids 276..: 10/10 validas | gasto acumulado 0.5451 USD
+[32/259] openai/gpt-5 few-shot oryx/method ids 366..: 10/10 validas | gasto acumulado 0.5740 USD
+[33/259] openai/gpt-5 few-shot oryx/class ids 31..: 10/10 validas | gasto acumulado 0.5996 USD
+[34/259] openai/gpt-5 few-shot oryx/method ids 375..: 10/10 validas | gasto acumulado 0.6369 USD
+[35/259] openai/gpt-5 zero-shot oryx/class ids 87..: 10/10 validas | gasto acumulado 0.6531 USD
+[36/259] openai/gpt-5 few-shot oryx/class ids 347..: 10/10 validas | gasto acumulado 0.6793 USD
+[37/259] openai/gpt-5 zero-shot oryx/class ids 273..: 10/10 validas | gasto acumulado 0.6971 USD
+[38/259] openai/gpt-5 few-shot oryx/class ids 75..: 10/10 validas | gasto acumulado 0.7284 USD
+[39/259] openai/gpt-5 zero-shot oryx/class ids 300..: 10/10 validas | gasto acumulado 0.7470 USD
+[40/259] openai/gpt-5 zero-shot oryx/class ids 497..: 10/10 validas | gasto acumulado 0.7591 USD
+[41/259] openai/gpt-5 zero-shot oryx/class ids 430..: 10/10 validas | gasto acumulado 0.7743 USD
+[42/259] openai/gpt-5 zero-shot oryx/class ids 595..: 10/10 validas | gasto acumulado 0.7953 USD
+[43/259] openai/gpt-5 few-shot oryx/class ids 595..: 10/10 validas | gasto acumulado 0.8195 USD
+[44/259] openai/gpt-5 few-shot oryx/class ids 276..: 10/10 validas | gasto acumulado 0.8487 USD
+[45/259] openai/gpt-5 zero-shot oryx/class ids 80..: 10/10 validas | gasto acumulado 0.8610 USD
+[46/259] openai/gpt-5 zero-shot oryx/class ids 499..: 10/10 validas | gasto acumulado 0.8691 USD
+[47/259] openai/gpt-5 few-shot oryx/class ids 87..: 10/10 validas | gasto acumulado 0.8997 USD
+[48/259] openai/gpt-5 zero-shot oryx/class ids 469..: 10/10 validas | gasto acumulado 0.9149 USD
+[49/259] openai/gpt-5 few-shot oryx/class ids 430..: 10/10 validas | gasto acumulado 0.9387 USD
+[50/259] openai/gpt-5 few-shot oryx/class ids 80..: 10/10 validas | gasto acumulado 0.9603 USD
+[51/259] openai/gpt-5 zero-shot oryx/class ids 550..: 10/10 validas | gasto acumulado 0.9789 USD
+[52/259] openai/gpt-5 few-shot oryx/class ids 300..: 10/10 validas | gasto acumulado 1.0145 USD
+[53/259] openai/gpt-5 few-shot oryx/class ids 497..: 10/10 validas | gasto acumulado 1.0414 USD
+[54/259] openai/gpt-5 zero-shot oryx/class ids 393..: 10/10 validas | gasto acumulado 1.0588 USD
+[55/259] openai/gpt-5 few-shot oryx/class ids 469..: 10/10 validas | gasto acumulado 1.0860 USD
+[56/259] openai/gpt-5 zero-shot oryx/file ids 108..: 10/10 validas | gasto acumulado 1.0973 USD
+[57/259] openai/gpt-5 few-shot oryx/class ids 499..: 10/10 validas | gasto acumulado 1.1210 USD
+[58/259] openai/gpt-5 zero-shot oryx/file ids 339..: 10/10 validas | gasto acumulado 1.1323 USD
+[59/259] openai/gpt-5 zero-shot oryx/file ids 300..: 10/10 validas | gasto acumulado 1.1422 USD
+[60/259] openai/gpt-5 few-shot oryx/class ids 273..: 10/10 validas | gasto acumulado 1.1823 USD
+[61/259] openai/gpt-5 few-shot oryx/file ids 108..: 10/10 validas | gasto acumulado 1.2086 USD
+[62/259] openai/gpt-5 few-shot oryx/file ids 339..: 10/10 validas | gasto acumulado 1.2268 USD
+[63/259] openai/gpt-5 zero-shot oryx/file ids 270..: 10/10 validas | gasto acumulado 1.2368 USD
+[64/259] openai/gpt-5 few-shot oryx/class ids 393..: 10/10 validas | gasto acumulado 1.2606 USD
+[65/259] openai/gpt-5 few-shot oryx/file ids 300..: 10/10 validas | gasto acumulado 1.2798 USD
+[66/259] openai/gpt-5 few-shot oryx/class ids 550..: 10/10 validas | gasto acumulado 1.3090 USD
+[67/259] openai/gpt-5 zero-shot oryx/file ids 571..: 10/10 validas | gasto acumulado 1.3203 USD
+[68/259] openai/gpt-5 few-shot oryx/file ids 270..: 10/10 validas | gasto acumulado 1.3422 USD
+[69/259] openai/gpt-5 few-shot oryx/file ids 261..: 10/10 validas | gasto acumulado 1.3636 USD
+[70/259] openai/gpt-5 zero-shot oryx/file ids 371..: 10/10 validas | gasto acumulado 1.3722 USD
+[71/259] openai/gpt-5 zero-shot oryx/file ids 584..: 10/10 validas | gasto acumulado 1.3855 USD
+[72/259] openai/gpt-5 few-shot oryx/file ids 584..: 10/10 validas | gasto acumulado 1.4073 USD
+[73/259] openai/gpt-5 zero-shot oryx/file ids 499..: 10/10 validas | gasto acumulado 1.4160 USD
+[74/259] openai/gpt-5 zero-shot oryx/file ids 261..: 10/10 validas | gasto acumulado 1.4404 USD
+[75/259] openai/gpt-5 few-shot oryx/file ids 571..: 10/10 validas | gasto acumulado 1.4653 USD
+[76/259] openai/gpt-5 few-shot oryx/file ids 507..: 10/10 validas | gasto acumulado 1.4890 USD
+[77/259] openai/gpt-5 few-shot oryx/file ids 499..: 10/10 validas | gasto acumulado 1.5065 USD
+[78/259] openai/gpt-5 zero-shot oryx/file ids 392..: 10/10 validas | gasto acumulado 1.5245 USD
+[79/259] openai/gpt-5 zero-shot oryx/file ids 388..: 10/10 validas | gasto acumulado 1.5344 USD
+[80/259] openai/gpt-5 zero-shot oryx/file ids 309..: 10/10 validas | gasto acumulado 1.5440 USD
+[81/259] openai/gpt-5 zero-shot oryx/file ids 189..: 10/10 validas | gasto acumulado 1.5519 USD
+[82/259] openai/gpt-5 few-shot oryx/file ids 392..: 10/10 validas | gasto acumulado 1.5786 USD
+[83/259] openai/gpt-5 few-shot oryx/file ids 305..: 10/10 validas | gasto acumulado 1.5979 USD
+[84/259] openai/gpt-5 zero-shot oryx/file ids 305..: 10/10 validas | gasto acumulado 1.6106 USD
+[85/259] openai/gpt-5 zero-shot oryx/file ids 507..: 10/10 validas | gasto acumulado 1.6235 USD
+[86/259] openai/gpt-5 few-shot oryx/file ids 371..: 10/10 validas | gasto acumulado 1.6582 USD
+[87/259] openai/gpt-5 few-shot oryx/file ids 189..: 10/10 validas | gasto acumulado 1.6764 USD
+[88/259] openai/gpt-5 few-shot oryx/file ids 388..: 10/10 validas | gasto acumulado 1.7113 USD
+[89/259] openai/gpt-5 few-shot oryx/file ids 309..: 10/10 validas | gasto acumulado 1.7372 USD
+[90/259] openai/gpt-5 zero-shot antlr4/method ids 336..: 10/10 validas | gasto acumulado 1.7534 USD
+[91/259] openai/gpt-5 few-shot antlr4/method ids 183..: 10/10 validas | gasto acumulado 1.7876 USD
+[92/259] openai/gpt-5 zero-shot antlr4/method ids 183..: 10/10 validas | gasto acumulado 1.8015 USD
+[93/259] openai/gpt-5 zero-shot antlr4/method ids 140..: 10/10 validas | gasto acumulado 1.8127 USD
+[94/259] openai/gpt-5 zero-shot antlr4/method ids 874..: 10/10 validas | gasto acumulado 1.8375 USD
+[95/259] openai/gpt-5 zero-shot antlr4/method ids 264..: 10/10 validas | gasto acumulado 1.8498 USD
+[96/259] openai/gpt-5 few-shot antlr4/method ids 874..: 10/10 validas | gasto acumulado 1.8923 USD
+[97/259] openai/gpt-5 few-shot antlr4/method ids 849..: 10/10 validas | gasto acumulado 1.9231 USD
+[98/259] openai/gpt-5 few-shot antlr4/method ids 140..: 10/10 validas | gasto acumulado 1.9530 USD
+[99/259] openai/gpt-5 zero-shot antlr4/method ids 849..: 10/10 validas | gasto acumulado 1.9648 USD
+[100/259] openai/gpt-5 zero-shot antlr4/method ids 410..: 10/10 validas | gasto acumulado 1.9780 USD
+[101/259] openai/gpt-5 few-shot antlr4/method ids 336..: 10/10 validas | gasto acumulado 2.0224 USD
+[102/259] openai/gpt-5 few-shot antlr4/method ids 532..: 10/10 validas | gasto acumulado 2.0429 USD
+[103/259] openai/gpt-5 few-shot antlr4/method ids 264..: 10/10 validas | gasto acumulado 2.0732 USD
+[104/259] openai/gpt-5 zero-shot antlr4/method ids 834..: 10/10 validas | gasto acumulado 2.0890 USD
+[105/259] openai/gpt-5 zero-shot antlr4/method ids 1..: 10/10 validas | gasto acumulado 2.1047 USD
+[106/259] openai/gpt-5 zero-shot antlr4/method ids 82..: 10/10 validas | gasto acumulado 2.1153 USD
+[107/259] openai/gpt-5 zero-shot antlr4/method ids 532..: 10/10 validas | gasto acumulado 2.1346 USD
+[108/259] openai/gpt-5 few-shot antlr4/method ids 1..: 10/10 validas | gasto acumulado 2.1614 USD
+[109/259] openai/gpt-5 zero-shot antlr4/method ids 165..: 10/10 validas | gasto acumulado 2.1753 USD
+[110/259] openai/gpt-5 few-shot antlr4/method ids 410..: 10/10 validas | gasto acumulado 2.2171 USD
+[111/259] openai/gpt-5 few-shot antlr4/method ids 834..: 10/10 validas | gasto acumulado 2.2478 USD
+[112/259] openai/gpt-5 zero-shot antlr4/method ids 419..: 10/10 validas | gasto acumulado 2.2635 USD
+[113/259] openai/gpt-5 few-shot antlr4/method ids 165..: 10/10 validas | gasto acumulado 2.2941 USD
+[114/259] openai/gpt-5 zero-shot antlr4/method ids 616..: 10/10 validas | gasto acumulado 2.3056 USD
+[115/259] openai/gpt-5 few-shot antlr4/method ids 82..: 10/10 validas | gasto acumulado 2.3354 USD
+[116/259] openai/gpt-5 zero-shot antlr4/class ids 361..: 10/10 validas | gasto acumulado 2.3526 USD
+[117/259] openai/gpt-5 few-shot antlr4/method ids 497..: 10/10 validas | gasto acumulado 2.3783 USD
+[118/259] openai/gpt-5 few-shot antlr4/method ids 419..: 10/10 validas | gasto acumulado 2.4080 USD
+[119/259] openai/gpt-5 few-shot antlr4/method ids 616..: 10/10 validas | gasto acumulado 2.4443 USD
+[120/259] openai/gpt-5 zero-shot antlr4/method ids 497..: 10/10 validas | gasto acumulado 2.4579 USD
+[121/259] openai/gpt-5 zero-shot antlr4/class ids 228..: 10/10 validas | gasto acumulado 2.4742 USD
+[122/259] openai/gpt-5 zero-shot antlr4/class ids 173..: 10/10 validas | gasto acumulado 2.4919 USD
+[123/259] openai/gpt-5 zero-shot antlr4/class ids 109..: 10/10 validas | gasto acumulado 2.5134 USD
+[124/259] openai/gpt-5 zero-shot antlr4/class ids 90..: 10/10 validas | gasto acumulado 2.5329 USD
+[125/259] openai/gpt-5 few-shot antlr4/class ids 361..: 10/10 validas | gasto acumulado 2.5710 USD
+[126/259] openai/gpt-5 few-shot antlr4/class ids 228..: 10/10 validas | gasto acumulado 2.6094 USD
+[127/259] openai/gpt-5 zero-shot antlr4/class ids 333..: 10/10 validas | gasto acumulado 2.6281 USD
+[128/259] openai/gpt-5 few-shot antlr4/class ids 109..: 10/10 validas | gasto acumulado 2.6651 USD
+[129/259] openai/gpt-5 few-shot antlr4/class ids 90..: 10/10 validas | gasto acumulado 2.6950 USD
+[130/259] openai/gpt-5 few-shot antlr4/class ids 333..: 10/10 validas | gasto acumulado 2.7221 USD
+[131/259] openai/gpt-5 zero-shot antlr4/class ids 85..: 10/10 validas | gasto acumulado 2.7369 USD
+[132/259] openai/gpt-5 few-shot antlr4/class ids 173..: 10/10 validas | gasto acumulado 2.7787 USD
+[133/259] openai/gpt-5 zero-shot antlr4/class ids 257..: 10/10 validas | gasto acumulado 2.7930 USD
+[134/259] openai/gpt-5 few-shot antlr4/class ids 257..: 10/10 validas | gasto acumulado 2.8306 USD
+[135/259] openai/gpt-5 few-shot antlr4/class ids 85..: 10/10 validas | gasto acumulado 2.8591 USD
+[136/259] openai/gpt-5 few-shot antlr4/class ids 47..: 10/10 validas | gasto acumulado 2.8906 USD
+[137/259] openai/gpt-5 zero-shot antlr4/class ids 187..: 10/10 validas | gasto acumulado 2.9013 USD
+[138/259] openai/gpt-5 zero-shot antlr4/class ids 247..: 10/10 validas | gasto acumulado 2.9185 USD
+[139/259] openai/gpt-5 few-shot antlr4/class ids 247..: 10/10 validas | gasto acumulado 2.9417 USD
+[140/259] openai/gpt-5 few-shot antlr4/class ids 187..: 10/10 validas | gasto acumulado 2.9637 USD
+[141/259] openai/gpt-5 zero-shot antlr4/class ids 47..: 10/10 validas | gasto acumulado 2.9885 USD
+[142/259] openai/gpt-5 zero-shot antlr4/file ids 140..: 10/10 validas | gasto acumulado 2.9995 USD
+[143/259] openai/gpt-5 zero-shot antlr4/class ids 107..: 10/10 validas | gasto acumulado 3.0144 USD
+[144/259] openai/gpt-5 zero-shot antlr4/file ids 67..: 10/10 validas | gasto acumulado 3.0243 USD
+[145/259] openai/gpt-5 zero-shot antlr4/file ids 55..: 10/10 validas | gasto acumulado 3.0377 USD
+[146/259] openai/gpt-5 few-shot antlr4/class ids 107..: 10/10 validas | gasto acumulado 3.0720 USD
+[147/259] openai/gpt-5 zero-shot antlr4/file ids 352..: 10/10 validas | gasto acumulado 3.0908 USD
+[148/259] openai/gpt-5 few-shot antlr4/file ids 67..: 10/10 validas | gasto acumulado 3.1135 USD
+[149/259] openai/gpt-5 few-shot antlr4/file ids 342..: 10/10 validas | gasto acumulado 3.1380 USD
+[150/259] openai/gpt-5 zero-shot antlr4/file ids 342..: 10/10 validas | gasto acumulado 3.1612 USD
+[151/259] openai/gpt-5 few-shot antlr4/file ids 140..: 10/10 validas | gasto acumulado 3.1946 USD
+[152/259] openai/gpt-5 few-shot antlr4/file ids 55..: 10/10 validas | gasto acumulado 3.2248 USD
+[153/259] openai/gpt-5 zero-shot antlr4/file ids 365..: 10/10 validas | gasto acumulado 3.2371 USD
+[154/259] openai/gpt-5 zero-shot antlr4/file ids 65..: 10/10 validas | gasto acumulado 3.2552 USD
+[155/259] openai/gpt-5 zero-shot antlr4/file ids 14..: 10/10 validas | gasto acumulado 3.2786 USD
+[156/259] openai/gpt-5 few-shot antlr4/file ids 14..: 10/10 validas | gasto acumulado 3.2983 USD
+[157/259] openai/gpt-5 zero-shot antlr4/file ids 344..: 10/10 validas | gasto acumulado 3.3094 USD
+[158/259] openai/gpt-5 few-shot antlr4/file ids 365..: 10/10 validas | gasto acumulado 3.3317 USD
+[159/259] openai/gpt-5 few-shot antlr4/file ids 352..: 10/10 validas | gasto acumulado 3.3656 USD
+[160/259] openai/gpt-5 zero-shot antlr4/file ids 231..: 10/10 validas | gasto acumulado 3.3838 USD
+[161/259] openai/gpt-5 zero-shot antlr4/file ids 229..: 10/10 validas | gasto acumulado 3.3966 USD
+[162/259] openai/gpt-5 few-shot antlr4/file ids 344..: 10/10 validas | gasto acumulado 3.4258 USD
+[163/259] openai/gpt-5 zero-shot antlr4/file ids 303..: 10/10 validas | gasto acumulado 3.4425 USD
+[164/259] openai/gpt-5 few-shot antlr4/file ids 303..: 10/10 validas | gasto acumulado 3.4645 USD
+[165/259] openai/gpt-5 zero-shot netty/method ids 12537..: 10/10 validas | gasto acumulado 3.4809 USD
+[166/259] openai/gpt-5 few-shot antlr4/file ids 231..: 10/10 validas | gasto acumulado 3.5020 USD
+[167/259] openai/gpt-5 few-shot antlr4/file ids 65..: 10/10 validas | gasto acumulado 3.5244 USD
+[168/259] openai/gpt-5 zero-shot netty/method ids 11014..: 10/10 validas | gasto acumulado 3.5421 USD
+[169/259] openai/gpt-5 zero-shot antlr4/file ids 278..: 6/6 validas | gasto acumulado 3.5544 USD
+[170/259] openai/gpt-5 few-shot antlr4/file ids 229..: 10/10 validas | gasto acumulado 3.5792 USD
+[171/259] openai/gpt-5 zero-shot netty/method ids 5071..: 10/10 validas | gasto acumulado 3.5944 USD
+[172/259] openai/gpt-5 zero-shot netty/method ids 7496..: 10/10 validas | gasto acumulado 3.6141 USD
+[173/259] openai/gpt-5 few-shot antlr4/file ids 278..: 6/6 validas | gasto acumulado 3.6400 USD
+[174/259] openai/gpt-5 few-shot netty/method ids 5071..: 10/10 validas | gasto acumulado 3.6684 USD
+[175/259] openai/gpt-5 zero-shot netty/method ids 949..: 10/10 validas | gasto acumulado 3.6833 USD
+[176/259] openai/gpt-5 few-shot netty/method ids 12537..: 10/10 validas | gasto acumulado 3.7235 USD
+[177/259] openai/gpt-5 few-shot netty/method ids 11014..: 10/10 validas | gasto acumulado 3.7644 USD
+[178/259] openai/gpt-5 few-shot netty/method ids 949..: 10/10 validas | gasto acumulado 3.7940 USD
+[179/259] openai/gpt-5 zero-shot netty/method ids 5072..: 10/10 validas | gasto acumulado 3.8176 USD
+[180/259] openai/gpt-5 zero-shot netty/method ids 12767..: 10/10 validas | gasto acumulado 3.8330 USD
+[181/259] openai/gpt-5 zero-shot netty/method ids 6218..: 10/10 validas | gasto acumulado 3.8465 USD
+[182/259] openai/gpt-5 few-shot netty/method ids 5072..: 10/10 validas | gasto acumulado 3.8790 USD
+[183/259] openai/gpt-5 few-shot netty/method ids 7496..: 10/10 validas | gasto acumulado 3.9178 USD
+[184/259] openai/gpt-5 few-shot netty/method ids 12767..: 10/10 validas | gasto acumulado 3.9444 USD
+[185/259] openai/gpt-5 zero-shot netty/method ids 11131..: 10/10 validas | gasto acumulado 3.9656 USD
+[186/259] openai/gpt-5 zero-shot netty/method ids 5511..: 10/10 validas | gasto acumulado 3.9936 USD
+[187/259] openai/gpt-5 few-shot netty/method ids 6218..: 10/10 validas | gasto acumulado 4.0183 USD
+[188/259] openai/gpt-5 zero-shot netty/method ids 11365..: 10/10 validas | gasto acumulado 4.0336 USD
+[189/259] openai/gpt-5 few-shot netty/method ids 5511..: 10/10 validas | gasto acumulado 4.0727 USD
+[190/259] openai/gpt-5 few-shot netty/method ids 11131..: 10/10 validas | gasto acumulado 4.1019 USD
+[191/259] openai/gpt-5 zero-shot netty/method ids 12956..: 10/10 validas | gasto acumulado 4.1214 USD
+[192/259] openai/gpt-5 zero-shot netty/method ids 7401..: 10/10 validas | gasto acumulado 4.1444 USD
+[193/259] openai/gpt-5 few-shot netty/method ids 7401..: 10/10 validas | gasto acumulado 4.1847 USD
+[194/259] openai/gpt-5 zero-shot netty/method ids 936..: 10/10 validas | gasto acumulado 4.1989 USD
+[195/259] openai/gpt-5 few-shot netty/method ids 11365..: 10/10 validas | gasto acumulado 4.2351 USD
+[196/259] openai/gpt-5 few-shot netty/method ids 936..: 10/10 validas | gasto acumulado 4.2656 USD
+[197/259] openai/gpt-5 few-shot netty/method ids 12956..: 10/10 validas | gasto acumulado 4.3008 USD
+[198/259] openai/gpt-5 zero-shot netty/method ids 54..: 10/10 validas | gasto acumulado 4.3245 USD
+[199/259] openai/gpt-5 zero-shot netty/class ids 4459..: 10/10 validas | gasto acumulado 4.3389 USD
+[200/259] openai/gpt-5 zero-shot netty/class ids 5492..: 10/10 validas | gasto acumulado 4.3632 USD
+[201/259] openai/gpt-5 zero-shot netty/class ids 197..: 10/10 validas | gasto acumulado 4.3771 USD
+[202/259] openai/gpt-5 few-shot netty/class ids 5492..: 10/10 validas | gasto acumulado 4.4085 USD
+[203/259] openai/gpt-5 zero-shot netty/class ids 3776..: 10/10 validas | gasto acumulado 4.4357 USD
+[204/259] openai/gpt-5 few-shot netty/method ids 54..: 10/10 validas | gasto acumulado 4.4818 USD
+[205/259] openai/gpt-5 few-shot netty/class ids 3776..: 10/10 validas | gasto acumulado 4.5197 USD
+[206/259] openai/gpt-5 zero-shot netty/class ids 5234..: 10/10 validas | gasto acumulado 4.5348 USD
+[207/259] openai/gpt-5 few-shot netty/class ids 4459..: 10/10 validas | gasto acumulado 4.5694 USD
+[208/259] openai/gpt-5 few-shot netty/class ids 197..: 10/10 validas | gasto acumulado 4.6021 USD
+[209/259] openai/gpt-5 zero-shot netty/class ids 1282..: 10/10 validas | gasto acumulado 4.6147 USD
+[210/259] openai/gpt-5 zero-shot netty/class ids 4968..: 10/10 validas | gasto acumulado 4.6259 USD
+[211/259] openai/gpt-5 zero-shot netty/class ids 2635..: 10/10 validas | gasto acumulado 4.6437 USD
+[212/259] openai/gpt-5 few-shot netty/class ids 3739..: 10/10 validas | gasto acumulado 4.6739 USD
+[213/259] openai/gpt-5 few-shot netty/class ids 5234..: 10/10 validas | gasto acumulado 4.7114 USD
+[214/259] openai/gpt-5 zero-shot netty/class ids 3739..: 10/10 validas | gasto acumulado 4.7329 USD
+[215/259] openai/gpt-5 few-shot netty/class ids 2635..: 10/10 validas | gasto acumulado 4.7721 USD
+[216/259] openai/gpt-5 zero-shot netty/class ids 6560..: 10/10 validas | gasto acumulado 4.7957 USD
+[217/259] openai/gpt-5 few-shot netty/class ids 4968..: 10/10 validas | gasto acumulado 4.8241 USD
+[218/259] openai/gpt-5 zero-shot netty/class ids 1047..: 10/10 validas | gasto acumulado 4.8391 USD
+[219/259] openai/gpt-5 few-shot netty/class ids 6560..: 10/10 validas | gasto acumulado 4.8658 USD
+[220/259] openai/gpt-5 few-shot netty/class ids 1101..: 10/10 validas | gasto acumulado 4.8935 USD
+[221/259] openai/gpt-5 zero-shot netty/class ids 1101..: 10/10 validas | gasto acumulado 4.9304 USD
+[222/259] openai/gpt-5 few-shot netty/class ids 76..: 10/10 validas | gasto acumulado 4.9686 USD
+[223/259] openai/gpt-5 few-shot netty/class ids 1282..: 10/10 validas | gasto acumulado 5.0129 USD
+[224/259] openai/gpt-5 zero-shot netty/class ids 593..: 10/10 validas | gasto acumulado 5.0252 USD
+[225/259] openai/gpt-5 zero-shot netty/class ids 76..: 10/10 validas | gasto acumulado 5.0433 USD
+[226/259] openai/gpt-5 zero-shot netty/class ids 5997..: 10/10 validas | gasto acumulado 5.0584 USD
+[227/259] openai/gpt-5 few-shot netty/class ids 593..: 10/10 validas | gasto acumulado 5.0815 USD
+[228/259] openai/gpt-5 zero-shot netty/file ids 622..: 10/10 validas | gasto acumulado 5.0936 USD
+[229/259] openai/gpt-5 zero-shot netty/file ids 3348..: 10/10 validas | gasto acumulado 5.1051 USD
+[230/259] openai/gpt-5 few-shot netty/class ids 1047..: 10/10 validas | gasto acumulado 5.1367 USD
+[231/259] openai/gpt-5 zero-shot netty/file ids 2604..: 10/10 validas | gasto acumulado 5.1502 USD
+[232/259] openai/gpt-5 few-shot netty/file ids 3348..: 10/10 validas | gasto acumulado 5.1684 USD
+[233/259] openai/gpt-5 zero-shot netty/file ids 414..: 10/10 validas | gasto acumulado 5.1813 USD
+[234/259] openai/gpt-5 few-shot netty/class ids 5997..: 10/10 validas | gasto acumulado 5.2103 USD
+[235/259] openai/gpt-5 zero-shot netty/file ids 2051..: 10/10 validas | gasto acumulado 5.2199 USD
+[236/259] openai/gpt-5 few-shot netty/file ids 622..: 10/10 validas | gasto acumulado 5.2507 USD
+[237/259] openai/gpt-5 few-shot netty/file ids 414..: 10/10 validas | gasto acumulado 5.2866 USD
+[238/259] openai/gpt-5 few-shot netty/file ids 2604..: 10/10 validas | gasto acumulado 5.3081 USD
+[239/259] openai/gpt-5 few-shot netty/file ids 2195..: 10/10 validas | gasto acumulado 5.3328 USD
+[240/259] openai/gpt-5 zero-shot netty/file ids 3475..: 10/10 validas | gasto acumulado 5.3427 USD
+[241/259] openai/gpt-5 zero-shot netty/file ids 1315..: 10/10 validas | gasto acumulado 5.3590 USD
+[242/259] openai/gpt-5 few-shot netty/file ids 3475..: 10/10 validas | gasto acumulado 5.4090 USD
+[243/259] openai/gpt-5 zero-shot netty/file ids 2195..: 10/10 validas | gasto acumulado 5.4196 USD
+[244/259] openai/gpt-5 few-shot netty/file ids 3805..: 10/10 validas | gasto acumulado 5.4538 USD
+[245/259] openai/gpt-5 zero-shot netty/file ids 1357..: 10/10 validas | gasto acumulado 5.4670 USD
+[246/259] openai/gpt-5 few-shot netty/file ids 2051..: 10/10 validas | gasto acumulado 5.5009 USD
+[247/259] openai/gpt-5 zero-shot netty/file ids 1777..: 10/10 validas | gasto acumulado 5.5191 USD
+[248/259] openai/gpt-5 zero-shot netty/file ids 3805..: 10/10 validas | gasto acumulado 5.5328 USD
+[249/259] openai/gpt-5 few-shot netty/file ids 1315..: 10/10 validas | gasto acumulado 5.5638 USD
+[250/259] openai/gpt-5 zero-shot netty/file ids 2818..: 10/10 validas | gasto acumulado 5.5797 USD
+[251/259] openai/gpt-5 zero-shot netty/file ids 2187..: 10/10 validas | gasto acumulado 5.5928 USD
+[252/259] openai/gpt-5 few-shot netty/file ids 1777..: 10/10 validas | gasto acumulado 5.6176 USD
+[253/259] openai/gpt-5 zero-shot netty/file ids 3548..: 10/10 validas | gasto acumulado 5.6331 USD
+[254/259] openai/gpt-5 few-shot netty/file ids 1357..: 10/10 validas | gasto acumulado 5.6771 USD
+[255/259] openai/gpt-5 few-shot netty/file ids 2818..: 10/10 validas | gasto acumulado 5.6999 USD
+[256/259] openai/gpt-5 few-shot netty/file ids 3548..: 10/10 validas | gasto acumulado 5.7239 USD
+[257/259] openai/gpt-5 zero-shot netty/file ids 1754..: 10/10 validas | gasto acumulado 5.7443 USD
+[258/259] openai/gpt-5 few-shot netty/file ids 2187..: 10/10 validas | gasto acumulado 5.7694 USD
+[259/259] openai/gpt-5 few-shot netty/file ids 1754..: 10/10 validas | gasto acumulado 5.8097 USD
+RF                                            -         n=1296  F1w=0.656 F1bug=0.291 [0.244,0.338]  MCC=0.081 [0.022,0.138]
+deepseek/deepseek-v3.2                        few-shot  n=1296  F1w=0.502 F1bug=0.418 [0.384,0.455]  MCC=0.105 [0.052,0.156]
+deepseek/deepseek-v3.2                        zero-shot n=1296  F1w=0.530 F1bug=0.404 [0.367,0.440]  MCC=0.088 [0.036,0.142]
+openai/gpt-4.1-mini                           few-shot  n=1296  F1w=0.569 F1bug=0.391 [0.354,0.428]  MCC=0.086 [0.035,0.143]
+openai/gpt-4.1-mini                           zero-shot n=1296  F1w=0.556 F1bug=0.388 [0.348,0.424]  MCC=0.076 [0.022,0.126]
+openai/gpt-5                                  few-shot  n=1296  F1w=0.604 F1bug=0.352 [0.316,0.394]  MCC=0.063 [0.015,0.118]
+openai/gpt-5                                  zero-shot n=1296  F1w=0.629 F1bug=0.354 [0.310,0.398]  MCC=0.087 [0.033,0.144]
+
+Detalle por conjunto: C:\Users\danyr\OneDrive\Documents\Visual Studio 2022\Project\PaperJordanys\Data\Python\tesis2026\piloto_llm_resultados.csv
+Tabla LaTeX: C:\Users\danyr\OneDrive\Documents\Visual Studio 2022\Project\PaperJordanys\Data\Python\tesis2026\piloto_llm_tabla.tex

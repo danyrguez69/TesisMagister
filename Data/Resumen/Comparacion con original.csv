@@ -1,0 +1,23 @@
+;;;;;
+Project;F-measure;Mejor en Pyton;Mismo;F-measure;Algorithm
+antlr4;0.7573;0,856;0,92;0,764;trees.RandomForest
+BroadleafCommerce;0.7366;0,778;0,86;0,764;trees.RandomForest
+hazelcast;0.7170;;;0,537;trees.RandomForest
+mct;0.6876;;;0,733;trees.RandomForest
+oryx;0.6678;0,889;0,94;0,834;trees.RandomForest
+junit;0.6638;;;-;rules.DecisionTable
+all;0.6622;;;0,565;trees.RandomForest
+netty;0.6412;;;-;trees.RandomForest
+elasticsearch;0.6411;;;0,552;trees.RandomForest
+orientdb;0.6236;;;0,535;trees.RandomForest
+titan;0.6216;;;0,603;functions.SGD
+neo4j;0.6086;;;0,561;functions.Logistic
+mcMMO;0.5815;;;0,547;trees.RandomForest
+MapDB;0.5610;;;0,519;functions.SimpleLogistic
+Android-Universal-Image-Loader;0.5569;;0,554;0,51;functions.SGD
+ceylon-ide-eclipse;0.5395;;0,796;0,594;trees.RandomTree
+;;;;;
+Crear nueva columna despues del filtrado utilizando weka;;;;;
+Resumen de las citaciones del paper original o de trabajos futuros de los autores;;;;;
+"Victor Rodriguez Gonzalez
+vrodriguez@ucn.cl";;;;;

@@ -1,4 +1,5 @@
 \section{Segunda pregunta de investigación}
+\label{sec:RQ2}
 
 \noindent\fbox{%
 \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
@@ -51,11 +52,12 @@ En la tabla \ref{table:metric_cero_varia} se muestran las métricas que no tiene
 
 De acuerdo con los análisis presentados en las tablas \ref{description-table} y \ref{table:metric_cero_varia}, se observa que, a excepción de la métrica TNOS, todas las demás métricas relacionadas con la violación de reglas presentan poca variación en sus datos (ver tabla \ref{table:smell_metrics}). Este patrón sugiere que dichas métricas podrían no ser particularmente relevantes para el proceso de predicción de errores en el contexto estudiado.
 
+\textit{Advertencia sobre un posible artefacto de conteo.} Una explicación alternativa, no excluyente, para la alta frecuencia de selección de CLOC, LOC y LLOC es un artefacto de conteo: al ser las únicas tres métricas disponibles en los tres niveles de granularidad, tienen estructuralmente el triple de oportunidades de ser seleccionadas que una métrica exclusiva de un solo nivel, y el doble que una disponible en dos niveles. Los datos actuales no permiten distinguir, sin reprocesar los registros de selección normalizando por nivel de granularidad, entre valor predictivo genuino y este efecto de oportunidad; esta verificación se declara como trabajo futuro (Capítulo \ref{cap:conclusion}) y como amenaza a la validez de constructo (Capítulo \ref{cap:discusion}).
 
 \noindent\fbox{%
 \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
-\textbf{Respuesta RQ2} 
-   Entre las métricas con mayor contribución se encuentran aquellas calculables en los tres niveles: método, clase y archivo, específicamente CLOC, LOC y LLOC. No obstante, según se detalla en la Tabla \ref{table:selected_metrics}, las métricas de código más relevantes para los modelos empleados en la selección de características son, en orden de importancia, aquellas a nivel de método, clase y archivo, respectivamente. En resumen, las métricas mas relevantes para la predicción de bug son las métricas de código fuente y seguida por las métricas de código de duplicación, quedando fuera las métricas de métricas de olores de código.
+\textbf{Respuesta RQ2}
+   Entre las métricas con mayor contribución se encuentran aquellas calculables en los tres niveles: método, clase y archivo, específicamente CLOC, LOC y LLOC, aunque parte de su preeminencia puede deberse a que tienen más oportunidades de ser seleccionadas. No obstante, según se detalla en la Tabla \ref{table:selected_metrics}, las métricas de código más relevantes para los modelos empleados en la selección de características son, en orden de importancia, aquellas a nivel de método, clase y archivo, respectivamente. En resumen, las métricas más relevantes para la predicción de errores son las métricas de código fuente, seguidas por las métricas de clonación de código, mientras que las métricas de violación de reglas (\textit{code smells}) quedan prácticamente fuera, con la excepción de TNOS.
 }%
 }
 \vspace{12pt}

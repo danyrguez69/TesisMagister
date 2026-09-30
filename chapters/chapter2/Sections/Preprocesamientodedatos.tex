@@ -61,8 +61,8 @@ Peso de la característica i = (distancia a la observación más cercana de la m
 El algoritmo de agrupamiento basado en umbrales (NTC) se utiliza para el segundo paso. En \cite{liu_empirical_2015} se encuentra un seudocódigo del algoritmo NTC.  Al principio, las funciones se agrupan en clústeres utilizando un umbral preespecificado. Para agrupar estas características, el algoritmo comienza calculando la similitud entre cada par de características y construye un gráfico de vecino más cercano sobre las características. Este proceso se repite y se van eliminando o seleccionando las características que cumplan con el umbral definido para la ejecución. Los métodos para calcular la similitud entre cualquier par de características se describirán a continuación \cite{liu_empirical_2015,chen_empirical_2013}.
 
 \begin{itemize}
-\item Incertidumbre simétrica (SU): La incertidumbre simétrica mide el coeficiente de entropía entre dos variables aleatorias y muchos investigadores la han utilizado para evaluar la similitud entre características {refs}.
-\item Semejanza de coseno (COS): La similitud de coseno mide el coseno del ángulo entre dos vectores euclidianos, construido por los valores de las dos características según el orden de instancia {ref}.
+\item Incertidumbre simétrica (SU): La incertidumbre simétrica mide el coeficiente de entropía entre dos variables aleatorias y muchos investigadores la han utilizado para evaluar la similitud entre características \cite{yu2003feature,liu_empirical_2015}.
+\item Semejanza de coseno (COS): La similitud de coseno mide el coseno del ángulo entre dos vectores euclidianos, construido por los valores de las dos características según el orden de instancia \cite{liu_empirical_2015}.
 \end{itemize}
 
 \subsection{Métodos de balanceo de número instancias}
@@ -78,9 +78,9 @@ En resumen, la técnica de Random Under Sampling busca balancear la proporción 
 
 \textbf{Random Over Sampling (ROS)} es una técnica de remuestreo utilizada en el aprendizaje automático para tratar el problema de desequilibrio de clases. El objetivo de ROS es aumentar la cantidad de muestras de las clases sub-representadas (o minoritarias) de tal manera que se iguale la cantidad de muestras de las clases sobre-representadas (o mayoritarias)  \cite{junsomboon_combining_2017,hossen_hybrid_2020}.
 
-La manera en que se lleva a cabo el ROS es mediante la generación aleatoria de nuevas muestras de las clases minoritarias. Esto se hace de forma que la proporción de muestras de las clases mayoritarias y minoritarias se acerque a una proporción deseada. Por ejemplo, si se quiere que la proporción de muestras de las clases mayoritarias y minoritarias sea 1:1, entonces se generarán aleatoriamente la mitad de las muestras adicionales necesarias para la clase minoritaria.
+La manera en que se lleva a cabo el ROS es mediante la duplicación aleatoria, con reemplazo, de instancias existentes de las clases minoritarias; a diferencia de SMOTE, no crea instancias nuevas. Esto se hace de forma que la proporción de muestras de las clases mayoritarias y minoritarias se acerque a una proporción deseada. Por ejemplo, si se quiere una proporción 1:1, se duplican instancias de la clase minoritaria hasta igualar el número de instancias de la clase mayoritaria.
 
-En resumen, la técnica de Random Over Sampling busca balancear la proporción de muestras entre las diferentes clases aumentando el tamaño de las clases minoritarias mediante la generación de nuevas muestras.
+En resumen, la técnica de Random Over Sampling busca balancear la proporción de muestras entre las diferentes clases aumentando el tamaño de las clases minoritarias mediante la duplicación de instancias existentes.
 
 
 \textbf{SMOTE (Synthetic Minority Over-sampling Technique)} es una técnica utilizada en Machine Learning para abordar el problema del desequilibrio de clases. Su objetivo es equilibrar la distribución de clases creando muestras sintéticas de la clase minoritaria. A continuación, se separa la explicación en la parte lógica matemática y el detalle del funcionamiento de SMOTE:
@@ -123,7 +123,7 @@ SMOTE es una técnica efectiva para abordar el desequilibrio de clases, ya que a
 
 \subsection{Modelos de clasificación} \label{sub:modelos}
 
-Se utiliza el modelos de clasificación Random Forest (RF) en la herramienta Weka para realizar los experimentos con los diferentes dataset.
+En el estudio principal se utiliza el modelo de clasificación Random Forest (RF) en la herramienta Weka para realizar los experimentos con los diferentes conjuntos de datos. En el análisis de sensibilidad (Sección \ref{sec:sensibilidad}) se utilizan, además, XGBoost y una SVM lineal, junto con Random Forest, implementados en \textit{scikit-learn}; estos algoritmos se describen en la Sección \ref{sec:clasificadores_mt}.
 
 RF: basado en un conjunto de árboles de decisiones. En su funcionamiento se utilizan algunas ecuaciones matemáticas, como las utilizadas en la construcción de un árbol de decisiones individual, como Gini impurity, Information Gain o Reduction in Variance \cite{shah_comparative_2020}.
 

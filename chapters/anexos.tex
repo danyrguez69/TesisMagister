@@ -1,3 +1,37 @@
 \fontsize{12pt}{14.5}\selectfont
-\chapter{Tablas y gráficos de conexión} \label{anexo1}
+\chapter{Disponibilidad de datos y reproducibilidad} \label{anexo1}
 
+\section{Datos y \textit{scripts}}
+
+El conjunto de datos BugHunter empleado en esta tesis es de acceso público \cite{ferenc_automatically_2020}. Los conjuntos de datos procesados, los \textit{scripts} de selección de características y balanceo y los resultados de las ejecuciones están disponibles a solicitud del autor. Su contenido es el siguiente:
+
+\begin{itemize}
+    \item \textbf{Estudio principal (13.916 ejecuciones).} Por ejecución se registran las métricas agregadas (precisión, \textit{recall}, \textit{F-measure} y exactitud) y los parámetros de la configuración, pero no las predicciones por instancia. Se conservan, además, la salida completa de Weka de la línea base del conjunto ``All'' a nivel de método (Tabla \ref{tab:porclase}) y las matrices de confusión de las mejores configuraciones a nivel de método (Tabla \ref{table:weka_method_smote_b}).
+    \item \textbf{Análisis de sensibilidad (28.440 ejecuciones).} Cada registro incluye la configuración completa y las métricas agregadas y por clase (precisión, \textit{recall} y \textit{F-measure} de la clase \textit{bug}, MCC y AUC-ROC). Se distribuye junto con los \textit{scripts} \texttt{sensibilidad\_clasificadores.py} y \texttt{analisis\_sensibilidad.py}, que permiten reproducir todos los análisis de la Sección \ref{sec:sensibilidad}.
+    \item \textbf{Validación entre herramientas.} El \textit{script} \texttt{validar\_weka\_vs\_sklearn.py} reproduce la comparación de la Sección \ref{sec:validacion_flujos} a partir de los archivos anteriores, sin reejecutar modelos.
+    \item \textbf{Piloto con LLM.} El \textit{script} \texttt{piloto\_llm.py} y el registro de respuestas crudas de los modelos (\texttt{piloto\_llm\_respuestas.jsonl}) permiten recalcular todas las métricas de la Sección \ref{sec:piloto_llm} sin volver a consultar la API.
+\end{itemize}
+
+\section{\textit{Prompts} del piloto con modelos de lenguaje}
+
+El mensaje de sistema, común a todas las solicitudes, fue el siguiente (en inglés, idioma en que se consultó a los modelos):
+
+\begin{quote}
+\small\ttfamily
+You are an expert software quality analyst. You receive static source-code metrics (computed by OpenStaticAnalyzer for Java code) of code elements and must predict whether each element is defective (bug) or not (no-bug). Answer ONLY with a JSON object of the form \{"predictions": [\{"id": <id>, "label": "bug" | "no-bug"\}, ...]\} covering every id.
+\end{quote}
+
+El mensaje de usuario indica el nivel de granularidad y la proporción de elementos defectuosos del proyecto en el conjunto de entrenamiento. En la modalidad \textit{few-shot} agrega ocho ejemplos etiquetados, cuatro de cada clase, y termina con la lista de instancias a clasificar, cada una serializada como \texttt{id=<n>: métrica1=valor1, métrica2=valor2, ...}. Por ejemplo, a nivel de archivo:
+
+\begin{quote}
+\small\ttfamily
+Code elements are Java files. In this project about 13\% of files are defective.\\
+Labelled examples:\\
+- McCC=12, LOC=240, LLOC=180, CLOC=35, PUA=4, PDA=2 -> no-bug\\
+...\\
+Classify these elements:\\
+id=1532: McCC=48, LOC=910, LLOC=702, CLOC=120, PUA=11, PDA=7\\
+...
+\end{quote}
+
+Los valores del ejemplo son ilustrativos del formato; los valores reales de cada solicitud se conservan en el registro de respuestas.

@@ -1,23 +1,23 @@
 \section{BUGHUNTER}
 
 
-Utilizamos el Conjunto de datos BugHunter: un tipo novedoso de conjunto de datos de errores construido automáticamente y disponible gratuitamente que contiene elementos de código (archivos, clases, métodos) con un amplio conjunto de métricas de código e información de errores \cite{ferenc_automatically_2020}.
+En esta tesis se utiliza el conjunto de datos BugHunter: un tipo novedoso de conjunto de datos de errores construido automáticamente y disponible gratuitamente que contiene elementos de código (archivos, clases, métodos) con un amplio conjunto de métricas de código e información de errores \cite{ferenc_automatically_2020}.
 
-Otros conjuntos de datos de errores disponibles siguen el enfoque tradicional (PROMISE \cite{sayyad_shirabad_promise_2005}, Eclipse, entre otros) de recopilar las características de todos los elementos del código fuente (con errores y sin errores) en solo una o más versiones de lanzamiento preseleccionadas del código. El enfoque seleccionado, por otro lado, captura el error y los estados fijos de los mismos elementos del código fuente desde el marco de tiempo más estrecho que podemos identificar para detectar la presencia de un error, independientemente de las versiones de lanzamiento.
+Otros conjuntos de datos de errores disponibles siguen el enfoque tradicional (PROMISE \cite{Sayyad-Shirabad+Menzies:2005}, Eclipse, entre otros) de recopilar las características de todos los elementos del código fuente (con errores y sin errores) en solo una o más versiones de lanzamiento preseleccionadas del código. El enfoque seleccionado, por otro lado, captura el error y los estados fijos de los mismos elementos del código fuente en el marco de tiempo más estrecho que es posible identificar para detectar la presencia de un error, independientemente de las versiones de lanzamiento.
 
 El conjunto de datos contiene información útil de caracterización de elementos de código defectuoso, se utilizan varios proyectos almacenados en GitHub que son mantenidos regularmente. Se utiliza la API de GitHub que hace posible implementar una herramienta de recuperación automática de datos. Se seleccionan 15 proyectos Java como sistemas temáticos, que difieren en muchos aspectos entre sí (tamaño, dominio, número de errores informados) para cubrir un conjunto amplio y general de sistemas \cite{ferenc_automatically_2020}. 
 
 El conjunto de datos se basa en un nuevo enfoque que recopila información del instante antes y después de la corrección de los elementos del código fuente (y sus características) que se vieron afectados por errores y no considera aquellos elementos del código que no fueron afectados por errores. Este tipo de conjunto de datos ayuda a capturar los cambios en las métricas de los productos de software cuando se corrige un error. Por lo tanto, se puede aprender de las diferencias en las métricas del código fuente entre elementos de código defectuosos y no defectuosos.
 
-En la tabla \ref{table:datasetmeta}, resumimos los metadatos principales del conjunto de datos. La cantidad de métricas existentes en cada categoría y la cantidad de registros existentes en cada uno de los niveles de granularidad.
+La Tabla \ref{table:datasetmeta} resume los metadatos principales del conjunto de datos: La cantidad de métricas existentes en cada categoría y la cantidad de registros existentes en cada uno de los niveles de granularidad.
 
 \input{chapters/chapter2/Tables/metadata_dataset} 
 
- Realizamos una descripción de los datos en \ref{description-table} mostrando cantidad, media, desviación estándar, mínimo, máximo y cantidad de elementos. Al analizar la tabla descriptiva de los datos podemos concluir:
+ La Tabla \ref{description-table} describe los datos mostrando cantidad, media, desviación estándar, mínimo, máximo y cantidad de elementos. De su análisis se concluye que:
  {
 \fontsize{14pt}{14pt}\selectfont
 \begin{itemize}
-\item No existen datos nulos dado que el contados de todos es igual al total de registros.
+\item No existen datos nulos, dado que el conteo de todas las características es igual al total de registros.
 \item Gran variedad en los rangos de los datos.
 \item Una gran cantidad de características que tienen moda y mediana iguales y con valor 0, pudiendo implicar poca variación en sus datos.
 \end{itemize}
@@ -27,7 +27,7 @@ El conjunto de datos BugHunter cuenta con varias métricas de código extraídas
 
 \input{chapters/chapter2/Tables/descriptionDataTable.tex}
 
-En la \ref{metrics-table} se muestra al conjunto de métricas y sus niveles correspondientes, el BugHunter contiene las métricas de código en tres niveles (método, clase y archivo).
+La Tabla \ref{metrics-table} muestra el conjunto de métricas y sus niveles correspondientes, el BugHunter contiene las métricas de código en tres niveles (método, clase y archivo).
 
 \input{chapters/chapter2/Tables/metricsTable.tex}
 

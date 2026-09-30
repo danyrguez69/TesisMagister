@@ -1,0 +1,73 @@
+En este capítulo se interpretan los resultados del Capítulo \ref{cap:resultados} a la luz de la literatura revisada en el Capítulo \ref{cap4}, se contrastan las hipótesis planteadas en el Capítulo \ref{cap:hipotesis} y se discuten las amenazas a la validez del estudio.
+
+\section{Interpretación de los hallazgos}
+
+\subsection{La selección de características como la técnica de mayor impacto práctico}
+
+La selección de características en dos etapas es la técnica de preprocesamiento con mayor impacto práctico de este estudio. Reduce la mediana del número de métricas de BugHunter entre un 40\,\% y un 88\,\% según el nivel de granularidad (hasta un 94\,\% en el mejor caso individual), con una pérdida de \textit{F-measure} inferior a 0,02, e incluso con una leve mejora a nivel de archivo. El análisis de sensibilidad muestra que este resultado no depende del clasificador: con \textit{Random Forest}, XGBoost y SVM lineal, el mejor esquema de selección mejora el \textit{F-measure} ponderado respecto de usar todas las métricas en la gran mayoría de los proyectos. Estos resultados son coherentes con los de Liu et al. \cite{liu_empirical_2015} y Chen et al. \cite{chen_empirical_2013}, que propusieron el marco de dos etapas sobre otros conjuntos de datos, y con los de Rathi et al. \cite{rathi_empirical_2023}, que reportan mejoras al combinar selección y muestreo. La contribución de esta tesis es mostrar que el marco se sostiene sobre BugHunter, en sus tres niveles de granularidad y con tres paradigmas de clasificación.
+
+La consistencia de CLOC, LOC y LLOC como predictoras en los tres niveles refuerza hallazgos previos sobre el valor de las métricas de tamaño de código frente a métricas más complejas de acoplamiento o cohesión \cite{RADJENOVIC20131397}. Como se advirtió en la Sección \ref{sec:RQ2}, sin embargo, esta consistencia debe leerse con cautela, porque estas tres métricas cuentan estructuralmente con más oportunidades de ser seleccionadas.
+
+\subsection{El beneficio del balanceo depende de la métrica}
+
+El hallazgo más relevante de esta tesis concierne al balanceo de clases. Aplicado solo al conjunto de entrenamiento, el balanceo no mejora el \textit{F-measure} ponderado cuando el conjunto de prueba conserva la distribución real de clases, un resultado confirmado con la prueba de Wilcoxon y un tamaño de efecto insignificante. Sin embargo, sí mejora de forma consistente la detección de la clase minoritaria, medida con el \textit{F-measure} de la clase \textit{bug} y con el MCC, en los tres clasificadores evaluados. Este patrón se observa con dos herramientas distintas (Weka y \textit{scikit-learn}, Sección \ref{sec:validacion_flujos}), lo que descarta que sea un artefacto de la implementación.
+
+Esta lectura reconcilia los resultados con la literatura que reporta beneficios del balanceo \cite{8494821,rathi_empirical_2023}: el beneficio existe y no es menor, pero se concentra en la clase minoritaria y queda diluido ---o incluso invertido--- en la métrica agregada. La explicación es aritmética: el \textit{F-measure} ponderado asigna a cada clase un peso proporcional a su frecuencia, de modo que una mejora en la detección de defectos, obtenida a costa de algunos falsos positivos en la clase mayoritaria, se compensa o se revierte en el agregado. El desequilibrio moderado de BugHunter (una mediana de entre el 28\,\% y el 43\,\% de instancias defectuosas, Tabla \ref{tab:desbalance}) atenúa este efecto; en conjuntos con menos del 10\,\% de instancias defectuosas, como los de NASA o PROMISE, cabe esperar que la divergencia entre ambas lecturas sea aún mayor.
+
+La literatura reciente con LLM muestra la misma dependencia. Jin et al. \cite{jin2025llm4sdp} observan que SMOTE mejora el \textit{recall} y el MCC de LLM ajustados solo en los conjuntos más desequilibrados, y Guo et al. \cite{guo2023} encuentran que el balance del entrenamiento es determinante para los modelos preentrenados en escenarios de pocos datos. La advertencia metodológica de esta tesis ---que la conclusión sobre el balanceo depende críticamente de la métrica de evaluación--- es, por tanto, independiente del tipo de modelo y aplica también a los enfoques basados en LLM. Los estudios que reportan exactitud \cite{khokhar2025finetuned} o solo un \textit{F-measure} agregado corren el riesgo de ocultar una detección pobre de la clase de interés, como ilustra la línea base del conjunto ``All'' a nivel de método: un \textit{F-measure} ponderado de 0,565 convive con un MCC de 0,052 (Tabla \ref{tab:porclase}).
+
+\subsection{Más datos no implica mejores modelos}
+
+El conjunto unificado ``All'', con muchas más instancias que cualquier proyecto individual, no obtuvo el mejor resultado en ningún escenario, clasificador ni métrica. Este resultado es coherente con la literatura de predicción entre proyectos \cite{cheng2022,sharma2023far}, que atribuye la degradación del desempeño a la heterogeneidad de las distribuciones de métricas entre proyectos con dominios, equipos y prácticas distintos. Jiang et al. \cite{jiang2024} muestran que esta heterogeneidad sigue siendo el principal obstáculo incluso para modelos de lenguaje preentrenados, y Jin et al. \cite{jin2025llm4sdp} observan que el desempeño de los LLM en predicción entre proyectos varía considerablemente según el conjunto de datos. Para un equipo de desarrollo, la implicancia práctica es que un modelo específico del proyecto, entrenado con su propio historial de errores, resulta preferible a un modelo genérico entrenado con datos de otros proyectos, salvo que se aplique un tratamiento explícito de adaptación de dominio.
+
+\subsection{Relación con los modelos de lenguaje de gran escala}
+
+La revisión del Capítulo \ref{cap4} muestra que los enfoques basados en LLM dependen del acceso al código fuente, tienen un costo computacional elevado y no superan de forma consistente a los clasificadores clásicos sobre métricas \cite{giray2023,stradowski2023,monteiro2026jit}. Los resultados de esta tesis aportan dos elementos a esa discusión. Primero, las métricas estáticas seleccionadas logran un desempeño comparable al de todas las métricas con una fracción de ellas, lo que las convierte en una representación compacta e interpretable que puede combinarse con representaciones basadas en LLM, en línea con la complementariedad observada por Jaiswal et al. \cite{jaiswal2026llm}. Segundo, las líneas base por clase establecidas sobre BugHunter permiten evaluar si una representación basada en LLM aporta una mejora real en la detección de la clase defectuosa, y no solo en una métrica agregada. El piloto exploratorio de la Sección \ref{sec:piloto_llm} realiza esta comparación sobre datos que no incluyen el código fuente, y su resultado refuerza ambos puntos. Tres LLM ---incluido uno con razonamiento extendido--- no superan a \textit{Random Forest} en MCC con las mismas métricas de entrada. Al mismo tiempo, parecen mejores si se mira solo el \textit{F-measure} de la clase \textit{bug} y peores si se mira solo el \textit{F-measure} ponderado. La advertencia metodológica central de esta tesis aplica, por tanto, también a la evaluación de LLM: sin métricas por clase y sin una línea base clásica, sería fácil atribuirles una mejora que no existe. Además, el razonamiento extendido multiplicó el costo entre 40 y 65 veces sin mejorar la discriminación, lo que respalda la conclusión de las revisiones sistemáticas sobre el costo de los enfoques profundos \cite{giray2023,stradowski2023}.
+
+\section{Contraste de hipótesis}
+
+La Tabla \ref{tab:hipotesis} resume el contraste de las hipótesis específicas planteadas en el Capítulo \ref{cap:hipotesis}.
+
+\begin{table}[H]
+\centering
+\caption{Contraste de las hipótesis específicas}
+\label{tab:hipotesis}
+\small
+\begin{tabular}{p{0.9cm}p{2.6cm}p{10.2cm}}
+\toprule
+Hip. & Resultado & Evidencia \\
+\midrule
+H1 & Aceptada & La selección de características reduce la mediana del número de métricas en un 40\,\%, 88\,\% y 50\,\% (método, clase y archivo), con una pérdida de \textit{F-measure} inferior a 0,02; el resultado se replica con XGBoost y SVM lineal (RQ1, Sección \ref{sec:sensibilidad}). \\
+H2 & Rechazada con el \textit{F-measure} ponderado; aceptada con métricas por clase & El balanceo no mejora el \textit{F-measure} ponderado ($|\delta| < 0{,}15$), pero mejora el \textit{F-measure} de la clase \textit{bug} (mediana de $+0{,}031$ a $+0{,}317$) y el MCC (mediana de $+0{,}013$ a $+0{,}055$) en los tres clasificadores (RQ4). \\
+H3 & Aceptada parcialmente & La combinación de selección y balanceo produce modelos con un \textit{F-measure} ponderado comparable al de la línea base con muchas menos métricas, y mejora la detección de la clase \textit{bug}; no mejora la precisión agregada respecto de usar solo selección de características (RQ1, RQ4). \\
+H4 & Aceptada parcialmente & Las métricas seleccionadas igualan o superan al conjunto completo (RQ1). La preeminencia de CLOC, LOC y LLOC puede deberse en parte a un artefacto de conteo que no fue posible descartar (RQ2). \\
+H5 & Rechazada & El conjunto unificado no supera a los proyectos individuales en ningún clasificador, nivel ni métrica (puestos 7 a 15 de 16 en \textit{F-measure} ponderado; RQ5). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+En consecuencia, la hipótesis general ---que la aplicación de técnicas avanzadas de preprocesamiento de datos mejora la precisión de los modelos de predicción de fallas--- se acepta de forma matizada. La selección de características mantiene o mejora el desempeño con muchas menos métricas, y el balanceo mejora la detección de código defectuoso, pero ninguna de las dos técnicas produce una mejora sustantiva del \textit{F-measure} ponderado.
+
+\section{Amenazas a la validez}
+
+\subsection{Validez de constructo}
+
+En el estudio principal, el \textit{F-measure} se reporta como valor agregado ponderado por la frecuencia de clase y no se desagrega por la clase minoritaria. Como muestra el análisis de sensibilidad, la interpretación de RQ4 cambia sustantivamente bajo una métrica específica de la clase de interés. La magnitud de este sesgo está acotada por el desequilibrio moderado de BugHunter, pero no es despreciable en los proyectos más desequilibrados, como \textit{oryx}. A ello se suma una limitación de reproducibilidad: de las 13.916 ejecuciones del estudio principal se almacenaron solo las métricas agregadas, por lo que sus métricas por clase no pueden recomputarse sin repetirlas. Esta limitación queda acotada por tres vías: la salida completa de la línea base del conjunto ``All'' a nivel de método (Tabla \ref{tab:porclase}), las matrices de confusión de las mejores configuraciones a nivel de método (Tabla \ref{table:weka_method_smote_b}) y, sobre todo, el análisis de sensibilidad, que almacena las métricas por clase de sus 28.440 ejecuciones.
+
+Una segunda amenaza de constructo concierne a RQ2: la mayor frecuencia de selección de CLOC, LOC y LLOC podría reflejar, al menos en parte, que son las únicas métricas presentes en los tres niveles y, por tanto, las que tienen más oportunidades de ser seleccionadas.
+
+\subsection{Validez interna}
+
+La selección de características se calcula sobre el conjunto proyecto-nivel completo, antes de la partición en entrenamiento y prueba, mientras que el balanceo se aplica exclusivamente sobre el entrenamiento. Dado que los algoritmos de relevancia utilizan la etiqueta de clase, este diseño introduce un riesgo de sesgo de selección \cite{ambroise2002,cawley2010}. Este riesgo no afecta el ajuste de los parámetros del clasificador, pero sí puede inflar de forma optimista la comparación entre ``todas las características'' y el mejor esquema de selección (RQ1).
+
+La línea base original se calculó en Weka con validación cruzada de 10 particiones, mientras que los experimentos de selección y balanceo emplearon una partición estratificada 67/33. Esta amenaza se mitigó recalculando la línea base bajo el mismo esquema en \textit{scikit-learn}, con diferencias de a lo sumo 0,02, y verificando que Weka y \textit{scikit-learn} producen resultados equivalentes sobre las mismas particiones (diferencia mediana de 0,010, Sección \ref{sec:validacion_flujos}).
+
+Por último, ninguno de los clasificadores fue ajustado mediante búsqueda de hiperparámetros, a pesar de que este ajuste puede modificar las conclusiones en predicción de defectos \cite{tantithamthavorn2019}. En particular, la ganancia de hasta $+0{,}317$ en el \textit{F-measure} de la clase \textit{bug} de la SVM lineal podría estar sobrestimada respecto de una SVM ajustada que, sin balanceo, presentara un sesgo menor hacia la clase mayoritaria.
+
+\subsection{Validez de conclusión}
+
+El efecto del balanceo se contrastó con la prueba de Wilcoxon y el tamaño de efecto de Cliff sobre la mejor configuración por proyecto, mientras que las medias sobre la totalidad de las ejecuciones se analizaron de forma descriptiva. La comparación pareada se basa en configuraciones seleccionadas \textit{a posteriori}. En RQ4, ambos brazos de la comparación maximizan sobre la misma malla de configuraciones y el sesgo tiende a cancelarse; en RQ1, donde el mejor esquema se compara contra una única configuración de referencia, la asimetría no se cancela. Además, tanto el estudio principal como el análisis de sensibilidad utilizan una única partición 67/33 con semilla fija. Una validación cruzada repetida, junto con pruebas ómnibus como Scott-Knott ESD \cite{tantithamthavorn2017}, reforzaría estas conclusiones.
+
+\subsection{Validez externa}
+
+El estudio se limita a 15 proyectos Java, a una malla discreta de parámetros ($\{0{,}5; 0{,}7; 0{,}9\}$ para \textit{Rank} y $\beta$) y a tres familias de clasificadores; no cubre, por ejemplo, redes neuronales. El desequilibrio moderado de BugHunter, consecuencia de su diseño, también limita la generalización a conjuntos más desequilibrados. Por su parte, el piloto con LLM es exploratorio: usa una muestra de tres proyectos, tres modelos y un único diseño de \textit{prompt}, y no descarta que los modelos hayan visto durante su preentrenamiento información relacionada con estos proyectos de código abierto.

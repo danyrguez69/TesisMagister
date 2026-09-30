@@ -1,95 +1,110 @@
 \section{Cuarta pregunta de investigación}
+\label{sec:RQ4}
 
 \noindent\fbox{%
 \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
-\textbf{RQ4} ¿Como los algoritmos de balanceo de clases ROS, RUS y SMOTE influyen en los resultados de los clasificadores?%
+\textbf{RQ4} ¿Cómo influyen los algoritmos de balanceo de clases ROS, RUS y SMOTE en los resultados de los clasificadores?%
 }%
 }
 \vspace{12pt}
 
-\subsection{Desbalance general}
-Para realizar un análisis estadístico de la tabla \ref{table:count_bug_nobug}, primero examinaremos las tendencias y patrones generales observados en los datos, enfocándonos en las diferencias entre los proyectos con errores (Bug) y sin errores (Without Bug). La tabla \ref{table:count_bug_nobug} muestra datos para diferentes entidades (Method, Class, File) en varios proyectos de software.
+\subsection{Desbalance de BugHunter}
 
+La Tabla \ref{table:count_bug_nobug} muestra el número de instancias con error (\textit{bug}) y sin error por proyecto y nivel. En la mayoría de los proyectos predominan las instancias sin error, aunque la proporción varía considerablemente entre proyectos y niveles.
 
 \input{chapters/chapter3/Sections/Research Questions/sections/RQ4/tables/count_bug_nobug}
 
-\begin{enumerate}
-\item Análisis Descriptivo General: 
-    \begin{itemize}
-        \item Cantidad de Errores vs. Sin Errores: En general, la cantidad de instancias "Without Bug" es mayor que las instancias "Bug" en la mayoría de los proyectos, lo que sugiere una tendencia general hacia una mayor cantidad de métodos, clases y archivos sin errores en los proyectos analizados.
-    \end{itemize}
-\item Análisis por Proyecto: 
-    \begin{itemize}
-        \item Proyectos con Mayor Número de Errores: Proyectos como 'elasticsearch', 'hazelcast', y 'all' muestran un número significativamente alto de errores. Esto podría indicar problemas más profundos en la calidad del código o la complejidad del proyecto.
-        \item Proyectos con Menor Número de Errores: Proyectos como 'oryx', 'mct', y 'Android-Universal-Image-Loader' tienen menos errores, lo que puede indicar una mejor calidad del código o una menor complejidad.
-    \end{itemize}
-\item Comparación entre Entidades (Method, Class, File): 
-    \begin{itemize}
-        \item Distribución de Errores: En algunos proyectos, la distribución de errores entre métodos, clases y archivos es similar, mientras que en otros hay diferencias significativas. Por ejemplo, 'netty' tiene una alta cantidad de errores en métodos comparado con clases y archivos.
-        \item Proporción Errores/Sin Errores por Entidad: En algunos casos, la proporción de errores respecto a instancias sin errores es mayor en una entidad que en otra, lo que puede indicar áreas de mayor riesgo en el proyecto.
-    \end{itemize}
-\item Patrones y Tendencias: 
-    \begin{itemize}
-        \item Tendencia General: Una observación general es que la mayoría de los proyectos tienden a tener más instancias sin errores que con errores. Sin embargo, esta relación varía considerablemente entre proyectos.
-        \item Proyectos Específicos: Proyectos como 'hazelcast' y 'elasticsearch' tienen un alto volumen de errores y sin errores, lo que podría indicar una escala más grande o una mayor actividad de desarrollo.
-    \end{itemize}
-\item Conclusiones: 
-    \begin{itemize}
-        \item Calidad del Código: Los proyectos con una menor proporción de errores podrían estar empleando prácticas de desarrollo más robustas o tener una menor complejidad.
-        \item Puntos de Atención: Proyectos con un alto número de errores, especialmente si la proporción respecto a instancias sin errores es alta, pueden requerir una revisión más detallada del código o prácticas de desarrollo.
-    \end{itemize}
-\end{enumerate}
+La Tabla \ref{tab:desbalance} resume esta distribución tras binarizar el atributo \textit{Number of Bugs}. El desequilibrio de BugHunter es moderado si se compara con los conjuntos clásicos de PFS ---como NASA o PROMISE, donde la clase con error suele representar menos del 10\,\% de las instancias \cite{8494821}---: la mediana de instancias \textit{bug} entre los 15 proyectos es del 28,1\,\% a nivel de método, 41,1\,\% a nivel de clase y 42,7\,\% a nivel de archivo, y en tres proyectos (\textit{hazelcast}, \textit{MapDB} y \textit{elasticsearch}) la clase \textit{bug} llega a ser mayoritaria a nivel de archivo. Esta característica es consecuencia directa del diseño de BugHunter, que solo incluye elementos de código efectivamente afectados por errores. El caso más desequilibrado es \textit{oryx} (razón no-bug:bug de 7,6:1 a nivel de método), lo que debe tenerse presente al interpretar su desempeño, el más alto del estudio.
 
+\begin{table}[H]
+\centering
+\caption{Proporción de instancias con error (\textit{bug}) por nivel de granularidad, sobre los 15 proyectos individuales}
+\label{tab:desbalance}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+Nivel & Mediana & Mín. (proyecto) & Máx. (proyecto) & ``All'' & Razón mediana \\
+      & \% bug  &                 &                 & \% bug  & no-bug:bug \\
+\midrule
+Método  & 28,1 & 11,7 (\textit{oryx}) & 42,2 (\textit{hazelcast}) & 37,0 & 2,6:1 \\
+Clase   & 41,1 & 12,5 (\textit{oryx}) & 53,0 (\textit{hazelcast}) & 48,6 & 1,4:1 \\
+Archivo & 42,7 & 13,2 (\textit{oryx}) & 55,2 (\textit{hazelcast}) & 50,7 & 1,3:1 \\
+\bottomrule
+\end{tabular}}
+\end{table}
 
+\subsection{Efecto del balanceo sobre el \textit{F-measure} ponderado}
 
+La Tabla \ref{tab:balance} resume el \textit{F-measure} promedio de las 13.916 ejecuciones agrupadas por técnica de balanceo, comparando el conjunto de entrenamiento original con su versión balanceada (el conjunto de prueba nunca se balancea). Con las tres técnicas, balancear el conjunto de entrenamiento no mejoró el \textit{F-measure} promedio respecto a entrenar con la distribución original. El efecto fue más marcado en RUS, cuya eliminación de instancias de la clase mayoritaria redujo la información disponible para el entrenamiento. Las desviaciones estándar fueron similares entre ambas condiciones (0,108 sin balancear; 0,104, 0,082 y 0,105 balanceando con ROS, RUS y SMOTE, respectivamente).
 
-\subsection{Estadísticas Descriptivas}
-
-El análisis de la relación entre las columnas \textit{InstanceReduction}, \textit{Balanceado} y \textit{FMeasure} proporciona las siguientes estadísticas descriptivas:
-{
-\fontsize{14pt}{14pt}\selectfont
-\begin{itemize}
-    \item \textbf{ROS (Random Over Sampling)}
-    \begin{itemize}
-        \item No balanceado (False): Media = 0.555, Desviación estándar = 0.108, Rango = 0.301 a 0.844.
-        \item Balanceado (True): Media = 0.548, Desviación estándar = 0.104, Rango = 0.328 a 0.837.
-    \end{itemize}
-    \item \textbf{RUS (Random Under Sampling)}
-    \begin{itemize}
-        \item No balanceado: Media = 0.555, Desviación estándar = 0.108, Rango = 0.326 a 0.844.
-        \item Balanceado: Media = 0.524, Desviación estándar = 0.082, Rango = 0.318 a 0.830.
-    \end{itemize}
-    \item \textbf{SMOTE (Synthetic Minority Over-sampling Technique)}
-    \begin{itemize}
-        \item No balanceado: Media = 0.555, Desviación estándar = 0.108, Rango = 0.318 a 0.838.
-        \item Balanceado: Media = 0.548, Desviación estándar = 0.105, Rango = 0.274 a 0.837.
-    \end{itemize}
-\end{itemize}
-}
-\subsection{Interpretación del Gráfico de Barras}
+\begin{table}[H]
+\centering
+\caption{\textit{F-measure} promedio según técnica de balanceo (13.916 ejecuciones)}
+\label{tab:balance}
+\begin{tabular}{lccc}
+\toprule
+Técnica & Sin balancear & Balanceado & $\Delta$ \\
+\midrule
+ROS   & 0,555 & 0,548 & $-0{,}007$ \\
+RUS   & 0,555 & 0,524 & $-0{,}031$ \\
+SMOTE & 0,555 & 0,548 & $-0{,}007$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=150mm, height=120mm,]{chapters/chapter3/Sections/Research Questions/sections/RQ4/img/InstancereductionBalanceado.png}
      \setstretch{1} %Interlineado 1
 	\captionsetup{labelsep=period, labelfont=bf}
-    \caption{Medición F según algoritmo de balanceo y si está balanceado o no}
+    \caption{\textit{F-measure} medio según algoritmo de balanceo y condición de balanceo del entrenamiento}
     \label{fig:ROSRUSSMOTE}
 \end{figure}
 
+Para contrastar formalmente esta observación se aplicó una prueba de Wilcoxon de rangos con signo \cite{wilcoxon1945}, pareada por conjunto de datos, sobre el mejor \textit{F-measure} balanceado frente al mejor sin balancear de cada uno de los 16 conjuntos por nivel, complementada con el tamaño de efecto $\delta$ de Cliff \cite{cliff1993}. A nivel de método la diferencia resultó estadísticamente significativa a favor de la versión sin balancear ($p = 0{,}012$), aunque con un tamaño de efecto insignificante ($\delta = 0{,}07$); a nivel de clase ($p = 0{,}48$) y de archivo ($p = 0{,}86$) no se detectaron diferencias significativas, y al agrupar los tres niveles el resultado quedó en el límite de la significancia ($p = 0{,}052$). En los cuatro casos el tamaño de efecto fue insignificante ($|\delta| < 0{,}15$).
 
-El gráfico de barras muestra la media de \textit{FMeasure} para cada combinación de \textit{InstanceReduction} y \textit{Balanceado}. Se observa que para cada método de reducción de instancia (ROS, RUS, SMOTE), los valores medios de \textit{FMeasure} son ligeramente más altos cuando no están balanceados (False) en comparación con cuando están balanceados (True).
+\subsection{Efecto del balanceo sobre la clase minoritaria}
 
-\subsection{Conclusión}
+Estas cifras deben interpretarse con cautela. Las medias de la Tabla \ref{tab:balance} se analizaron de forma descriptiva sobre todas las ejecuciones, mientras que la prueba estadística se aplicó a la mejor configuración por proyecto, sujeta a un sesgo de selección optimista. Además, el \textit{F-measure} agregado pondera ambas clases por su frecuencia, de modo que la contribución de la clase de interés práctico (\textit{bug}) queda diluida. Este efecto está acotado por el desequilibrio moderado de BugHunter (Tabla \ref{tab:desbalance}), pero no desaparece: la línea base del conjunto ``All'' a nivel de método (Tabla \ref{tab:porclase}) muestra que un \textit{F-measure} ponderado de 0,565 convive con un \textit{F-measure} de 0,356 para la clase \textit{bug} y un MCC cercano a cero.
 
-Este análisis sugiere que el balanceo de datos (\textit{Balanceado}) tiene un impacto en la medida \textit{FMeasure}, especialmente en el método \textit{RUS}. Los datos no balanceados tienden a tener un \textit{FMeasure} ligeramente más alto en comparación con los datos balanceados para los métodos \textit{ROS} y \textit{SMOTE}. Es importante considerar que el balanceo de datos puede ser crítico para evitar el sesgo en modelos de aprendizaje automático, especialmente en contextos con distribución de clases desigual.
+Dos fuentes de evidencia permiten ir más allá de la métrica agregada. La primera son las matrices de confusión que Weka entrega para las mejores configuraciones a nivel de método (Tabla \ref{table:weka_method_smote_b}), a partir de las cuales se calculan el \textit{F-measure} de la clase \textit{bug} y el MCC (Sección \ref{sec:validacion_flujos}). Sobre los 16 conjuntos, entrenar con SMOTE reduce la mediana del \textit{F-measure} ponderado de 0,600 a 0,581, pero eleva la mediana del \textit{F-measure} de la clase \textit{bug} de 0,280 a 0,334; en MCC, en cambio, la diferencia es pequeña y de signo opuesto (0,070 frente a 0,056). Debe notarse que estas configuraciones fueron elegidas por su \textit{F-measure} ponderado y no por su desempeño en la clase minoritaria. La segunda fuente, más completa, es el análisis de sensibilidad (Sección \ref{sec:sensibilidad}), que almacena las métricas por clase para sus 28.440 ejecuciones y muestra que el balanceo mejora de forma consistente el \textit{F-measure} de la clase \textit{bug} y el MCC en los tres clasificadores evaluados, aun cuando el \textit{F-measure} ponderado apenas varía.
 
+\subsection{¿Qué técnica de balanceo es más efectiva?}
 
+La respuesta depende del objetivo. La Tabla \ref{tab:balanceo_tecnica} resume, sobre las ejecuciones del análisis de sensibilidad en los 15 proyectos individuales, la mediana de cada métrica según la técnica de balanceo. Con \textit{Random Forest} y XGBoost, RUS obtiene el mayor \textit{F-measure} de la clase \textit{bug} y el mejor MCC, pero también el menor \textit{F-measure} ponderado: al eliminar instancias de la clase mayoritaria, el modelo predice defectos con más frecuencia, lo que mejora su detección a costa de más falsos positivos. ROS y SMOTE ofrecen un compromiso intermedio, con mejoras más moderadas en la clase \textit{bug} y una pérdida menor en el agregado. Con la SVM lineal, las tres técnicas producen mejoras similares y grandes en la clase \textit{bug}, porque sin balanceo este clasificador casi no predice defectos. Por tanto, si el objetivo es detectar la mayor cantidad posible de código defectuoso, RUS es la técnica más efectiva; si se busca preservar el desempeño global, ROS o SMOTE son preferibles.
+
+\begin{table}[H]
+\centering
+\caption{Mediana del desempeño por técnica de balanceo en el análisis de sensibilidad (15 proyectos individuales, todas las configuraciones)}
+\label{tab:balanceo_tecnica}
+\begin{tabular}{llccc}
+\toprule
+Clasificador & Balanceo & \textit{F-measure} ponderado & \textit{F-measure} bug & MCC \\
+\midrule
+RF   & Ninguno & 0,537 & 0,325 & $-0{,}015$ \\
+RF   & ROS     & 0,529 & 0,356 & $-0{,}008$ \\
+RF   & RUS     & 0,513 & 0,417 & 0,009 \\
+RF   & SMOTE   & 0,532 & 0,343 & $-0{,}013$ \\
+\midrule
+XGB  & Ninguno & 0,540 & 0,318 & 0,003 \\
+XGB  & ROS     & 0,537 & 0,367 & 0,001 \\
+XGB  & RUS     & 0,524 & 0,427 & 0,027 \\
+XGB  & SMOTE   & 0,542 & 0,346 & $-0{,}004$ \\
+\midrule
+SVM  & Ninguno & 0,551 & 0,171 & 0,038 \\
+SVM  & ROS     & 0,562 & 0,423 & 0,086 \\
+SVM  & RUS     & 0,558 & 0,426 & 0,081 \\
+SVM  & SMOTE   & 0,565 & 0,425 & 0,087 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las medianas de MCC cercanas a cero reflejan que la tabla incluye todas las configuraciones de selección, también las peores; las mejoras sobre la mejor configuración de cada proyecto se presentan en la Tabla \ref{tab:sensibilidad}.
 
 \noindent\fbox{%
 \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
-\textbf{Respuesta RQ4} 
-Se observó una tendencia general hacia un mejor desempeño de los modelos de clasificación sin la implementación de técnicas de balanceo de clases, como Random Over-Sampling (ROS), Random Under-Sampling (RUS) y Synthetic Minority Over-sampling Technique (SMOTE). Esto sugiere que, para los conjuntos de datos evaluados, dichas técnicas no contribuyen significativamente a la mejora del rendimiento de los modelos de clasificación.
+\textbf{Respuesta RQ4}
+Balancear solo el conjunto de entrenamiento con ROS, RUS o SMOTE no mejora el \textit{F-measure} ponderado cuando el conjunto de prueba conserva la distribución real de clases; RUS lo empeora de forma más marcada ($-0{,}031$). La diferencia entre las mejores configuraciones con y sin balanceo tiene un tamaño de efecto insignificante ($|\delta| < 0{,}15$) en los tres niveles. Sin embargo, el balanceo sí desplaza el desempeño hacia la clase de interés práctico: aumenta el \textit{F-measure} de la clase \textit{bug} y, en el análisis de sensibilidad, también el MCC. La conclusión de RQ4 depende, por tanto, de la métrica de evaluación empleada. Entre las técnicas, RUS maximiza la detección de defectos y ROS y SMOTE preservan mejor el desempeño global.
 }%
 }
 \vspace{12pt}

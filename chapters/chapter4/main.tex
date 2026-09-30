@@ -1,5 +1,5 @@
 
-En el ámbito de la ingeniería de software, la predicción de fallas juega un papel crucial en la mejora de la calidad y la fiabilidad del software. La capacidad de identificar potenciales errores en etapas tempranas del desarrollo puede significar ahorros significativos en términos de tiempo y recursos. Basándonos en esta premisa, nuestra investigación postula la siguiente hipótesis:
+En el ámbito de la ingeniería de software, la predicción de fallas juega un papel crucial en la mejora de la calidad y la fiabilidad del software. La capacidad de identificar potenciales errores en etapas tempranas del desarrollo puede significar ahorros significativos en términos de tiempo y recursos. A partir de esta premisa, la investigación postula la siguiente hipótesis:
 
 \subsection*{Hipótesis}
 
@@ -14,10 +14,10 @@ La aplicación de técnicas avanzadas de preprocesamiento de datos mejora la pre
     \item \textbf{H5:} La integración de métricas de varios proyectos en un solo conjunto de datos (proyecto resumen) no disminuye significativamente la precisión de los modelos de predicción de fallas de software en comparación con el análisis individual por proyecto.
 \end{itemize}
 
+En estas hipótesis, el término \textit{precisión} se emplea en su sentido amplio de desempeño predictivo del modelo, y no como la métrica específica de precisión (\textit{precision}) definida en la Sección \ref{sec:metricas_evaluacion}. Su contraste se realiza con el \textit{F-measure} ponderado y, dado el desequilibrio de clases, también con el \textit{F-measure} de la clase defectuosa y el MCC.
+
 \subsection*{Validación de la Hipótesis}
 
-Para validar esta hipótesis, adoptaremos un enfoque metodológico basado en la comparación de modelos de aprendizaje automático antes y después de aplicar técnicas de selección de características y balanceo de clases. Específicamente, utilizaremos el clasificador RandomForest, dada su eficacia demostrada en la literatura para tareas de clasificación en el dominio del software. El conjunto de datos a utilizar será el BugHunter \citep{ferenc_automatically_2020}, que comprende métricas de código de 15 proyectos en Java, se someterá a un proceso de análisis de relevancia y control de redundancia, seguido por técnicas de balanceo de clases como random over-sampling, random under-sampling y SMOTE para equilibrar las instancias de fallas y no fallas.
+Para validar estas hipótesis se compararon modelos de aprendizaje automático antes y después de aplicar las técnicas de selección de características y de balanceo de clases sobre BugHunter \cite{ferenc_automatically_2020}, que comprende métricas de código de 15 proyectos Java en tres niveles de granularidad. Los datos se sometieron a un análisis de relevancia y control de redundancia, seguido de balanceo del conjunto de entrenamiento con \textit{Random Over-Sampling}, \textit{Random Under-Sampling} y SMOTE.
 
-La efectividad del enfoque se medirá mediante métricas estándar en la predicción de fallas de software, incluyendo precisión, recall y la medida F1. Se espera que la aplicación de las  técnicas de selección de características y balanceo de clases, no solo mejore la capacidad de los modelos para identificar correctamente las fallas, sino que también reduzca la dimensión del espacio de características sin sacrificar el rendimiento del modelo.
-
-
+El estudio principal utilizó el clasificador \textit{Random Forest}, dada su eficacia demostrada en la literatura para la clasificación en el dominio del software. Para verificar que los hallazgos no dependen de ese clasificador, un análisis de sensibilidad repitió el flujo con XGBoost y una SVM lineal. La efectividad se midió con precisión, \textit{recall} y \textit{F-measure}, complementadas en el análisis de sensibilidad con el \textit{F-measure} de la clase defectuosa, el MCC y el AUC-ROC. Las diferencias entre configuraciones se contrastaron con la prueba de Wilcoxon de rangos con signo y el tamaño de efecto $\delta$ de Cliff. El resultado del contraste de cada hipótesis se presenta en el Capítulo \ref{cap:discusion} (Tabla \ref{tab:hipotesis}).

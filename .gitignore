@@ -1,0 +1,23 @@
+# Datos pesados (>50 MB): se conservan localmente/OneDrive; BugHunter es público
+Data/Python/metricData.csv
+Data/Python/all.csv
+Data/Python/Select.ipynb
+Data/Python/elasticsearch.csv
+Data/Python/hazelcast.csv
+Data/Python/full/all/method.csv
+Data/Python/full2/_all_method-p.csv
+Data/Python/full2/_all_method.csv
+
+# Salidas de compilación LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.xdv

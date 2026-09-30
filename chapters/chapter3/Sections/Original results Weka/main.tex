@@ -31,3 +31,23 @@ En lo que respecta a las métricas de código a nivel de clases, observamos una 
 Al considerar las métricas a nivel de archivo, nuevamente destacamos que el proyecto oryx obtuvo el mejor resultado con una F-measure de 0,77. Esto contrasta con los hallazgos del estudio original, donde el proyecto BroadleafCommerce lideró con una F-measure de 0,77, seguido por oryx con 0,64, lo cual representa una diferencia de 0,13 en comparación con nuestros resultados. En este nivel, también observamos una variación promedio de ±0,10 en los valores obtenidos para la F-measure.
 
 Estos experimentos han permitido alinear nuestros resultados iniciales con aquellos reportados en el estudio original, estableciendo una base sólida para futuras mejoras. Estas mejoras se centrarán en la reducción del número de métricas utilizadas en los algoritmos de aprendizaje automático, manteniendo o incluso superando los resultados obtenidos en esta fase experimental. Para todos los proyectos, a nivel de método se introducen 72 características en los algoritmos, a nivel de clase 92, y a nivel de archivo 6. Por tanto, el objetivo será minimizar el número de características introducidas, buscando optimizar la eficacia y eficiencia de los modelos de predicción empleados.
+
+\subsection{Desglose por clase de la línea base}
+
+La salida completa de Weka para la línea base del conjunto ``All'' a nivel de método se conservó, lo que permite desglosar su desempeño por clase (Tabla \ref{tab:porclase}). El contraste es ilustrativo: el \textit{F-measure} ponderado de 0,565 encubre un \textit{F-measure} de solo 0,356 para la clase \textit{bug} (precisión de 0,410 y \textit{recall} de 0,314), con un MCC de 0,052 y un AUC-ROC de 0,539, valores apenas superiores a los de un clasificador aleatorio. Este desglose cuantifica de forma directa cuánto puede encubrir la métrica agregada respecto de la clase de interés práctico (Sección \ref{sec:RQ4}), y es coherente con el desempeño no superior del conjunto unificado frente a los proyectos individuales (RQ5).
+
+\begin{table}[H]
+\centering
+\caption{Desglose por clase de la línea base (Weka, Random Forest, validación cruzada de 10 particiones) sobre el conjunto ``All'' a nivel de método}
+\label{tab:porclase}
+\begin{tabular}{lccccc}
+\toprule
+Clase & Precisión & \textit{Recall} & \textit{F-measure} & MCC & AUC-ROC \\
+\midrule
+No-bug & 0,646 & 0,735 & 0,688 & 0,052 & 0,539 \\
+Bug    & 0,410 & 0,314 & 0,356 & ---   & ---   \\
+\midrule
+Prom. ponderado & 0,559 & 0,579 & 0,565 & 0,052 & 0,539 \\
+\bottomrule
+\end{tabular}
+\end{table}

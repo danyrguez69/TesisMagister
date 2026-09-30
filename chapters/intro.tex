@@ -13,39 +13,37 @@ El problema de alta dimensionalidad, causado por características poco relevante
 
 Esta investigación evalúa un enfoque de preprocesamiento de datos en dos etapas, combinando selección de características y reducción de instancias, aplicado al conjunto de datos BugHunter \cite{ferenc_automatically_2020}. El objetivo principal es determinar la mejor combinación de técnicas que permita reducir la cantidad de características y mejorar la precisión del modelo de PFS.
 
-Se replican los resultados de \cite{ferenc_automatically_2020} usando BugHunter y el clasificador RandomForest en Weka \cite{weka}, sirviendo como línea base. Se aplican técnicas de análisis de relevancia y control de redundancia para seleccionar métricas, variando parámetros para optimizar resultados.
+Se replican los resultados de \cite{ferenc_automatically_2020} usando BugHunter y el clasificador Random Forest en Weka \cite{weka}, sirviendo como línea base. Se aplican técnicas de análisis de relevancia y control de redundancia para seleccionar métricas, variando parámetros para optimizar resultados. Para verificar que los hallazgos no dependen del clasificador, el estudio se complementa con un análisis de sensibilidad con XGBoost y SVM lineal que registra, además, métricas por clase (\textit{F-measure} de la clase defectuosa, MCC y AUC-ROC). Finalmente, dada la irrupción de los modelos de lenguaje de gran escala (LLM) en la ingeniería de software \cite{hou2024,zhang2026llm4se}, se analiza su relación con el enfoque de esta tesis y se evalúa, mediante un piloto exploratorio, su aplicación directa sobre las métricas de BugHunter.
 
 La investigación se enfoca en generar evidencia experimental para responder las siguientes preguntas de investigación:
 
 \begin{itemize}
-    \item \textbf{RQ1.} ¿El análisis de relevancia y control de redundancia de características mejora la identificación de errores basada en métricas de código?
-    \item \textbf{RQ2.} ¿Cuáles métricas de código son buenas predictoras de errores y en qué nivel (archivo, clase, método) proporcionan mejores resultados?
-    \item \textbf{RQ3.} ¿Cómo influye la variación de parámetros en los algoritmos de análisis de relevancia y control de redundancia en los resultados de los modelos de clasificación?
+    \item \textbf{RQ1.} ¿El análisis de relevancia y el control de redundancia de características mejoran la identificación de errores basada en métricas de código?
+    \item \textbf{RQ2.} ¿Qué métricas de código son mejores predictoras de errores y en qué nivel de granularidad (archivo, clase, método) ofrecen mejores resultados?
+    \item \textbf{RQ3.} ¿Cómo influye la variación de los parámetros de los algoritmos de relevancia y redundancia en los resultados de clasificación?
     \item \textbf{RQ4.} ¿Cómo influyen los algoritmos de balanceo de clases ROS, RUS y SMOTE en los resultados de los clasificadores?
-    \item \textbf{RQ5.} ¿Qué diferencias existen entre el proyecto resumen y los proyectos individuales en los resultados obtenidos en las preguntas anteriores?
+    \item \textbf{RQ5.} ¿Qué diferencias existen entre entrenar con el conjunto unificado de proyectos (proyecto resumen) y entrenar con cada proyecto por separado?
 \end{itemize}
 
-\textbf{Hipótesis general:} La aplicación de técnicas avanzadas de preprocesamiento de datos mejora la precisión de los modelos de predicción de fallas de software.
-
-\textbf{Hipótesis específicas:}
-\begin{itemize}
-    \item \textbf{H1:} La aplicación de técnicas de selección de características sobre conjuntos de datos de métricas de software permite reducir significativamente la cantidad de características utilizadas, sin disminuir la precisión de los modelos de predicción de fallas de software.
-    \item \textbf{H2:} El uso de algoritmos de balanceo de clases (ROS, RUS, SMOTE) mejora la precisión de los modelos de predicción de fallas de software en comparación con modelos entrenados en conjuntos de datos desequilibrados.
-    \item \textbf{H3:} La combinación de selección de características y balanceo de clases produce modelos de predicción de fallas de software con mayor precisión que aquellos entrenados con el conjunto de datos original sin preprocesamiento.
-    \item \textbf{H4:} Las métricas de código seleccionadas mediante análisis de relevancia y control de redundancia son mejores predictoras de fallas de software que el conjunto completo de métricas.
-    \item \textbf{H5:} La integración de métricas de varios proyectos en un solo conjunto de datos (proyecto resumen) no disminuye significativamente la precisión de los modelos de predicción de fallas de software en comparación con el análisis individual por proyecto.
-\end{itemize}
+La hipótesis general de esta tesis es que la aplicación de técnicas avanzadas de preprocesamiento de datos mejora la precisión de los modelos de predicción de fallas de software. Esta hipótesis y las cinco hipótesis específicas que se derivan de ella se detallan en el Capítulo \ref{cap:hipotesis}.
 
 \textbf{Contribuciones del Trabajo de Investigación}
 
 \begin{itemize}
-    \item Se presenta una evaluación experimental exhaustiva de técnicas de preprocesamiento de datos (selección de características y balanceo de clases) aplicadas al conjunto de datos BugHunter para la predicción de fallas de software.
-    \item Se identifican las métricas de código más relevantes para la predicción de fallas, demostrando que es posible reducir la dimensionalidad de los conjuntos de datos sin afectar la precisión de los modelos.
-    \item Se analiza el impacto de diferentes algoritmos de balanceo de clases en la precisión de los modelos de predicción.
-    \item Se compara el desempeño de modelos entrenados con conjuntos de datos individuales y conjuntos de datos unificados (proyecto resumen), aportando evidencia sobre la viabilidad de integrar métricas de múltiples proyectos.
-    \item Se proporciona una línea base replicando experimentos previos y se proponen mejoras metodológicas que pueden ser adoptadas en investigaciones futuras.
+    \item Una evaluación experimental de la selección de características en dos etapas y del balanceo de clases sobre BugHunter en sus tres niveles de granularidad, con 13.916 ejecuciones de \textit{Random Forest} y 28.440 ejecuciones adicionales con XGBoost y SVM lineal.
+    \item La identificación de las métricas de código más seleccionadas en cada nivel y la cuantificación de la reducción de dimensionalidad alcanzable sin pérdida de desempeño.
+    \item La evidencia de que el beneficio del balanceo depende de la métrica de evaluación, con líneas base por clase (\textit{F-measure} de la clase defectuosa, MCC y AUC-ROC) para tres paradigmas de clasificación.
+    \item La comparación entre el entrenamiento por proyecto individual y el entrenamiento con un conjunto unificado de proyectos.
+    \item Una validación cruzada entre Weka y \textit{scikit-learn} que muestra la equivalencia de ambos flujos experimentales.
+    \item Una revisión actualizada del estado del arte que sitúa el enfoque de métricas tabulares frente a las representaciones profundas y los modelos de lenguaje de gran escala, junto con un piloto que ilustra su evaluación sobre BugHunter.
 \end{itemize}
 
-El resto del documento está organizado de la siguiente manera: el Capítulo II introduce trabajos relacionados con el preprocesamiento de datos para la predicción de errores de software. El Capítulo III describe el conjunto de datos BugHunter, incluyendo materiales y métodos utilizados. El Capítulo IV analiza resultados y responde a las preguntas de investigación. Finalmente, el Capítulo V presenta las principales conclusiones, identificando sus limitaciones y trabajos futuros.
+\textbf{Publicaciones derivadas}
+
+Parte de los resultados de esta tesis se presentó en el artículo \textit{``Benefit of Class Balancing Is Metric-Dependent: Feature Selection and Software Defect Prediction Evidence from BugHunter''}, enviado a las Jornadas Chilenas de Computación (JCC 2026). El resto de los resultados se reserva para un artículo de revista posterior.
+
+\textbf{Organización del documento}
+
+El resto del documento está organizado de la siguiente manera. El Capítulo \ref{cap2} presenta el marco teórico: métricas de software, selección de características, conjuntos de datos, algoritmos de aprendizaje automático y métodos de evaluación. El Capítulo \ref{cap4} revisa el estado del arte, incluidos los enfoques basados en representaciones profundas y en modelos de lenguaje de gran escala. Los Capítulos \ref{cap:hipotesis} y \ref{cap:objetivos} plantean las hipótesis y los objetivos. El Capítulo \ref{cap3} describe el conjunto de datos BugHunter y los materiales y métodos utilizados. El Capítulo \ref{cap:resultados} presenta los resultados experimentales y responde a las preguntas de investigación. El Capítulo \ref{cap:discusion} discute los hallazgos, contrasta las hipótesis y analiza las amenazas a la validez. Finalmente, el Capítulo \ref{cap:conclusion} presenta las conclusiones, las limitaciones y el trabajo futuro.
 
 \newpage

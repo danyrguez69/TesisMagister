@@ -1,129 +1,111 @@
-
 \section{Introducción}
-La predicción de fallas en el software representa un área crítica en la ingeniería de software, orientada hacia la mejora de la calidad y fiabilidad de los sistemas. Este capítulo presenta una revisión exhaustiva del estado del arte, centrándose en avances recientes y estableciendo la relevancia de nuestra investigación en el contexto actual.
-
-
-
-
-
+La predicción de fallas en el software representa un área crítica en la ingeniería de software, orientada hacia la mejora de la calidad y fiabilidad de los sistemas. Este capítulo presenta una revisión del estado del arte en tres líneas complementarias: (i) los conjuntos de datos y las técnicas de preprocesamiento ---selección de características y balanceo de clases--- sobre métricas de código, que constituyen el foco de esta tesis; (ii) los enfoques basados en representaciones profundas del código fuente; y (iii) la irrupción reciente de los modelos de lenguaje de gran escala (\textit{Large Language Models}, LLM) en la predicción y detección de defectos. El capítulo cierra con un análisis de la relación entre estas líneas y el trabajo desarrollado en esta tesis.
 
 \section{Criterios de Búsqueda}
 
-Se utilizaron combinaciones de las siguientes palabras clave: predicción de fallas de software, métricas de software, selección de características, balanceo de clase, modelos de clasificación, y conjuntos de datos de software. Los filtros aplicados se centraron en trabajos publicados en los últimos diez años, en inglés, y en fuentes académicas y científicas reconocidas.
+La búsqueda combinó términos sobre predicción de fallas de software, métricas de software, selección de características, balanceo de clases, modelos de clasificación y conjuntos de datos, y se amplió en 2026 para incorporar los desarrollos basados en aprendizaje profundo y en modelos de lenguaje de gran escala.
 
 \subsection{Palabras Clave y Combinaciones}
 
-Para garantizar la exhaustividad en la búsqueda de literatura, se utilizaron diversas combinaciones de palabras clave, tales como:
+Se utilizaron combinaciones de las siguientes palabras clave:
 \begin{itemize}
-    \item Software fault prediction
-    \item Software metrics
-    \item Feature selection
-    \item Class balancing
-    \item Classification models
-    \item Software datasets
+    \item \textit{Software fault prediction}, \textit{software defect prediction}
+    \item \textit{Software metrics}, \textit{code metrics}
+    \item \textit{Feature selection}, \textit{class imbalance}, \textit{class balancing}
+    \item \textit{Cross-project defect prediction}, \textit{just-in-time defect prediction}
+    \item \textit{Deep learning}, \textit{graph neural network}, \textit{abstract syntax tree}
+    \item \textit{Large language model}, \textit{pre-trained code model}, \textit{LLM for software engineering}
 \end{itemize}
 
 \subsection{Filtros Aplicados}
 
-Para refinar los resultados de búsqueda y asegurar la relevancia de los artículos seleccionados, se aplicaron los siguientes filtros:
 \begin{itemize}
-    \item \textbf{Año de Publicación}: Se consideraron trabajos publicados en los últimos diez años para asegurar que la revisión incluya los desarrollos más recientes en el campo.
-    \item \textbf{Idioma}: Se incluyeron únicamente trabajos en inglés, dado que es el idioma predominante en las publicaciones científicas y técnicas.
-    \item \textbf{Tipo de Fuente}: Se limitaron las búsquedas a fuentes académicas y científicas reconocidas, como revistas indexadas y conferencias de alto impacto.
-    \item \textbf{Accesibilidad}: Se priorizaron los artículos de acceso libre o disponibles a través de las suscripciones institucionales de la universidad.
+    \item \textbf{Año de publicación}: trabajos publicados entre 2013 y 2026, con prioridad para el período 2022--2026 en las líneas de aprendizaje profundo y LLM. Se conservan además trabajos fundacionales anteriores cuando son la referencia original de una técnica utilizada en esta tesis.
+    \item \textbf{Idioma}: inglés, idioma predominante de las publicaciones del área.
+    \item \textbf{Tipo de fuente}: revistas indexadas, conferencias con revisión por pares y revisiones sistemáticas de la literatura.
+    \item \textbf{Relevancia temática}: trabajos directamente relacionados con la predicción de defectos de software, su preprocesamiento de datos o su evaluación.
 \end{itemize}
-
-\subsection{Criterios Adicionales}
-
-Para asegurar una revisión exhaustiva y pertinente, se podrían agregar los siguientes criterios:
-\begin{itemize}
-    \item \textbf{Impacto del Artículo}: Se priorizaron artículos publicados en revistas y conferencias con alto factor de impacto.
-    \item \textbf{Citas}: Se consideraron artículos citados, ya que suelen ser indicativos de relevancia y reconocimiento en la comunidad científica.
-    \item \textbf{Relevancia Temática}: Se aseguró que los artículos seleccionados estuvieran directamente relacionados con los temas principales de la tesis, como métodos de predicción de fallas, análisis de métricas de software, y técnicas de selección de características.
-    \item \textbf{Innovación Metodológica}: Se prestó especial atención a estudios que presentaran metodologías novedosas o mejoras significativas a técnicas existentes.
-\end{itemize}
-
-Estos criterios adicionales pueden ayudar a asegurar que tu revisión de la literatura sea completa, relevante y de alta calidad, proporcionando una base sólida para tu investigación.
-
-
-
-
-
 
 \subsection{Bases de Datos Utilizadas}
 
-Para garantizar una cobertura amplia y multidisciplinaria de la literatura relacionada con la predicción de fallas de software, se consultaron las siguientes bases de datos:
+Se consultaron IEEE Xplore, ACM Digital Library, ScienceDirect, SpringerLink y Google Scholar. Los metadatos bibliográficos de las referencias incorporadas en la actualización de 2026 se verificaron contra el registro Crossref de cada publicación.
 
-\begin{itemize}
-    \item \textbf{IEEE Xplore}: Esta base de datos proporciona acceso a publicaciones y conferencias en el ámbito de la ingeniería eléctrica y electrónica, informática y tecnologías de la información. Es una fuente reconocida y ampliamente utilizada en investigaciones tecnológicas.
-    \item \textbf{ACM Digital Library}: Es una de las principales bibliotecas digitales en informática y tecnologías de la información, proporcionando acceso a revistas, conferencias y otros recursos académicos. La ACM Digital Library es fundamental para investigaciones relacionadas con la ingeniería de software.
-    \item \textbf{ScienceDirect}: Ofrece acceso a una amplia gama de publicaciones científicas y técnicas en diversas disciplinas. Es particularmente útil para obtener artículos de revistas reconocidas y de alto impacto.
-    \item \textbf{Google Scholar}: Es una herramienta accesible y popular para buscar literatura académica. A pesar de su cobertura menos específica, permite identificar una gran cantidad de artículos y tesis en diferentes campos del conocimiento.
-\end{itemize}
+\section{Datasets con Métricas Asociadas al Software}
 
-\subsection{Justificación de la Selección}
+Durante años, el principal obstáculo de la predicción de fallas de software (PFS) fue la escasez de conjuntos de datos públicos. Repositorios como PROMISE \cite{Sayyad-Shirabad+Menzies:2005}, y conjuntos como NASA, SOFTLAB, ReLink, AEEEM y Eclipse \cite{shepperd2013data,d2012evaluating,wu2011relink,zimmermann2007predicting,kim2011dealing} paliaron este problema, aunque la mayoría se limita a métricas tradicionales de tamaño y complejidad capturadas en una o pocas versiones de lanzamiento. BugHunter \cite{ferenc_automatically_2020} se diferencia de ellos porque captura las métricas de cada elemento de código en el instante más cercano posible a la introducción y a la corrección de un error, en lugar de comparar versiones de lanzamiento completas. Las métricas se extraen con OpenStaticAnalyzer \cite{openstaticanalyzergithubio} en tres niveles de granularidad (archivo, clase y método), lo que permite estudiar en qué nivel las métricas de código son más informativas. Singh y Thankachan \cite{9397136} ofrecen una revisión amplia de los marcos de aprendizaje automático aplicados a la PFS, mientras que Li et al. \cite{li_progress_2018} sintetizan el estado del arte hasta 2018, señalando el desequilibrio de clases y la alta dimensionalidad como los principales desafíos abiertos.
 
-La selección de estas bases de datos se fundamenta en los siguientes aspectos:
+\section{Preprocesamiento: Selección de Características y Balanceo de Clases}
 
-\begin{itemize}
-    \item \textbf{Relevancia y Cobertura}: Estas bases de datos son reconocidas por su amplia cobertura de publicaciones relevantes en el campo de la ingeniería de software y la predicción de fallas.
-    \item \textbf{Acceso a Publicaciones de Alto Impacto}: Proveen acceso a revistas y conferencias de alto impacto, garantizando que la literatura revisada tenga un alto estándar de calidad y rigor científico.
-    \item \textbf{Diversidad de Fuentes}: La combinación de diferentes bases de datos asegura una visión multidisciplinaria y exhaustiva del estado del arte, abarcando diferentes enfoques y metodologías.
-\end{itemize}
+Liu et al. \cite{liu_empirical_2015} y Chen et al. \cite{chen_empirical_2013} propusieron el marco de preprocesamiento en dos etapas que se adopta en esta tesis: primero un análisis de relevancia (Ganancia de Información, Chi-Cuadrado, ReliefF) y luego un control de redundancia basado en agrupamiento por umbral (\textit{Neighbor-based Threshold Clustering}, NTC), usando Incertidumbre Simétrica \cite{yu2003feature} o Semejanza de Coseno como medidas de similitud entre características. Estos trabajos, al igual que el presente estudio en su diseño original, calculan la selección de características sobre el conjunto completo antes de particionar entrenamiento y prueba, una práctica común en la literatura de selección de características para PFS cuyo riesgo de sesgo de selección ha sido documentado fuera del área \cite{ambroise2002,cawley2010} y se discute en el Capítulo \ref{cap:discusion}.
 
-En conclusión, las bases de datos seleccionadas han permitido realizar una revisión exhaustiva y rigurosa de la literatura relacionada con la predicción de fallas de software, asegurando la inclusión de estudios relevantes y de alta calidad.
+Sobre el desequilibrio de clases, Tantithamthavorn et al. \cite{8494821} muestran que el efecto de las técnicas de rebalanceo depende fuertemente del contexto experimental y que puede alterar la interpretación de los modelos, mientras que Rathi et al. \cite{rathi_empirical_2023} y Hossen et al. \cite{hossen_hybrid_2020} reportan mejoras al combinar muestreo y selección de características sobre proyectos de PROMISE. A diferencia de estos últimos, la presente tesis evalúa dicha combinación sobre BugHunter, comparando explícitamente los tres niveles de granularidad y contrastando el entrenamiento por proyecto individual frente al conjunto unificado, un análisis no cubierto en los estudios anteriores. Esta última comparación se enmarca en la distinción entre predicción de fallas intra-proyecto (WPDP) y entre proyectos (CPDP), donde entrenar con datos de proyectos ajenos suele degradar el rendimiento por la heterogeneidad de las distribuciones \cite{cheng2022,sharma2023far}.
 
+\section{Representaciones Profundas del Código Fuente}
 
+Una línea de trabajo más reciente sustituye las métricas de código por representaciones profundas del código fuente. Šikić et al. \cite{sikic2022} aplican redes neuronales de grafos (GNN) sobre representaciones derivadas del árbol de sintaxis abstracta (AST) para predecir defectos; Zhou et al. \cite{zhou2022} combinan la semántica interna de cada archivo (CNN sobre el AST) con la estructura de dependencias entre clases (GCN); y SeDPGK \cite{liu2024sedpgk} extiende esta ruta al escenario semisupervisado mediante destilación de conocimiento sobre grafos de dependencias. Pornprasit y Tantithamthavorn \cite{pornprasit2023} proponen DeepLineDP, un modelo jerárquico de aprendizaje profundo que localiza defectos a nivel de línea, mientras que Jiang et al. \cite{jiang2024} muestran que una codificación conjunta semántico-sintáctica del AST mejora la transferencia entre proyectos, aunque la heterogeneidad de distribuciones sigue siendo el principal obstáculo.
 
+Las revisiones sistemáticas de Giray et al. \cite{giray2023} y de Stradowski y Madeyski \cite{stradowski2023} coinciden, no obstante, en que estos modelos incrementan considerablemente el costo computacional sin superar de forma consistente a los clasificadores clásicos entrenados sobre métricas tabulares, y señalan la brecha aún abierta entre esta investigación y su adopción industrial.
 
+\section{Modelos de Lenguaje de Gran Escala en la Predicción de Defectos}
 
+\subsection{Panorama general}
 
+Los modelos de lenguaje de gran escala ---redes \textit{transformer} preentrenadas sobre grandes corpus de texto y de código--- han abierto una nueva agenda de investigación en ingeniería de software. Fan et al. \cite{fan2023} identifican los problemas abiertos de su uso en el área, y las revisiones sistemáticas de Hou et al. \cite{hou2024} y de Zhang et al. \cite{zhang2026llm4se} cuantifican la magnitud del fenómeno: esta última resume 62 modelos de código y 926 estudios que aplican LLM a 112 tareas del ciclo de desarrollo, y destaca como desafíos transversales la evaluación empírica, la construcción de \textit{benchmarks} y la confiabilidad de los resultados. En el ámbito específico de los defectos, Chen et al. \cite{chen2026llm} sintetizan el estado del arte de la detección de defectos con LLM, distinguiendo entre enfoques dinámicos (generación de casos de prueba, guía por retroalimentación y evaluación de salidas) y estáticos (análisis de código fuente o binario), y señalan la ingeniería de \textit{prompts} y el ajuste fino como las dos estrategias dominantes de adaptación.
 
+\subsection{Predicción \textit{just-in-time} con modelos preentrenados}
 
+La predicción \textit{just-in-time} (JIT), que clasifica cada cambio de código en el momento de su envío al repositorio, ha sido el principal banco de pruebas de los modelos preentrenados. Guo et al. \cite{guo2023} reportan mejoras consistentes con seis \textit{backbones} preentrenados, y observan que el balance de los datos de entrenamiento resulta determinante en escenarios de pocos datos. Monteiro et al. \cite{monteiro2026jit} comparan modelos de código de arquitectura \textit{encoder}, \textit{decoder} y \textit{encoder-decoder} con LLM cerrados accesibles por API (GPT y Gemini), y concluyen que los modelos abiertos pequeños y medianos ajustados con datos del dominio (CodeT5+ y UniXCoder) superan significativamente al \textit{prompting zero-shot} de los LLM cerrados, destacando además la integración de características definidas por expertos como un factor crítico. Nam et al. \cite{nam2026}, por su parte, construyen ReDef, un \textit{benchmark} de alta confianza basado en reversiones de cambios en 22 proyectos C/C++, y muestran mediante pruebas contrafactuales que el desempeño de los modelos de lenguaje de código se mantiene estable aun cuando se altera la semántica del cambio, lo que indica que dependen de señales superficiales más que de una comprensión real del código.
 
+\subsection{LLM para predicción entre proyectos y basada en métricas}
 
+Jin et al. \cite{jin2025llm4sdp} proponen LLM4SDP, el primer enfoque que ajusta LLM de pesos abiertos (Qwen2-7B, Llama3-8B y CodeGemma-7B) mediante LoRA para la predicción entre proyectos. Su resultado es particularmente pertinente para esta tesis: evaluado con MCC sobre cinco conjuntos de datos, el desempeño varía entre conjuntos, y el sobremuestreo con SMOTE mejora el \textit{recall} y el MCC en los conjuntos más desequilibrados, pero lo empeora en otros. Khokhar et al. \cite{khokhar2025finetuned} reportan exactitudes superiores al 90\,\% combinando ajuste fino y \textit{prompting few-shot}, aunque la exactitud es una métrica poco informativa bajo desequilibrio de clases (Sección \ref{sec:metricas_evaluacion}). Jaiswal et al. \cite{jaiswal2026llm} comparan directamente métricas clásicas, representaciones vectoriales (\textit{embeddings}) obtenidas con LLM y un modelo híbrido sobre un conjunto derivado de Eclipse JDT con 94 atributos estructurales y evolutivos: los \textit{embeddings} capturan información semántica ausente en las métricas, pero es el modelo híbrido el que obtiene el mejor desempeño en todos los conjuntos (AUC-ROC máximo de 0,898), lo que evidencia la complementariedad de ambas fuentes.
 
+Fuera de la ingeniería de software, TabLLM \cite{hegselmann2023tabllm} mostró que un LLM puede clasificar datos tabulares si cada fila se serializa como texto en lenguaje natural, y que este enfoque es competitivo con los árboles potenciados por gradiente principalmente en el régimen de muy pocos ejemplos etiquetados. Esta técnica es la que permite aplicar un LLM directamente sobre conjuntos de métricas como BugHunter, que no incluyen el código fuente.
 
-\section{Trabajos Seleccionados}
+\section{Tabla Comparativa de Trabajos Relacionados}
 
-La selección de artículos en este punto de la tesis se ha realizado bajo criterios estrictos de relevancia y contribución al campo de la predicción de fallas de software. A continuación, se argumentan los principales criterios considerados y la justificación para incluir ciertos trabajos.
+La Tabla \ref{tab:comparativa_estado_arte} resume los trabajos más cercanos a esta tesis según el tipo de representación de entrada, la técnica empleada y la necesidad de acceder al código fuente.
 
-\subsection{Criterios de Selección}
+\begin{table}[H]
+\centering
+\caption{Comparación de trabajos relacionados con la predicción de defectos de software}
+\label{tab:comparativa_estado_arte}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllll}
+\toprule
+Trabajo & Año & Representación de entrada & Técnica principal & ¿Requiere código fuente? \\
+\midrule
+Liu et al. \cite{liu_empirical_2015} & 2016 & Métricas tabulares & Selección en dos etapas + clasificadores clásicos & No \\
+Tantithamthavorn et al. \cite{8494821} & 2020 & Métricas tabulares & Técnicas de rebalanceo & No \\
+Ferenc et al. \cite{ferenc_automatically_2020} & 2020 & Métricas tabulares (BugHunter) & 11 clasificadores & No \\
+Rathi et al. \cite{rathi_empirical_2023} & 2023 & Métricas tabulares & Muestreo + selección de características & No \\
+Šikić et al. \cite{sikic2022} & 2022 & AST como grafo & GNN & Sí \\
+Zhou et al. \cite{zhou2022} & 2022 & AST + grafo de dependencias & CNN + GCN & Sí \\
+Pornprasit y Tantithamthavorn \cite{pornprasit2023} & 2023 & Tokens de código & DeepLineDP (jerárquico) & Sí \\
+Jiang et al. \cite{jiang2024} & 2024 & AST (semántico-sintáctico) & Modelo de lenguaje preentrenado (CPDP) & Sí \\
+Guo et al. \cite{guo2023} & 2023 & Cambios de código & 6 modelos preentrenados (JIT) & Sí \\
+Monteiro et al. \cite{monteiro2026jit} & 2026 & Cambios de código & Modelos de código ajustados vs. LLM \textit{zero-shot} (JIT) & Sí \\
+Nam et al. \cite{nam2026} & 2026 & Cambios de código (ReDef) & Modelos de lenguaje de código, pruebas contrafactuales & Sí \\
+Jin et al. \cite{jin2025llm4sdp} & 2025 & Conjuntos de defectos (EQ, JDT, LC, ML, PDE) & LLM abiertos + LoRA + SMOTE (CPDP) & No informado \\
+Jaiswal et al. \cite{jaiswal2026llm} & 2026 & Métricas + \textit{embeddings} LLM & \textit{Stacking} híbrido & Sí (\textit{embeddings}) \\
+\textbf{Esta tesis} & 2026 & Métricas tabulares (BugHunter) & Selección en dos etapas + balanceo; RF, XGBoost, SVM; piloto LLM & No \\
+\bottomrule
+\end{tabular}}
+\end{table}
 
-Para la selección de trabajos se consideraron los siguientes criterios:
+\section{Relación con esta Tesis}
 
-\begin{itemize}
-    \item \textbf{Relevancia}: Se priorizaron artículos que abordan directamente el problema de la predicción de fallas en software, específicamente aquellos que proponen nuevas metodologías o mejoran técnicas existentes.
-    \item \textbf{Contribución al Campo}: Se seleccionaron investigaciones que aportan significativamente al conocimiento existente, ya sea a través de la introducción de nuevos algoritmos, modelos de predicción o conjuntos de datos.
-    \item \textbf{Innovación en Métodos de Selección de Características}: Se eligieron estudios que presentan métodos novedosos para la selección de características, un aspecto crucial en el análisis y preprocesamiento de datos para la predicción de fallas.
-    \item \textbf{Propuestas de Nuevos Conjuntos de Datos}: Se incluyeron trabajos que introducen y validan nuevos conjuntos de datos, como BugHunter, ya que estos aportan nuevas métricas y perspectivas para la investigación.
-\end{itemize}
+La revisión anterior permite situar el aporte de esta tesis frente a la tendencia actual del área. Cuatro aspectos resultan determinantes.
 
-\subsection{Justificación de los Trabajos Seleccionados}
+\textbf{Acceso al código fuente.} Las representaciones profundas y los modelos de lenguaje de código \cite{sikic2022,zhou2022,pornprasit2023,guo2023,monteiro2026jit,nam2026} requieren el código fuente completo de cada elemento o de cada cambio. BugHunter, en cambio, publica las métricas de código de cada elemento, pero no su texto fuente, de modo que estos enfoques no son aplicables directamente sobre él. Esta es también la situación de muchos entornos industriales, donde las métricas se comparten con más facilidad que el código. La vía para aplicar un LLM sobre este tipo de datos es la serialización de las métricas como texto \cite{hegselmann2023tabllm}, que se evalúa de forma exploratoria en la Sección \ref{sec:piloto_llm}.
 
-\begin{itemize}
-    \item \textbf{Conjunto de Datos BugHunter}: Varios trabajos, incluyendo Rathi et al. (2023) y Liu et al. (2015), han sido seleccionados por su contribución al desarrollo y análisis de BugHunter, un conjunto de datos innovador que ha sido fundamental para nuestra investigación \cite{rathi_empirical_2023, liu_empirical_2015}.
-    \item \textbf{Análisis Exhaustivo de Metodologías de Aprendizaje Automático}: Estudios como Tantithamthavorn et al. (2020) proporcionan un análisis detallado de diversas metodologías de aprendizaje automático aplicadas a la predicción de fallas, sentando bases importantes para nuestra investigación \cite{8494821}.
-    \item \textbf{Métodos de Selección de Características}: La investigación de Liu et al. (2015) destaca por su enfoque en el preprocesamiento en dos etapas para mejorar la calidad de los conjuntos de datos de software, subrayando la importancia del análisis de relevancia y control de redundancias \cite{liu_empirical_2015}.
-\end{itemize}
+\textbf{Costo e interpretabilidad.} Las revisiones sistemáticas \cite{giray2023,stradowski2023} coinciden en que los modelos profundos incrementan el costo computacional sin superar consistentemente a los clasificadores clásicos sobre métricas. El enfoque de esta tesis ---métricas estáticas con selección de características y clasificadores clásicos--- se entrena en segundos, identifica explícitamente qué métricas son predictoras (RQ2) y reduce la dimensionalidad entre un 40\,\% y un 88\,\% según el nivel, propiedades que los LLM no ofrecen de forma directa. Además, el resultado de Jaiswal et al. \cite{jaiswal2026llm}, según el cual la combinación de métricas clásicas y \textit{embeddings} supera a cada fuente por separado, indica que las métricas seleccionadas en esta tesis no quedan obsoletas frente a los LLM, sino que constituyen un componente complementario.
 
-En conclusión, la revisión de los trabajos seleccionados demuestra la continua relevancia y evolución del campo de la predicción de fallas de software. La combinación de técnicas avanzadas de selección de características y el uso de conjuntos de datos innovadores, como BugHunter, representan áreas prometedoras para futuras investigaciones y aplicaciones prácticas en la ingeniería de software.
+\textbf{Calidad de los datos y evaluación bajo desequilibrio.} Los trabajos con LLM reproducen los problemas de datos que motivan esta tesis. Guo et al. \cite{guo2023} encuentran que el balance del entrenamiento es determinante, Jin et al. \cite{jin2025llm4sdp} observan que SMOTE mejora el \textit{recall} y el MCC solo en algunos conjuntos, y Nam et al. \cite{nam2026} muestran que la calidad de las etiquetas condiciona las conclusiones. Esto coincide con el hallazgo central de esta tesis (RQ4): el beneficio del balanceo depende de la métrica con que se evalúa, y la exactitud o el \textit{F-measure} ponderado pueden ocultar una detección pobre de la clase defectuosa. Por ello, los resultados reportados con exactitud \cite{khokhar2025finetuned} deben leerse con cautela.
 
-
-
-\section{Análisis de Trabajos Relacionados}
-
-\subsection{Relacionados a la Predicción de Fallas de Software}
-\cite{ferenc_automatically_2020} y \cite{9397136} destacan por sus contribuciones innovadoras al conjunto de datos BugHunter y al análisis exhaustivo de metodologías de aprendizaje automático, respectivamente, sentando las bases para nuestra investigación.
-
-\subsection{Datasets con Métricas Asociadas al Software}
-El conjunto de datos BugHunter \cite{ferenc_automatically_2020}, junto con el análisis de \cite{openstaticanalyzergithubio}, proporciona una fuente invaluable de métricas de software y errores capturados, esencial para nuestra investigación.
-
-\subsection{Métodos de Selección de Características}
-\cite{liu_empirical_2015} investiga un enfoque de preprocesamiento en dos etapas para mejorar la calidad de los conjuntos de datos de software, fundamentando la importancia del análisis de relevancia y control de redundancias en nuestro estudio.
+\textbf{BugHunter como línea base.} Ninguno de los trabajos basados en LLM revisados evalúa sobre BugHunter. Las líneas base establecidas en esta tesis ---con métricas por clase (\textit{F-measure} de la clase \textit{bug}, MCC y AUC-ROC) para tres clasificadores de paradigmas distintos--- ofrecen un punto de comparación riguroso para determinar si las representaciones basadas en LLM aportan mejoras reales, a un costo computacional justificado, sobre conjuntos construidos con el diseño de BugHunter.
 
 \section{Conclusión}
-La revisión del estado del arte subraya la importancia continua de la predicción de fallas de software y valida la relevancia de nuestro enfoque. La combinación de técnicas de selección de características y el uso de conjuntos de datos innovadores, como BugHunter, representa un área prometedora para la investigación futura.
-
+La revisión del estado del arte muestra que el área ha evolucionado desde los clasificadores clásicos sobre métricas tabulares hacia representaciones profundas y modelos de lenguaje de gran escala, pero que estos últimos aún no superan de forma consistente a los enfoques clásicos, dependen del acceso al código fuente y heredan los problemas de calidad de datos y de desequilibrio de clases. En este contexto, la combinación de selección de características y balanceo de clases sobre BugHunter que se estudia en esta tesis conserva su vigencia como enfoque de bajo costo e interpretable, y como línea base contra la cual evaluar los enfoques basados en LLM.
 
 \newpage

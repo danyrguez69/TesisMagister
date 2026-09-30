@@ -1,0 +1,54 @@
+\section{Piloto exploratorio: modelos de lenguaje de gran escala sobre métricas de BugHunter}
+\label{sec:piloto_llm}
+
+Como se discutió en el Capítulo \ref{cap4}, los enfoques basados en modelos de lenguaje de gran escala (LLM) para la predicción de defectos operan, en su mayoría, sobre el código fuente, que BugHunter no incluye. La única forma de aplicar un LLM directamente sobre este conjunto de datos es serializar las métricas de cada instancia como texto \cite{hegselmann2023tabllm}. Este piloto evalúa, de forma exploratoria, si un LLM de propósito general clasifica instancias de BugHunter como defectuosas o no defectuosas mejor o peor que \textit{Random Forest} entrenado con las mismas métricas.
+
+\subsection{Diseño}
+
+\begin{itemize}
+    \item \textbf{Datos.} Tres proyectos de tamaño y desequilibrio distintos (\textit{oryx}, \textit{antlr4} y \textit{netty}) en los tres niveles de granularidad, con la misma partición estratificada 67/33 y semilla fija del análisis de sensibilidad. De cada conjunto de prueba se extrae una muestra estratificada de hasta 150 instancias, lo que totaliza 1.296 instancias.
+    \item \textbf{Características.} Las 10 métricas más relevantes según la Ganancia de Información, calculada exclusivamente sobre el conjunto de entrenamiento para evitar la fuga de información hacia la prueba (6 métricas a nivel de archivo, donde no hay más disponibles).
+    \item \textbf{Serialización y \textit{prompt}.} Cada instancia se serializa como una lista \textit{nombre=valor} de sus métricas. El \textit{prompt} describe la tarea, el nivel de granularidad y la proporción de instancias defectuosas del proyecto, y exige una respuesta en formato JSON con la etiqueta \textit{bug} o \textit{no-bug}. Se evalúan dos modalidades: \textit{zero-shot}, sin ejemplos, y \textit{few-shot}, con 8 ejemplos etiquetados y balanceados tomados del conjunto de entrenamiento. Las instancias se envían en lotes de 10 por solicitud, con temperatura 0.
+    \item \textbf{Modelos.} Tres LLM de propósito general accesibles mediante la API de OpenRouter: GPT-4.1 mini (OpenAI, comercial, de bajo costo), DeepSeek-V3.2 (DeepSeek, de pesos abiertos) y GPT-5 (OpenAI, comercial, con razonamiento extendido). Este último genera una cadena de razonamiento interna antes de responder, lo que en una prueba preliminar elevó su costo por solicitud a unas 80 veces el de DeepSeek-V3.2; se incluye para evaluar si ese razonamiento mejora la clasificación.
+    \item \textbf{Referencia.} \textit{Random Forest} (100 árboles) entrenado con el conjunto de entrenamiento completo y las mismas métricas, evaluado sobre las mismas instancias.
+    \item \textbf{Métricas.} \textit{F-measure} ponderado, \textit{F-measure} de la clase \textit{bug} y MCC, con intervalos de confianza del 95\,\% obtenidos por \textit{bootstrap} (1.000 remuestreos).
+\end{itemize}
+
+El \textit{script} \texttt{piloto\_llm.py} implementa el experimento de forma reanudable y conserva las respuestas crudas de los modelos, de modo que todas las métricas pueden recalcularse sin volver a consultar la API. Los \textit{prompts} completos se incluyen en el Anexo \ref{anexo1}.
+
+\subsection{Resultados}
+
+Los tres modelos respondieron en el formato solicitado para las 1.296 instancias en las dos modalidades, sin respuestas inválidas. La Tabla \ref{tab:piloto_llm} resume el desempeño agregado sobre los nueve conjuntos proyecto-nivel.
+
+\begin{table}[H]
+\centering
+\caption{Piloto con LLM: desempeño sobre 1.296 instancias de BugHunter (\textit{oryx}, \textit{antlr4} y \textit{netty}, tres niveles), con intervalos de confianza del 95\,\% por \textit{bootstrap}}
+\label{tab:piloto_llm}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccc}
+\toprule
+Modelo & Modalidad & \textit{F-measure} ponderado & \textit{F-measure} bug [IC 95\,\%] & MCC [IC 95\,\%] \\
+\midrule
+Random Forest (referencia) & --- & 0,656 & 0,291 [0,244; 0,338] & 0,081 [0,022; 0,138] \\
+\midrule
+GPT-4.1 mini & \textit{zero-shot} & 0,556 & 0,388 [0,348; 0,424] & 0,076 [0,022; 0,126] \\
+GPT-4.1 mini & \textit{few-shot}  & 0,569 & 0,391 [0,354; 0,428] & 0,086 [0,035; 0,143] \\
+DeepSeek-V3.2 & \textit{zero-shot} & 0,530 & 0,404 [0,367; 0,440] & 0,088 [0,036; 0,142] \\
+DeepSeek-V3.2 & \textit{few-shot}  & 0,502 & 0,418 [0,384; 0,455] & 0,105 [0,052; 0,156] \\
+GPT-5 (razonamiento) & \textit{zero-shot} & 0,629 & 0,354 [0,310; 0,398] & 0,087 [0,033; 0,144] \\
+GPT-5 (razonamiento) & \textit{few-shot}  & 0,604 & 0,352 [0,316; 0,394] & 0,063 [0,015; 0,118] \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Cuatro resultados se desprenden del piloto.
+
+\textbf{Ningún LLM supera a \textit{Random Forest} en MCC.} Todos los modelos obtienen un MCC positivo pero bajo, entre 0,063 y 0,105, frente a 0,081 de \textit{Random Forest}, y todos los intervalos de confianza se traslapan ampliamente con el de la referencia. Con las mismas métricas de entrada, un LLM de propósito general sin ajuste fino no clasifica mejor que un clasificador clásico entrenado con cientos o miles de instancias del proyecto, aun cuando el LLM solo recibe, a lo sumo, ocho ejemplos.
+
+\textbf{Se repite el patrón de RQ4.} Los LLM obtienen un \textit{F-measure} de la clase \textit{bug} mayor que \textit{Random Forest} (0,352 a 0,418 frente a 0,291), pero un \textit{F-measure} ponderado menor (0,502 a 0,629 frente a 0,656), porque predicen la clase defectuosa con más frecuencia. Según la métrica elegida, los LLM parecen mejores o peores que la referencia, mientras que el MCC indica que su capacidad de discriminación es equivalente. Es la misma dependencia de la métrica observada con el balanceo de clases.
+
+\textbf{El razonamiento extendido no mejora la clasificación.} GPT-5, que razona antes de responder, obtiene el \textit{F-measure} ponderado más cercano al de \textit{Random Forest} (0,629), pero no mejora el \textit{F-measure} de la clase \textit{bug} ni el MCC respecto de los modelos más simples. Su costo fue muy superior: 5,81 USD para 259 solicitudes, frente a 0,15 USD de GPT-4.1 mini y 0,09 USD de DeepSeek-V3.2 para 260 solicitudes cada uno, es decir, entre 40 y 65 veces más. Los ejemplos del modo \textit{few-shot} tampoco producen una mejora consistente frente al modo \textit{zero-shot}.
+
+\textbf{El desempeño varía entre conjuntos.} \textit{Random Forest} obtiene el mejor MCC a nivel de método (media de 0,171 sobre los tres proyectos, frente a 0,102 como máximo de los LLM), pero un MCC negativo a nivel de clase ($-0{,}120$), donde los LLM obtienen valores positivos (0,014 a 0,116). Con alrededor de 150 instancias por conjunto, estas diferencias por nivel son inestables y no deben generalizarse.
+
+En síntesis, aplicar un LLM directamente sobre las métricas de BugHunter no mejora la detección de código defectuoso frente a un clasificador clásico, incrementa el costo y hace más opaca la decisión. Este resultado es coherente con Monteiro et al. \cite{monteiro2026jit}, que observan que el \textit{prompting zero-shot} de LLM cerrados es superado por modelos más pequeños ajustados con datos del dominio, y sugiere que el aporte potencial de los LLM está en las representaciones del código fuente \cite{jaiswal2026llm} más que en la reinterpretación de métricas tabulares.

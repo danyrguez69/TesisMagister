@@ -1,0 +1,52 @@
+\section{Evaluación de modelos de clasificación}
+
+Esta sección presenta las métricas de desempeño, los esquemas de validación y las pruebas estadísticas empleados para evaluar y comparar los modelos de predicción de fallas en esta tesis.
+
+\subsection{Métricas de desempeño}
+\label{sec:metricas_evaluacion}
+
+En la clasificación binaria de fallas, la clase positiva corresponde a los elementos de código con error (\textit{bug}). Las predicciones de un modelo sobre un conjunto de prueba se resumen en una matriz de confusión con cuatro valores: verdaderos positivos ($TP$, elementos con error predichos como tales), falsos positivos ($FP$), verdaderos negativos ($TN$) y falsos negativos ($FN$). A partir de ella se definen las siguientes métricas.
+
+\textbf{Precisión y \textit{recall}.} La precisión mide qué proporción de las predicciones positivas es correcta, y el \textit{recall} (sensibilidad) qué proporción de las instancias positivas reales es detectada:
+\begin{equation}
+\text{Precisión} = \frac{TP}{TP + FP}, \qquad \text{Recall} = \frac{TP}{TP + FN}.
+\label{eq:precision_recall}
+\end{equation}
+
+\textbf{\textit{F-measure}.} Es la media armónica de precisión y \textit{recall}:
+\begin{equation}
+F_{1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + \text{Recall}}.
+\label{eq:f1}
+\end{equation}
+Estas tres métricas pueden calcularse para cada clase, tomándola como positiva. El \textit{F-measure} de la clase \textit{bug} ($F_{1}$-bug) mide directamente la capacidad del modelo para detectar código defectuoso. Las herramientas como Weka y \textit{scikit-learn} reportan además un valor agregado \textbf{ponderado}, que promedia el \textit{F-measure} de cada clase ponderado por su frecuencia en el conjunto de prueba. Bajo desequilibrio de clases, este agregado queda dominado por la clase mayoritaria, de modo que un modelo que casi nunca predice la clase minoritaria puede obtener un \textit{F-measure} ponderado aceptable. Esta diferencia es central para interpretar los resultados de esta tesis (Sección \ref{sec:RQ4}).
+
+\textbf{Exactitud.} La exactitud, $(TP+TN)/(TP+TN+FP+FN)$, es poco informativa bajo desequilibrio: en un conjunto con un 90\,\% de instancias sin error, un clasificador que prediga siempre ``sin error'' alcanza una exactitud del 90\,\% sin detectar ningún defecto.
+
+\textbf{Coeficiente de correlación de Matthews (MCC).} Considera los cuatro valores de la matriz de confusión:
+\begin{equation}
+MCC = \frac{TP \cdot TN - FP \cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}.
+\label{eq:mcc}
+\end{equation}
+Toma valores entre $-1$ y $+1$, donde 0 corresponde a una predicción no mejor que el azar. Solo alcanza valores altos cuando el modelo acierta en ambas clases, por lo que es más confiable que el \textit{F-measure} y la exactitud en clasificación binaria desequilibrada \cite{chicco2020}.
+
+\textbf{Área bajo la curva ROC (AUC-ROC).} La curva ROC representa la tasa de verdaderos positivos frente a la tasa de falsos positivos para todos los umbrales de decisión posibles. El área bajo ella equivale a la probabilidad de que el modelo asigne una puntuación mayor a una instancia defectuosa elegida al azar que a una no defectuosa, es independiente del umbral y vale 0,5 para un clasificador aleatorio.
+
+\subsection{Esquemas de validación y sesgo de selección}
+
+Para estimar el desempeño de un modelo sobre datos no vistos, los datos se dividen en entrenamiento y prueba. En la validación por \textit{holdout}, los datos se dividen una sola vez, por ejemplo en 67\,\% para entrenamiento y 33\,\% para prueba, idealmente de forma estratificada para conservar la proporción de clases. En la validación cruzada de $k$ particiones, los datos se dividen en $k$ partes y el modelo se entrena $k$ veces, usando cada parte una vez como prueba; la estimación final promedia las $k$ evaluaciones. Tantithamthavorn et al. \cite{tantithamthavorn2017} muestran que la elección del esquema de validación afecta tanto el sesgo como la varianza de las estimaciones de desempeño en predicción de defectos, y recomiendan esquemas repetidos, como el \textit{bootstrap} fuera de muestra, frente a una única partición.
+
+Cualquier paso de preprocesamiento que utilice la etiqueta de clase ---como la selección de características por relevancia o el balanceo de clases--- debe calcularse únicamente con los datos de entrenamiento. Si la selección de características se realiza sobre el conjunto completo antes de particionar, la información de las instancias de prueba influye en qué características se eligen y la estimación del desempeño resulta optimista. Este \textbf{sesgo de selección} fue documentado por Ambroise y McLachlan \cite{ambroise2002} en la selección de genes a partir de datos de microarreglos. Cawley y Talbot \cite{cawley2010} lo generalizaron a la selección de modelos e hiperparámetros, mostrando que la corrección requiere un esquema \textbf{anidado}, en el que la selección se repite de forma independiente dentro de cada partición de entrenamiento. De forma análoga, el ajuste de hiperparámetros puede modificar sustancialmente el desempeño y las conclusiones de los modelos de predicción de defectos \cite{tantithamthavorn2019}.
+
+\subsection{Predicción intra-proyecto y entre proyectos}
+
+En la predicción intra-proyecto (\textit{Within-Project Defect Prediction}, WPDP), el modelo se entrena y evalúa con datos de un mismo proyecto. En la predicción entre proyectos (\textit{Cross-Project Defect Prediction}, CPDP), se entrena con datos de uno o varios proyectos y se aplica a otro, lo que resulta útil cuando el proyecto objetivo carece de historial etiquetado. La heterogeneidad de las distribuciones de métricas entre proyectos suele degradar el desempeño en CPDP \cite{cheng2022,sharma2023far}. El conjunto ``All'' de BugHunter, que une los 15 proyectos, constituye un escenario mixto entre ambos enfoques (Sección \ref{sec:RQ5}).
+
+\subsection{Pruebas estadísticas para comparar modelos}
+
+Comparar dos configuraciones sobre varios conjuntos de datos requiere pruebas que no asuman normalidad, dado el número reducido de conjuntos y la distribución acotada de las métricas.
+
+\textbf{Prueba de Wilcoxon de rangos con signo.} Es una prueba no paramétrica para muestras pareadas \cite{wilcoxon1945}. Ordena por magnitud las diferencias absolutas entre las dos condiciones en cada conjunto de datos, asigna a cada rango el signo de la diferencia y contrasta si la suma de rangos positivos difiere de la esperada bajo la hipótesis nula de que no hay diferencia entre condiciones.
+
+\textbf{Tamaño de efecto $\delta$ de Cliff.} La significancia estadística no indica la magnitud de una diferencia. El $\delta$ de Cliff \cite{cliff1993} es una medida de dominancia no paramétrica: estima la probabilidad de que un valor de un grupo sea mayor que uno del otro, menos la probabilidad inversa, y toma valores entre $-1$ y $+1$. Por convención, $|\delta| < 0{,}147$ se considera un efecto insignificante, $|\delta| < 0{,}33$ pequeño, $|\delta| < 0{,}474$ mediano y valores mayores, grande.
+
+\textbf{Scott-Knott ESD.} Para comparar más de dos configuraciones a la vez, la prueba Scott-Knott ESD agrupa las configuraciones en rangos estadísticamente distintos, fusionando los grupos cuya diferencia tiene un tamaño de efecto insignificante \cite{tantithamthavorn2017}. Se menciona aquí como la prueba ómnibus recomendada para extender las comparaciones de esta tesis (Capítulo \ref{cap:conclusion}).

@@ -1,4 +1,5 @@
 \section{Quinta pregunta de investigación}
+\label{sec:RQ5}
 
 Nuestra ultima pregunta de investigación va enfocada a diferenciar los resultados entre el conjunto de datos resumen (unión de todos los proyectos en cada nivel) y los resultados individuales por proyecto.
 
@@ -16,6 +17,8 @@ Iniciando con el análisis de los resultados base obtenidos en la sección \ref{
 \input{chapters/chapter3/Sections/Research Questions/sections/RQ5/tables/min_max_all}
 
 Este escenario se observa consistentemente en respuesta a la pregunta de investigación RQ1 (véase Sección \ref{sec:RQ1}), como se ilustra en las Tablas \ref{table:b_u_c_m}, \ref{table:b_u_c_c}, y \ref{table:b_u_c_f}. A pesar de implementar la selección de características y el balanceo de clases, los resultados no alcanzan un nivel óptimo de rendimiento. Este fenómeno sugiere que la amalgama de métricas de código procedentes de diversos proyectos, los cuales pueden variar significativamente en metodologías de desarrollo, equipos de programación y objetivos, no contribuye necesariamente a la mejora de la precisión de los clasificadores. Se infiere que un análisis a nivel de proyecto individual es más fructífero, ya que los errores detectados en cada proyecto podrían estar intrínsecamente relacionados con aspectos específicos de desarrollo y estructura propios del software en cuestión. Por consiguiente, la expansión del volumen de datos mediante la combinación de métricas de diferentes proyectos no garantiza una mejora en los resultados, según se desprende de nuestro análisis.
+
+Esta comparación se enmarca en la distinción clásica entre predicción de fallas intra-proyecto (\textit{Within-Project Defect Prediction}, WPDP) y entre proyectos (\textit{Cross-Project Defect Prediction}, CPDP), donde entrenar con datos de proyectos ajenos suele degradar el rendimiento por la heterogeneidad de las distribuciones \cite{cheng2022,sharma2023far}. El conjunto ``All'' constituye un escenario mixto ---cada proyecto aporta instancias tanto al entrenamiento como a la prueba---, y su desempeño no superior a los proyectos individuales es coherente con lo reportado en esa línea de trabajo. El análisis de sensibilidad (Sección \ref{sec:sensibilidad}) confirma que ``All'' no obtiene el mejor resultado con ningún clasificador ni nivel, tampoco bajo el MCC, una métrica insensible al desequilibrio.
 
 \noindent\fbox{%
 \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%

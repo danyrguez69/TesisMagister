@@ -1,0 +1,116 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.RandomForest -P 100 -I 100 -num-slots 1 -K 0 -M 1.0 -V 0.001 -S 1
+Relation:     _all_method-weka.filters.unsupervised.attribute.Remove-R1-3
+Instances:    159078
+Attributes:   73
+              CC
+              CCL
+              CCO
+              CI
+              CLC
+              CLLC
+              LDC
+              LLDC
+              HCPL
+              HDIF
+              HEFF
+              HNDB
+              HPL
+              HPV
+              HTRP
+              HVOL
+              MI
+              MIMS
+              MISEI
+              MISM
+              McCC
+              NL
+              NLE
+              NII
+              NOI
+              CD
+              CLOC
+              DLOC
+              TCD
+              TCLOC
+              LLOC
+              LOC
+              NOS
+              NUMPAR
+              TLLOC
+              TLOC
+              TNOS
+              WarningBlocker
+              WarningCritical
+              WarningInfo
+              WarningMajor
+              WarningMinor
+              Android Rules
+              Basic Rules
+              Brace Rules
+              Clone Implementation Rules
+              Code Size Rules
+              Comment Rules
+              Controversial Rules
+              Coupling Rules
+              Design Rules
+              Empty Code Rules
+              Finalizer Rules
+              Import Statement Rules
+              J2EE Rules
+              JUnit Rules
+              Jakarta Commons Logging Rules
+              Java Logging Rules
+              JavaBean Rules
+              MigratingToJUnit4 Rules
+              Migration Rules
+              Migration13 Rules
+              Migration14 Rules
+              Migration15 Rules
+              Naming Rules
+              Optimization Rules
+              Security Code Guideline Rules
+              Strict Exception Rules
+              String and StringBuffer Rules
+              Type Resolution Rules
+              Unnecessary and Unused Code Rules
+              Vulnerability Rules
+              Number of Bugs
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+RandomForest
+
+Bagging with 100 iterations and base learner
+
+weka.classifiers.trees.RandomTree -K 0 -M 1.0 -V 0.001 -S 1 -do-not-check-capabilities
+
+Time taken to build model: 130.76 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances       92139               57.9206 %
+Incorrectly Classified Instances     66939               42.0794 %
+Kappa statistic                          0.0514
+Mean absolute error                      0.4528
+Root mean squared error                  0.5277
+Relative absolute error                 97.1563 %
+Root relative squared error            109.317  %
+Total Number of Instances           159078     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,735    0,686    0,646      0,735    0,688      0,052    0,539     0,678     NoBug
+                 0,314    0,265    0,410      0,314    0,356      0,052    0,539     0,418     Bag
+Weighted Avg.    0,579    0,530    0,559      0,579    0,565      0,052    0,539     0,582     
+
+=== Confusion Matrix ===
+
+     a     b   <-- classified as
+ 73654 26614 |     a = NoBug
+ 40325 18485 |     b = Bag
+

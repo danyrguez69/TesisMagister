@@ -1,0 +1,43 @@
+\section{Análisis de sensibilidad: clasificadores adicionales y línea base unificada}
+\label{sec:sensibilidad}
+
+El estudio principal presenta dos limitaciones de diseño: utiliza un único clasificador y su línea base se calculó con una herramienta y un esquema de validación distintos (Weka con validación cruzada de 10 particiones) de los del resto de los experimentos (partición 67/33). Para mitigarlas se ejecutó un análisis de sensibilidad que repite el flujo completo sobre los 48 conjuntos proyecto-nivel con tres clasificadores de paradigmas distintos: \textit{Random Forest} como referencia, XGBoost \cite{chen2016} (\textit{boosting} de gradiente) y una SVM lineal \cite{cortes1995} con estandarización previa (Sección \ref{sec:clasificadores_mt}). Los tres clasificadores comparten exactamente la misma partición estratificada 67/33, con semilla fija, en cada conjunto, lo que permite comparaciones pareadas. Se reutilizan los subconjuntos de métricas obtenidos en la selección de características, el balanceo (ROS, RUS y SMOTE) se aplica solo al entrenamiento, y de cada una de las 28.440 ejecuciones (9.480 por clasificador) se almacenan tanto las métricas agregadas como las métricas por clase (\textit{F-measure} de la clase \textit{bug}, MCC y AUC-ROC). El experimento se ejecutó en \textit{scikit-learn}; XGBoost se aceleró en una GPU NVIDIA RTX 3060. Ninguno de los tres clasificadores fue ajustado mediante búsqueda de hiperparámetros.
+
+La semilla fija es una decisión deliberada: permite comparar los distintos esquemas de selección, técnicas de balanceo y clasificadores sobre exactamente la misma división de los datos. Implica, no obstante, que el análisis no promedia sobre múltiples particiones aleatorias, lo que se discute como amenaza a la validez de conclusión en el Capítulo \ref{cap:discusion}.
+
+\subsection{Línea base unificada}
+
+Recalculada con \textit{Random Forest} bajo el mismo esquema \textit{holdout} estratificado 67/33 de \textit{scikit-learn} (todas las características, sin balanceo), la línea base promedia 0,62 a nivel de método, 0,52 a nivel de clase y 0,52 a nivel de archivo, frente a 0,63, 0,50 y 0,50 de la línea base Weka con validación cruzada (Tabla \ref{table:original_result_average}). Las diferencias, de a lo sumo 0,02, indican que el factor de confusión introducido por el cambio de herramienta y de esquema de validación no altera las conclusiones, en línea con la validación de la Sección \ref{sec:validacion_flujos}. En el conjunto ``All'' a nivel de método, el desglose por clase de esta línea base (\textit{F-measure} de la clase \textit{bug} de 0,360, MCC de 0,069 y AUC-ROC de 0,546) coincide estrechamente con el obtenido en Weka (Tabla \ref{tab:porclase}), lo que corrobora ambas mediciones de forma independiente.
+
+\subsection{Generalización entre clasificadores}
+
+La Tabla \ref{tab:sensibilidad} resume las diferencias pareadas sobre los 15 proyectos individuales. Emergen tres patrones.
+
+\textbf{Selección de características (RQ1).} La selección de características no solo conserva, sino que mejora el \textit{F-measure} ponderado en los tres clasificadores (mediana de $+0{,}001$ a $+0{,}041$), con mejora en 14 o 15 de los 15 proyectos en ocho de las nueve combinaciones de clasificador y nivel (9 de 15 para la SVM lineal a nivel de archivo) y $p<0{,}01$ en la prueba de Wilcoxon en todos los casos. Las reducciones medianas de características van del 31\,\% al 82\,\%. El hallazgo de RQ1 no es, por tanto, específico de \textit{Random Forest}.
+
+\textbf{Balanceo de clases (RQ4).} El efecto del balanceo depende del clasificador y, sobre todo, de la métrica. En el \textit{F-measure} ponderado, el balanceo no aporta en \textit{Random Forest} (consistente con RQ4), aporta marginalmente en XGBoost y mejora de forma significativa en la SVM lineal. En las métricas por clase, en cambio, el balanceo mejora la detección de la clase \textit{bug} de manera consistente en los tres clasificadores: el \textit{F-measure} de la clase \textit{bug} aumenta con una mediana de $+0{,}031$ a $+0{,}317$, con mejora en 12 a 15 de los 15 proyectos y $p<0{,}05$ en todos los casos, y el MCC aumenta con una mediana de $+0{,}013$ a $+0{,}055$. Es decir, el resultado nulo de RQ4 es en gran medida un artefacto de la métrica agregada: balancear el entrenamiento sí mejora la capacidad del modelo para identificar código defectuoso, a costa de la clase mayoritaria, y ese intercambio queda oculto en el \textit{F-measure} ponderado.
+
+\textbf{Conjunto unificado (RQ5).} El conjunto ``All'' no obtuvo el mejor resultado con ningún clasificador ni nivel (puestos 7 a 15 de 16 en \textit{F-measure} ponderado y 6 a 13 de 16 en MCC), por lo que la conclusión de RQ5 también se generaliza, incluso bajo una métrica insensible al desequilibrio.
+
+Las diferencias globales entre clasificadores fueron pequeñas (mediana pareada de a lo sumo 0,023 en el mejor \textit{F-measure} ponderado, a favor de la SVM lineal y de XGBoost sobre \textit{Random Forest}). Sin embargo, la SVM lineal sin balanceo tiende fuertemente a la clase mayoritaria (mediana de \textit{F-measure} de la clase \textit{bug} de 0,143 a nivel de método), lo que refuerza la necesidad de leer las métricas por clase junto al agregado.
+
+\begin{table}[H]
+\centering
+\caption{Análisis de sensibilidad por clasificador: mediana de las diferencias pareadas sobre los 15 proyectos (sel. = mejor esquema de selección frente a todas las características; bal. = mejor entrenamiento balanceado frente a sin balancear) y puesto de ``All'' entre los 16 conjuntos por mejor \textit{F-measure} ponderado}
+\label{tab:sensibilidad}
+\begin{tabular}{llccccc}
+\toprule
+Clasificador & Nivel & $\Delta F$ sel. & $\Delta F$ bal. & $\Delta F_{1}$ bug bal. & $\Delta$MCC bal. & ``All'' \\
+\midrule
+RF  & Método  & +0,014 & $-0{,}001$ & +0,108 & +0,036 & 9/16 \\
+RF  & Clase   & +0,028 & +0,002   & +0,072 & +0,026 & 12/16 \\
+RF  & Archivo & +0,033 & +0,011   & +0,040 & +0,021 & 12/16 \\
+XGB & Método  & +0,014 & +0,005   & +0,135 & +0,045 & 11/16 \\
+XGB & Clase   & +0,031 & +0,004   & +0,066 & +0,025 & 7/16 \\
+XGB & Archivo & +0,041 & +0,012   & +0,031 & +0,027 & 7/16 \\
+SVM & Método  & +0,006 & +0,024   & +0,317 & +0,055 & 15/16 \\
+SVM & Clase   & +0,018 & +0,009   & +0,155 & +0,013 & 13/16 \\
+SVM & Archivo & +0,001 & +0,033   & +0,206 & +0,041 & 13/16 \\
+\bottomrule
+\end{tabular}
+\end{table}

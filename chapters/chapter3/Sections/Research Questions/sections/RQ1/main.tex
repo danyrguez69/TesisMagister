@@ -1,6 +1,4 @@
-\chapter{\MakeUppercase{Análisis de resultados}}
-
-En este capitulo, estudiamos las cinco preguntas de investigación basándonos en los resultados experimentales. Después de eso, ofrecemos una breve discusión sobre los principales hallazgos. Finalmente, describimos las posibles amenazas a la validez del estudio empírico
+En esta sección se estudian las cinco preguntas de investigación a partir de los resultados experimentales. La discusión de los hallazgos y las amenazas a la validez se presentan en el Capítulo \ref{cap:discusion}.
 
 \section{Primera pregunta de investigación}
 La primera pregunta de investigación a responder es:
@@ -13,7 +11,7 @@ La primera pregunta de investigación a responder es:
 }
 \vspace{12pt}
 
-Para abordar la pregunta de investigación \textbf{RQ1}, se condujo un amplio experimento involucrando 13,916 ejecuciones del algoritmo \textit{RandomForest}, un clasificador de ensamble bien establecido en el campo del aprendizaje automático. El experimento se estructuró utilizando tres conjuntos de datos distintos por proyecto, cada uno sometido a iteraciones (\ref{fig:Flow}) a través de un espacio de parámetros definido por rangos de importancia de características (\textit{Rank}), el parámetro de penalización \( \beta \), y la selección de modelos. En cada iteración, se generaban tres subconjuntos de datos: un conjunto de pruebas correspondiente al 33\% del \textit{dataset} original y dos conjuntos de entrenamiento, uno manteniendo la distribución de la clase original y otro aplicando la técnica de balanceo de clases \textit{SMOTE} para contrarrestar el desbalanceo de clases. Ambos subconjuntos, el balanceado y el no balanceado, se sometían al proceso de entrenamiento del clasificador \textit{RandomForest} dentro de la plataforma \textit{Weka}, utilizando idénticos conjuntos de pruebas para obtener una comparativa directa de su rendimiento. Este enfoque permitió evaluar la influencia del balanceo de clases en la eficacia del modelo en tareas de predicción de errores.
+Para abordar la pregunta de investigación \textbf{RQ1} se condujo un experimento de 13.916 ejecuciones del clasificador \textit{Random Forest}. Cada conjunto proyecto-nivel se recorrió (Figura \ref{fig:Flow}) a través del espacio de parámetros definido por el umbral de relevancia (\textit{Rank}), el umbral de redundancia $\beta$ y el esquema de selección. En cada iteración se generaron en Python un conjunto de prueba con el 33\,\% de los datos, mediante partición estratificada, y dos conjuntos de entrenamiento: uno con la distribución de clases original y otro balanceado con ROS, RUS o SMOTE, técnicas aplicadas exclusivamente sobre el entrenamiento. Ambos conjuntos de entrenamiento se utilizaron para entrenar \textit{Random Forest} en la plataforma \textit{Weka}, en la modalidad \textit{Supplied test set}, evaluando siempre contra el mismo conjunto de prueba, lo que permite una comparación directa de su rendimiento. La consistencia de este flujo con una implementación equivalente en \textit{scikit-learn} se verifica en la Sección \ref{sec:validacion_flujos}.
 
 Comparamos los resultados obtenidos con la selección de características con los resultados base obtenidos sin selección de características en la sección anterior. 
 
@@ -24,21 +22,41 @@ La tabla \ref{table:b_u_c_m} resume los resultados a nivel de método.
 \input{chapters/chapter3/Sections/Research Questions/sections/RQ1/tables/method}
 
 \subsection{Clase}
-A nivel de clase, el proyecto Oryx también obtiene los mejores resultados, con una medida F de 0,78 tanto sin balancear como balanceando las clases. Sin embargo, la selección de características permite reducir el número de características de 92 a 6 y 47, respectivamente. Esto implica una reducción del 93,5 \% y del 48,9 \% respecto a los resultados base, que usan todas las características. Por lo tanto, la selección de características también es beneficiosa a nivel de clase, ya que permite simplificar el modelo sin perder rendimiento. % Comentario: He seguido el mismo esquema que en el párrafo anterior, usando conectores, presente y condicional.
-
+A nivel de clase, el proyecto Oryx también obtiene los mejores resultados, con una medida F de 0,78 tanto sin balancear como balanceando las clases. Sin embargo, la selección de características permite reducir el número de características de 92 a 6 y 47, respectivamente. Esto implica una reducción del 93,5 \% y del 48,9 \% respecto a los resultados base, que usan todas las características. Por lo tanto, la selección de características también es beneficiosa a nivel de clase, ya que permite simplificar el modelo sin perder rendimiento.
 La tabla \ref{table:b_u_c_c} resume los resultados a nivel de clase.
 
 \input{chapters/chapter3/Sections/Research Questions/sections/RQ1/tables/class}
-\subsection{Fichero}
-A nivel de fichero, el proyecto Oryx vuelve a obtener los mejores resultados, con una medida F de 0,806 con la selección de características y balanceando las clases. Este resultado mejora en 0,03 el resultado base, que tiene una medida F de 0,77 con todas las características. Además, la selección de características permite reducir el número de características de 92 a 46, lo que supone una reducción del 50 \%. Así, la selección de características mejora el rendimiento y la simplicidad del modelo a nivel de fichero.
+\subsection{Archivo}
+A nivel de archivo, el proyecto Oryx vuelve a obtener los mejores resultados, con una medida F de 0,806 con la selección de características y sin balancear las clases (0,777 balanceando). Este resultado mejora en 0,036 el resultado base, que tiene una medida F de 0,770 con todas las características. Además, la selección de características permite reducir el número de características de 6 a 3, lo que supone una reducción del 50\,\%. Así, la selección de características mejora el rendimiento y la simplicidad del modelo a nivel de archivo.
 
-La tabla \ref{table:b_u_c_f} resume los resultados a nivel de fichero.
+La tabla \ref{table:b_u_c_f} resume los resultados a nivel de archivo.
 \input{chapters/chapter3/Sections/Research Questions/sections/RQ1/tables/file}
+
+\subsection{Resultados agregados sobre los 15 proyectos}
+
+El patrón observado en Oryx se confirma al agregar los 15 proyectos individuales (Tabla \ref{tab:agg}): la mediana del mejor \textit{F-measure} apenas varía entre las versiones sin balancear y balanceada en los tres niveles, con reducciones medianas del número de características del 40\,\% a nivel de método, 88\,\% a nivel de clase y 50\,\% a nivel de archivo. En cuanto a los esquemas, la Semejanza de Coseno (COS) predominó en el control de redundancia a nivel de método y archivo, mientras que la Incertidumbre Simétrica (SU) fue más frecuente a nivel de clase.
+
+\begin{table}[H]
+\centering
+\caption{Mejor \textit{F-measure} por proyecto agregado sobre los 15 proyectos individuales (mediana [mín--máx])}
+\label{tab:agg}
+\begin{tabular}{lcc}
+\toprule
+Nivel & Sin balancear & Balanceado \\
+\midrule
+Método  & 0,620 [0,538--0,838] & 0,615 [0,525--0,837] \\
+Clase   & 0,524 [0,448--0,786] & 0,519 [0,460--0,780] \\
+Archivo & 0,525 [0,456--0,806] & 0,547 [0,436--0,777] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textit{Advertencia sobre el sesgo de comparar el mejor esquema contra una única configuración de referencia.} Las Tablas \ref{table:b_u_c_m}, \ref{table:b_u_c_c}, \ref{table:b_u_c_f} y \ref{tab:agg} comparan el mejor esquema de selección ---un máximo sobre las 54 combinaciones de algoritmo de relevancia, medida de redundancia, \textit{Rank} y $\beta$--- frente a una única configuración de referencia (todas las características). Esta comparación introduce una asimetría optimista estructural que, a diferencia de lo que ocurre en RQ4, no se cancela con una comparación simétrica. Por ello, la evidencia más robusta de RQ1 corresponde a las medianas de la Tabla \ref{tab:agg} y a las del análisis de sensibilidad (Sección \ref{sec:sensibilidad}), antes que a la cifra máxima de 94\,\% obtenida en una única celda (proyecto Oryx, nivel método). La eliminación completa de este sesgo, seleccionando el esquema sobre una partición de validación independiente de la de prueba, se declara como trabajo futuro (Capítulo \ref{cap:conclusion}).
 
 
 \noindent\fbox{%
 \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
-\textbf{Respuesta RQ1} Los hallazgos experimentales corroboran la eficacia de las estrategias implementadas para el análisis de relevancia y la mitigación de redundancia, las cuales han facilitado una compresiva reducción de características manteniendo la integridad de los resultados iniciales. Específicamente, el algoritmo de \textit{Semejanza de Coseno} (COS) se identificó como preponderante para el nivel de método y archivo, mientras que la \textit{Incertidumbre Simétrica} (SU) fue preeminente a nivel de clases. Estas técnicas han demostrado ser capaces de lograr una reducción de hasta el 94\% en la dimensionalidad de los conjuntos de datos, sin comprometer la eficacia predictiva de los modelos. Esta optimización de las características no solo mejora la eficiencia computacional, sino que también destaca la importancia de seleccionar atributos significativos en la construcción de modelos de aprendizaje automático robustos y precisos.
+\textbf{Respuesta RQ1} Los hallazgos experimentales corroboran la eficacia de las estrategias implementadas para el análisis de relevancia y la mitigación de redundancia, las cuales han facilitado una compresiva reducción de características manteniendo la integridad de los resultados iniciales. Específicamente, el algoritmo de \textit{Semejanza de Coseno} (COS) se identificó como preponderante para el nivel de método y archivo, mientras que la \textit{Incertidumbre Simétrica} (SU) fue preeminente a nivel de clases. Estas técnicas reducen la mediana del número de métricas en un 40\,\%, 88\,\% y 50\,\% en los niveles de método, clase y archivo, respectivamente (hasta un 94\,\% en el mejor caso individual), con una pérdida de \textit{F-measure} inferior a 0,02. El análisis de sensibilidad (Sección \ref{sec:sensibilidad}) confirma que este resultado se mantiene con XGBoost y SVM lineal.
 
 }%
 }

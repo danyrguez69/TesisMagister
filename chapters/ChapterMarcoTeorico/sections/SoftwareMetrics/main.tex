@@ -2,7 +2,7 @@
 
 Las métricas de software se pueden utilizar en modelos de predicción de fallas para mejorar la calidad del software al predecir la ubicación de la falla. En \cite{RADJENOVIC20131397} se realiza un análisis sistemático de la literatura desde 1991 hasta 2011. Entre los resultados destaca que las métricas orientadas a objetos (49\%) se utilizaron casi el doble de veces en comparación con las métricas de código fuente tradicionales (27\%) o las métricas de proceso (24\%). Las métricas orientadas a objetos de Chidamber y Kemerer (CK) fueron las más utilizadas. Según los estudios seleccionados existen diferencias significativas entre las métricas utilizadas en el rendimiento de la predicción de fallos. Se ha informado que las métricas de procesos y orientadas a objetos tienen más éxito en la búsqueda de fallas en comparación con las métricas tradicionales de tamaño y complejidad. Las métricas de proceso parecen ser mejores para predecir fallas posteriores al lanzamiento en comparación con cualquier métrica de código estático.
 
-A pesar de la existencia de una gran cantidad de métricas de código en \cite{SINGH2024101253} proponen tres nuevas métricas basadas en la complejidad, el acoplamiento y cohesión del conjunto de métricas del repositorio PROMISE. El repositorio PROMISE fue creado para abordar la falta de conjuntos de datos públicos accesibles y estandarizados que puedan ser utilizados para el entrenamiento \cite{sayyad_shirabad_promise_2005,Sayyad-Shirabad+Menzies:2005} y validación de modelos de predicción en ingeniería de software y es uno de los mas utilizado en la literatura consultada \cite{ARAR2016106,RATHI2023119806,sharma2023far,NEVENDRA2022116217,PANDEY2020113085,rathore2021software}.
+A pesar de la existencia de una gran cantidad de métricas de código en \cite{singh2024improved} proponen tres nuevas métricas basadas en la complejidad, el acoplamiento y cohesión del conjunto de métricas del repositorio PROMISE. El repositorio PROMISE fue creado para abordar la falta de conjuntos de datos públicos accesibles y estandarizados que puedan ser utilizados para el entrenamiento \cite{Sayyad-Shirabad+Menzies:2005} y validación de modelos de predicción en ingeniería de software y es uno de los mas utilizado en la literatura consultada \cite{ARAR2016106,rathi_empirical_2023,sharma2023far,NEVENDRA2022116217,PANDEY2020113085,rathore2021software}.
 
 El repositorio PROMISE contiene una amplia gama de métricas de software que se utilizan para diversas investigaciones en ingeniería de software, particularmente en estudios de predicción de defectos y estimación de esfuerzos. Aunque el contenido exacto puede variar con las actualizaciones del repositorio y la inclusión de nuevos conjuntos de datos, típicamente incluye los siguientes tipos de métricas \cite{singh2024improved}:
 
@@ -38,13 +38,13 @@ El repositorio PROMISE contiene una amplia gama de métricas de software que se 
 
 \section*{Métricas de Reutilización}
 \begin{itemize}
-  \item {Número de veces que una clase o función ha sido reutilizada en diferentes proyectos.
+  \item Número de veces que una clase o función ha sido reutilizada en diferentes proyectos.
 \end{itemize}
 
 En \cite{PANDEY2021114595} realizan una revisión de la literatura de varios estudios desde 1990 hasta junio de 2019 sobre la aplicación del aprendizaje automático y el método estadístico sobre la predicción de fallas de software.
 
 
-Indican que las métricas Orientadas a Objetos (OO) son más propensas a errores. Considerando que las métricas que se han empleado ampliamente son más funcionales en SFP. En la Fig. 7 podemos ver que LOC es la métrica más útil entre todas las métricas de OO, seguida por CBO
+Indican que las métricas Orientadas a Objetos (OO) son más propensas a errores. Considerando que las métricas que se han empleado ampliamente son más funcionales en SFP. En la Figura \ref{fig:OOmetrics} se observa que LOC es la métrica más útil entre todas las métricas de OO, seguida por CBO
 
 \begin{figure}[h!]
     \centering
